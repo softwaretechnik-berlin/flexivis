@@ -1,0 +1,58 @@
+<tree-search>
+
+  <input class="tree-search-input" onkeyup={ filter } />
+
+  <div class="tree-search">
+    <tree if={ show } show-depth={ showDepth } obj={ obj } customizer={ customizer } show-all={ showAll } path={ path } />
+  </div>
+
+  <script>
+    import * as riot from "riot";
+    import Tree from "./tree.riot";
+
+    riot.register("tree", Tree);
+
+    const find = obj => path => {
+      return path
+        .replace(/\[(\d+)\]/g, ".$1")
+        .split(".")
+        .filter(self => self)
+        .reduce((o, subpath) => o[subpath], obj);
+    };
+
+    export default {
+      components: {
+        Tree,
+      },
+
+      onBeforeMount() {
+        this.path = '';
+        this.show = true;
+        this.original = this.props.obj;
+        this.obj = this.original;
+        this.showDepth = this.props.showDepth;
+        this.showAll = this.props.showAll || false;
+        this.customizer = this.props.customizer;
+      },
+
+      filter(e) {
+        this.show = false;
+        this.update();
+        this.path = e.target.value
+          .replace(/\.?(\b)\[?(\d+)\]?(\b|)/gm, "[$2]")
+          .replace(/^\.?(.*?)(\.*)$/, ".$1")
+          .replace(/^.$/, "");
+        try {
+          this.obj = find(this.original)(this.path);
+        } catch (e) {
+          console.error(e)
+          this.obj = undefined;
+        }
+        this.show = true;
+        this.update();
+      }
+
+    }
+  </script>
+
+</tree-search>

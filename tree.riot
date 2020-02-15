@@ -1,0 +1,125 @@
+<tree>
+  <div class="tree-controls" if={ isRoot }>
+    <a class="tree-conntrol-expand" onclick={ expandAll }>expand</a>
+    <a class="tree-conntrol-colapse" onclick={ collapseAll }>colapse</a>
+    <a class="tree-conntrol-toggle" onclick={ toggleAll }>toggle</a>
+    <a class="tree-conntrol-reset" onclick={ resetAll }>reset</a>
+  </div>
+
+  <span if={ isObject } class="tree-node tree-node-object">
+    &#123; <a onclick={ toggle }>{ show ? '-' : '+' }</a>
+    <span if={ show }>
+      <ul class="tree-node-list tree-node-object-list">
+        <li each={ element in Object.entries(obj) } class="tree-node-item tree-node-object-item">
+          <span class="tree-key"><raw html={ renderKey(element[0]) } /></span> <!-- {element[1]} -->
+          <tree parent={ this } obj={ element[1] } customizer={ customizer } show-depth={ showDepth - 1 } show-all={ showAll } path={ '.' + element[0] } />
+        </li>
+      </ul>
+    </span>
+    &#125;<!-- force that a whitespace isn't added -->
+  </span>
+
+  <span if={ isArray } class="tree-node tree-node-array">
+    [ <a onclick={ toggle }>{ show ? '-' : '+' }</a>
+    <span if={ show }>
+      <ul class="tree-node-list tree-node-array-list">
+        <li each={ (element, index) in obj } class="tree-node-item tree-node-array-item">
+          <tree parent={ this } obj={ element } customizer={ customizer } show-depth={ showDepth - 1 } show-all={ showAll } path={ '[' + index + ']' } />
+        </li>
+      </ul>
+    </span>
+    ]<!-- force that a whitespace isn't added -->
+  </span>
+
+  <span if={ isValue } class="tree-value tree-value-{ type }" data-path={ path }><raw html={ renderValue() } /></span>
+
+  <script>
+    import Raw from "./raw.riot";
+
+    const defaultCustomizer = {
+      key: (path, key, obj) => key,
+      value: (path, obj) => JSON.stringify(obj),
+    };
+
+    export default {
+      components: {
+        Raw,
+      },
+
+      onBeforeMount() {
+        this.isRoot = !this.props.parent;
+
+        this.obj = this.props.obj;
+        this.path = this.isRoot ? this.props.path || '' : this.props.parent.path + this.props.path;
+        this.type = (() => {
+          if (Array.isArray(this.obj)) return "array";
+          else if (this.obj === null) return "null";
+          else return typeof this.obj;
+        })();
+
+        this.isArray = this.type === "array";
+        this.isObject = this.type === "object";
+        this.isValue = !(this.isArray || this.isObject);
+
+        this.customizer = !this.isRoot ? this.props.customizer : (() => {
+          const base = Object.assign({}, defaultCustomizer, this.props.customizer);
+          return Object.fromEntries(Object.entries(base).map(([property, f]) => {
+            const nf = (...args) => {
+              const result = f(...args);
+              return result === undefined ? defaultCustomizer[property](...args) : result;
+            };
+            return [property, nf];
+          }));
+        })();
+      },
+
+      onMounted() {
+        this.resetAll();
+      },
+
+      toggle() {
+        this.showDepth = 0;
+        this.show = !this.show;
+        this.showAll = false;
+        this.update();
+      },
+
+      expandAll() {
+        this.collapseAll();
+        this.showDepth = 0;
+        this.showAll = true;
+        this.show = true;
+        this.update();
+      },
+
+      collapseAll() {
+        this.showDepth = 0;
+        this.showAll = false;
+        this.show = false;
+        this.update();
+      },
+
+      toggleAll() {
+        this.show ? this.collapseAll() : this.expandAll();
+      },
+
+      resetAll() {
+        this.collapseAll();
+        this.showDepth = this.props.showDepth
+        this.showAll = this.props.showAll || false;
+        this.show = this.showDepth > 0 || this.showAll;
+        this.update();
+      },
+
+      renderKey(key) {
+        return this.customizer.key(`${this.path}.${key}`, key, this.obj);
+      },
+
+      renderValue() {
+        return this.customizer.value(this.path, this.obj, this.type);
+      },
+
+    }
+  </script>
+
+</tree>

@@ -1,0 +1,22 @@
+<raw>
+  <script>
+    export default {
+      updateHTML() {
+        if (typeof this.props.html === "object") {
+          while (this.root.firstChild) {
+            this.root.removeChild(this.root.firstChild);
+          }
+          this.root.appendChild(this.props.html)
+        } else {
+          this.root.innerHTML = this.props.html;
+        }
+      },
+      onMounted() {
+        this.updateHTML();
+      },
+      onUpdated() {
+        this.updateHTML();
+      },
+    }
+  </script>
+</raw>
