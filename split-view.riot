@@ -1,0 +1,47 @@
+<split>
+
+  <div class="split-view">
+    <div class="view-frame" each={ view in views } if={ !view.hidden } style={ view.style }>
+      <split-view if={ view.nested } search-params={ props.searchParams } view-definition={ view.definition } />
+      <content-frame if={ !view.nested } definition={ view.definition } />
+      <!--
+      <iframe class="split-frame" if={ view.iframe } src={ view.content }/>
+      <raw if={ view.raw } html={ view.content }/>
+      <layer-map if={ view.map && view.content } sources={ view.content }/>
+      -->
+    </div>
+  </div>
+
+  <script>
+    import * as riot from "riot";
+    import Frame from "./content-frame.riot";
+
+    riot.register("content-frame", Frame)
+
+    const parseView = (params, definition, size, orientation) => {
+      const style = orientation === "/" ? `width: ${size}%;` : `height: ${size}%;`
+      const nested = Array.isArray(definition);
+      return {
+        style,
+        hidden: size === 0,
+        nested,
+        definition: nested ? definition : params.get(definition),
+      };
+    };
+
+    const parseDefinition = (definition, params) => {
+      const [a, aSize, orientation, bSize, b] = definition;
+
+      return [
+        parseView(params, a, aSize, orientation),
+        parseView(params, b, bSize, orientation),
+      ];
+    };
+
+    export default {
+      onBeforeMount() {
+        this.views = parseDefinition(this.props.viewDefinition, this.props.searchParams);
+      },
+    }
+  </script>
+</split>

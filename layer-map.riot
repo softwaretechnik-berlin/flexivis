@@ -1,0 +1,94 @@
+<layer-map>
+
+  <div class="map-box">
+    <button class="open-btn {sidebarOpen ? 'sidebar-open' : ''}" onclick={ openSidebar }>&#9776;</button>
+
+    <div class="sidebar {sidebarOpen ? 'sidebar-open' : ''}">
+      <a class="close-btn" onclick={ closeSidebar }>&times;</a>
+      <div class="controls">
+        <select class="layer-select" onchange={ onLayerChanged }>
+          <option each={ l in layerDescriptions } value={ l.id } selected={l.id === defaultLayer}>{ l.name }</option>
+        </select>
+        <div class="features">
+          <span each={ (layer, i) in geoJsonLayerIds }>
+            <input type="checkbox" id="feature-checkbox-{mapId}-{i}" checked={ layer.checked } onclick={ toggleGeoJsonLayer(layer.id) }/>
+            <label for="feature-checkbox-{mapId}-{i}">{ layer.id }</label><br/>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="properties-box" if={ state.obj }>
+      <tree-search />
+    </div>
+
+    <div class="map"></div>
+  </div>
+
+  <script>
+    import * as riot from "riot";
+    import TreeSearch from "./tree-search.riot";
+
+    import { BaseLayerDescriptions, HereGeoJsonMap } from "./map"
+
+    riot.register("tree-search", TreeSearch);
+
+    export default {
+      onBeforeMount() {
+        this.defaultLayer = "reduced.day";
+        this.layerDescriptions = BaseLayerDescriptions;
+      },
+      onMounted() {
+        this.mapId = Math.floor(Math.random() * 10000);
+        this.map = new HereGeoJsonMap(
+          "x6sXIaeWkAPvZYeyrAhx",
+          "YopQln8NuXmBTMW1rOKvmg",
+          this.root.getElementsByClassName('map')[0],
+        );
+
+        this.map.selectHereLayer(this.defaultLayer);
+        this.map.on("feature-selected", properties => this.update({ obj: properties }));
+
+        if (this.props.sources) {
+          this.geoJsonLayerIds = this.props.sources.split(';').map((source, i) => {
+            // format: (~)(url)(@name)
+            // URLs prefixed with ~ are not displayed initially
+            const [, hidden, url,, name] = source.match(/(~)?([^@]+)(@(.+))?/);
+            const id = name || url;
+            this.map.addGeoJsonLayer(id, url);
+
+            if (hidden) {
+              this.map.disableGeoJsonLayer(id);
+            }
+
+            return { id, checked: !hidden };
+          });
+        }
+      },
+      onUpdated() {
+        riot.unmount("tree-search", true)
+        if (this.state.obj) {
+          riot.mount("tree-search", {
+            obj: this.state.obj,
+            show: true,
+            showDepth: 2,
+          });
+        }
+      },
+      onLayerChanged(e) {
+        this.map.selectHereLayer(e.target.value)
+      },
+      toggleGeoJsonLayer(layerId) {
+        return (e) => e.target.checked ? this.map.enableGeoJsonLayer(layerId) : this.map.disableGeoJsonLayer(layerId);
+      },
+      openSidebar(e) {
+        this.sidebarOpen = true;
+        this.update();
+      },
+      closeSidebar(e) {
+        this.sidebarOpen = false;
+        this.update();
+      },
+    }
+  </script>
+</layer-map>

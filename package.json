@@ -2,8 +2,12 @@
   "name": "here-maps",
   "dependencies": {
     "@riotjs/observable": "^4.0.4",
+    "highlight.js": "^9.18.1",
+    "markdown-it": "^10.0.0",
+    "mermaid": "^8.4.6",
     "observable": "^2.1.4",
     "ol": "6.1.1",
+    "pegjs": "^0.10.0",
     "riot": "^4.8.7"
   },
   "devDependencies": {
@@ -12,7 +16,8 @@
   },
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build --no-cache -d dist index.html"
+    "build": "parcel build --no-cache -d dist index.html",
+    "build-local-use": "parcel build --no-cache -d dist index.html --public-url ./"
   },
   "engines": {
     "node": ">=10.16.0"

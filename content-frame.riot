@@ -1,0 +1,18 @@
+<content-frame>
+  <script>
+    import * as riot from "riot";
+    import Raw from "./raw.riot";
+    import LayerMap from "./layer-map.riot";
+
+    import { mount } from "./sources.js";
+
+    riot.register("raw", Raw);
+    riot.register("layer-map", LayerMap);
+
+    export default {
+      onMounted() {
+        mount(riot, this.root, this.props.definition);
+      },
+    }
+  </script>
+</content-frame>
