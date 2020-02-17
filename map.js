@@ -6,7 +6,7 @@ import XYZ from "ol/source/XYZ";
 import GeoJSON from "ol/format/GeoJSON";
 import { extend as extendExtent, createEmpty as createExtent } from "ol/extent";
 import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
-import { Vector as VectorSource } from "ol/source";
+import { Vector as VectorSource, OSM as OSMSource } from "ol/source";
 import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
 
 import observable from "@riotjs/observable";
@@ -48,31 +48,37 @@ const HighlightStyle = new Style({
 
 export const BaseLayerDescriptions = [
   {
-    id: "reduced.day",
-    name: "Reduced Day",
+    id: "here.reduced.day",
+    layerId: "reduced.day",
+    name: "HERE Reduced Day",
     base: "base",
-    type: "maptile",
+    type: "here",
   },
   {
-    id: "normal.day",
-    name: "Normal Day",
+    id: "here.normal.day",
+    layerId: "normal.day",
+    name: "HERE Normal Day",
     base: "base",
-    type: "maptile",
+    type: "here",
   },
   {
-    id: "satellite.day",
-    name: "Satellite Day",
+    id: "here.satellite.day",
+    layerId: "satellite.day",
+    name: "HERE Satellite Day",
     base: "aerial",
-    type: "maptile",
+    type: "here",
+  },
+  {
+    id: "osm",
+    name: "OpenStreetMap",
+    type: "osm",
   },
 ];
 
 export class HereGeoJsonMap {
-  constructor(appId, appCode, mapElementId) {
+  constructor(hereAppId, hereAppCode, mapElementId) {
     observable(this);
 
-    this.appId = appId;
-    this.appCode = appCode;
     this.map = new Map({
       layers: [],
       target: mapElementId,
@@ -89,18 +95,25 @@ export class HereGeoJsonMap {
     this.highlightedFeature = undefined;
 
     this.baseLayers = BaseLayerDescriptions.map(layerDesc => {
-      const layer = new TileLayer({
-        visible: false,
-        preload: Infinity,
-        source: new XYZ({
-          url:
-            `https://{1-4}.${layerDesc.base}.maps.api.here.com/` +
-            `${layerDesc.type}/2.1/maptile/newest/${layerDesc.id}/` +
-            `{z}/{x}/{y}/256/png?app_id=${this.appId}&app_code=${this.appCode}`,
-          attributions: `Map Tiles &copy; ${new Date().getFullYear()} <a href="http://developer.here.com">HERE</a>`,
-        }),
-      });
+      const layer =
+        layerDesc.type === "here"
+          ? new TileLayer({
+              visible: false,
+              preload: Infinity,
+              source: new XYZ({
+                url:
+                  `https://{1-4}.${layerDesc.base}.maps.api.here.com/` +
+                  `maptile/2.1/maptile/newest/${layerDesc.layerId}/` +
+                  `{z}/{x}/{y}/256/png?app_id=${hereAppId}&app_code=${hereAppCode}`,
+                attributions: `Map Tiles &copy; ${new Date().getFullYear()} <a href="http://developer.here.com">HERE</a>`,
+              }),
+            })
+          : new TileLayer({
+              source: new OSMSource(),
+            });
+
       this.map.addLayer(layer);
+
       return {
         id: layerDesc.id,
         layer,

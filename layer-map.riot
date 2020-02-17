@@ -35,8 +35,9 @@
 
     export default {
       onBeforeMount() {
-        this.defaultLayer = "reduced.day";
+        this.defaultLayer = "here.reduced.day";
         this.layerDescriptions = BaseLayerDescriptions;
+        console.log(this.layerDescriptions)
       },
       onMounted() {
         this.mapId = Math.floor(Math.random() * 10000);
