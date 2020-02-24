@@ -4,8 +4,6 @@ import "highlight.js/styles/github.css";
 
 import mermaid from "mermaid";
 
-// console.log(mermaid);
-
 const md = new MarkdownIt({
   typographer: true,
   linkify: true,
