@@ -9,6 +9,12 @@
     riot.register("raw", Raw);
     riot.register("layer-map", LayerMap);
 
+    //TODO at this point the component has already been registered by other component.
+    // We should centralize the registration of components at a single place. `index.js`
+    // might be the best place.
+    // import TreeSearch from "./tree-search.riot";
+    // riot.register("tree-search", TreeSearch);
+
     export default {
       onMounted() {
         mount(riot, this.root, this.props.definition);

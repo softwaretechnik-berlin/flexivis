@@ -12,7 +12,7 @@ const md = new MarkdownIt({
       try {
         return hljs.highlight(lang, str).value;
       } catch (e) {}
-    } else if (lang === 'mermaid') {
+    } else if (lang === "mermaid") {
       return `<div class="mermaid">${str}</div>`;
     }
 
@@ -31,6 +31,19 @@ const resourceHandler = ctx => {
   ctx.element.appendChild(iframe);
 };
 
+const jsonHandler = retriever => ctx => {
+  return Promise.resolve(retriever(ctx)).then(source => {
+    const div = document.createElement("div");
+    div.classList.add("json");
+    ctx.element.appendChild(div);
+    ctx.riot.mount(
+      div,
+      { obj: JSON.parse(source), showDepth: 4 },
+      "tree-search"
+    );
+  });
+};
+
 const markdownHandler = retriever => ctx => {
   return Promise.resolve(retriever(ctx)).then(source => {
     const div = document.createElement("div");
@@ -39,7 +52,7 @@ const markdownHandler = retriever => ctx => {
     ctx.element.appendChild(div);
 
     // render any mermaid template that was added by the highlighter
-    mermaid.init(undefined, '.mermaid');
+    mermaid.init(undefined, ".mermaid");
   });
 };
 
@@ -66,6 +79,7 @@ const handlers = {
   http: resourceHandler,
   https: resourceHandler,
   file: resourceHandler,
+  json: jsonHandler(ctx => get(ctx.description)),
   md: markdownHandler(ctx => get(ctx.description)),
   "md-raw": markdownHandler(ctx => ctx.description),
   html: htmlHandler,

@@ -15,6 +15,12 @@ a {
   width: 100%;
 }
 
+.json {
+  overflow: auto;
+  height: 100%;
+  width: 100%;
+}
+
 iframe, .view-frame {
   display: inline-block;
   box-sizing: border-box;
