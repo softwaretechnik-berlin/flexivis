@@ -4,9 +4,9 @@
     "@riotjs/observable": "^4.0.4",
     "highlight.js": "^9.18.1",
     "markdown-it": "^10.0.0",
-    "mermaid": "^8.4.6",
+    "mermaid": "^8.4.8",
     "ol": "6.1.1",
-    "riot": "^4.8.7"
+    "riot": "^4.11.1"
   },
   "devDependencies": {
     "@riotjs/parcel-plugin-riot": "^4.0.1",
