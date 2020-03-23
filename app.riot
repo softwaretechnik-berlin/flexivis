@@ -3,10 +3,8 @@
 
   <script>
     import * as riot from "riot";
-    import SplitView from "./split-view.riot";
-    import * as split from "./split";
 
-    riot.register("split-view", SplitView);
+    import * as split from "./split";
 
     const searchParams = new URLSearchParams(location.search);
     const viewDefinition = split.parse(searchParams.get("split") || '');

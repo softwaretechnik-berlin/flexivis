@@ -8,9 +8,6 @@
 
   <script>
     import * as riot from "riot";
-    import Tree from "./tree.riot";
-
-    riot.register("tree", Tree);
 
     const find = obj => path => {
       return path
@@ -21,10 +18,6 @@
     };
 
     export default {
-      components: {
-        Tree,
-      },
-
       onBeforeMount() {
         this.path = '';
         this.show = true;

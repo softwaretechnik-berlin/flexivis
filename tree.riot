@@ -34,8 +34,6 @@
   <span if={ isValue } class="tree-value tree-value-{ type }" data-path={ path }><raw html={ renderValue() } /></span>
 
   <script>
-    import Raw from "./raw.riot";
-
     const defaultCustomizer = {
       key: (path, key, obj) => key,
       value: (path, obj) => JSON.stringify(obj),

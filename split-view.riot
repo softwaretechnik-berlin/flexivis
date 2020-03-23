@@ -14,9 +14,6 @@
 
   <script>
     import * as riot from "riot";
-    import Frame from "./content-frame.riot";
-
-    riot.register("content-frame", Frame)
 
     const parseView = (params, definition, size, orientation) => {
       const style = orientation === "/" ? `width: ${size}%;` : `height: ${size}%;`
