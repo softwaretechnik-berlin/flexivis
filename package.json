@@ -6,7 +6,11 @@
     "markdown-it": "^10.0.0",
     "mermaid": "^8.4.8",
     "ol": "6.1.1",
-    "riot": "^4.11.1"
+    "pegjs": "^0.10.0",
+    "riot": "^4.11.1",
+    "vega": "^5.10.1",
+    "vega-embed": "^6.5.2",
+    "vega-lite": "^4.8.1"
   },
   "devDependencies": {
     "@riotjs/parcel-plugin-riot": "^4.0.1",

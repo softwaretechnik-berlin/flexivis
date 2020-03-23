@@ -4,6 +4,8 @@ import "highlight.js/styles/github.css";
 
 import mermaid from "mermaid";
 
+import vegaEmbed from "vega-embed";
+
 const md = new MarkdownIt({
   typographer: true,
   linkify: true,
@@ -51,7 +53,7 @@ const markdownHandler = retriever => ctx => {
     div.innerHTML = md.render(source);
     ctx.element.appendChild(div);
 
-    // render any mermaid template that was added by the highlighter
+    // render any mermaid templates that were added by the highlighter
     mermaid.init(undefined, ".mermaid");
   });
 };
@@ -73,6 +75,16 @@ const mermaidHandler = retriever => ctx => {
   });
 };
 
+const vegaHandler = retriever => ctx => {
+  return Promise.resolve(retriever(ctx)).then(source => {
+    const div = document.createElement('div');
+    div.style.width = '100%';
+    div.style.height = '100%';
+    vegaEmbed(div, JSON.parse(source));
+    ctx.element.appendChild(div);
+  });
+};
+
 const get = url => fetch(url).then(r => r.text());
 
 const handlers = {
@@ -86,6 +98,7 @@ const handlers = {
   map: mapHandler,
   mermaid: mermaidHandler(ctx => get(ctx.description)),
   "mermaid-raw": mermaidHandler(ctx => ctx.description),
+  vega: vegaHandler(ctx => get(ctx.description)),
 };
 
 export function mount(riot, element, definition) {
