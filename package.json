@@ -7,7 +7,6 @@
     "mermaid": "^8.4.6",
     "observable": "^2.1.4",
     "ol": "6.1.1",
-    "pegjs": "^0.10.0",
     "raw": "^0.1.4",
     "riot": "^4.8.7",
     "split-view": "^1.0.1",
@@ -16,12 +15,14 @@
   },
   "devDependencies": {
     "@riotjs/parcel-plugin-riot": "^4.0.1",
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "pegjs": "^0.10.0"
   },
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build --no-cache -d dist index.html",
-    "build-local-use": "parcel build --no-cache -d dist index.html --public-url ./"
+    "build-local-use": "parcel build --no-cache -d dist index.html --public-url ./",
+    "generate-parser": "pegjs -o split.js --export-var module.exports --format umd split.pegjs"
   },
   "engines": {
     "node": ">=10.16.0"
