@@ -1,39 +1,15 @@
-<split>
+<split-view>
 
-  <div class="split-view">
-    <div class="view-frame" each={ view in views } if={ !view.hidden } style={ view.style }>
-      <split-view if={ view.nested } search-params={ props.searchParams } view-definition={ view.definition } />
-      <content-frame if={ !view.nested } definition={ view.definition } />
-    </div>
+  <content-frame class="view-frame" if={ typeof view === "string" } definition={ props.searchParams.get(view) } />
+  <div class="view-frame" if={ typeof view === "object" } each={ inner in view.views } style="{ view.sep === "/" ? "width" : "height" }: {inner.size}%;">
+    <split-view search-params={ props.searchParams } view-definition={ inner.view } />
   </div>
 
   <script>
-    import * as riot from "riot";
-
-    const parseView = (params, definition, size, orientation) => {
-      const style = orientation === "/" ? `width: ${size}%;` : `height: ${size}%;`
-      const nested = Array.isArray(definition);
-      return {
-        style,
-        hidden: size === 0,
-        nested,
-        definition: nested ? definition : params.get(definition),
-      };
-    };
-
-    const parseDefinition = (definition, params) => {
-      const [a, aSize, orientation, bSize, b] = definition;
-
-      return [
-        parseView(params, a, aSize, orientation),
-        parseView(params, b, bSize, orientation),
-      ];
-    };
-
     export default {
       onBeforeMount() {
-        this.views = parseDefinition(this.props.viewDefinition, this.props.searchParams);
+        this.view = this.props.viewDefinition;
       },
     }
   </script>
-</split>
+</split-view>
