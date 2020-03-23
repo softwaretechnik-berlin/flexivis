@@ -4,11 +4,6 @@
     <div class="view-frame" each={ view in views } if={ !view.hidden } style={ view.style }>
       <split-view if={ view.nested } search-params={ props.searchParams } view-definition={ view.definition } />
       <content-frame if={ !view.nested } definition={ view.definition } />
-      <!--
-      <iframe class="split-frame" if={ view.iframe } src={ view.content }/>
-      <raw if={ view.raw } html={ view.content }/>
-      <layer-map if={ view.map && view.content } sources={ view.content }/>
-      -->
     </div>
   </div>
 
