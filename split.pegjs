@@ -1,20 +1,25 @@
-Root = Split / Single / Empty
+Root = Unparenthesized / Empty
 
-Empty = '' { return ['url', 100, 'X', 0, '']; }
+Empty = '' { return {view:'url', size: 100}; }
 
 Sep = [/-]
 
-Single = a:Val { return [a, 100, 'X', 0, '']; };
+View = view:(Parenthesized / Label) size:Int? { return { view, size}; };
 
-Val = val:(Parenthesized / Label) { return val; };
+Parenthesized = '(' inner:Unparenthesized ')' { return inner; };
 
-Parenthesized = '(' inner:(Split / Val) ')' { return inner; };
+Unparenthesized = Split / SingleView
 
-Split
-	=
-    a:Val sep:Sep b:Val { return [a, 50, sep, 50, b]}
-    / a:Val i:Int sep:Sep b:Val { return [a, i, sep, 100 - i, b]}
-    / a:Val sep:Sep i:Int b:Val { return [a, 100 - i, sep, i, b]}
+SingleView = view:View { return view.view }
+
+Split = a:View conts:SplitContinuation+ & { return conts.every(c => c.sep == conts[0].sep) } {
+  let views = [a].concat(conts.map(c => c.view))
+  let defaultSize = (100 - views.reduce((a, v) => a + v.size, 0)) / views.filter(v => !v.size).length
+  views.forEach(v => v.size = v.size || defaultSize)
+  return { sep: conts[0].sep, views }
+}
+
+SplitContinuation = sep:Sep view:View { return {sep, view}}
 
 Label = [a-zA-Z]+ { return text(); }
 
