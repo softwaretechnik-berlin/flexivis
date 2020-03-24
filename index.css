@@ -21,7 +21,7 @@ a {
   width: 100%;
 }
 
-iframe, .view-frame {
+iframe, .view-frame, .view-box, .separator {
   display: inline-block;
   box-sizing: border-box;
   height: 100%;
@@ -32,6 +32,11 @@ iframe, .view-frame {
 
 .view-frame {
   overflow: hidden;
+}
+
+.separator {
+  background: red;
+  position: fixed;
 }
 
 .map {

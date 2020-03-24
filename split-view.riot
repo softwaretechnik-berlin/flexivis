@@ -1,14 +1,19 @@
 <split-view>
 
-  <content-frame class="view-frame" if={ typeof view === "string" } definition={ props.searchParams.get(view) } />
-  <div class="view-frame" if={ typeof view === "object" } each={ inner in view.views } style="{ view.sep === "/" ? "width" : "height" }: {inner.size}%;">
-    <split-view search-params={ props.searchParams } view-definition={ inner.view } />
+  <content-frame class="view-frame" if={ isLeaf } definition={ props.searchParams.get(view) } />
+  <div class="view-box" if={ !isLeaf } each={ (inner, idx) in view.views }  style="{ isVertical ? "width" : "height" }: calc({inner.size}% - {idx === 0 ? 0 : 1}px);">
+    <div if={ idx !== 0 } class="separator" style="{ !isVertical ? "height" : "width" }: 1px; cursor: { !isVertical ? "ns" : "ew" }-resize;" />
+    <div class="view-frame">
+      <split-view search-params={ props.searchParams } view-definition={ inner.view } />
+    </div>
   </div>
 
   <script>
     export default {
       onBeforeMount() {
         this.view = this.props.viewDefinition;
+        this.isLeaf = typeof this.view === "string";
+        this.isVertical = this.view.sep === "/";
       },
     }
   </script>
