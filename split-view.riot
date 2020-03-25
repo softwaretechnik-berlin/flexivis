@@ -45,6 +45,7 @@
           invisibleDiv.style.top = 0;
           invisibleDiv.style.left = 0;
           invisibleDiv.style.position = "absolute";
+          invisibleDiv.style.cursor = e.target.style.cursor;
 
           const move = e => {
             const p = Math.max(100 * (eventLocation(e) / screenSize()) - startPercentage, 0);
