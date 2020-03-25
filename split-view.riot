@@ -1,8 +1,8 @@
 <split-view>
 
   <content-frame class="view-frame" if={ isLeaf } definition={ props.searchParams.get(view) } />
-  <div class="view-box" if={ !isLeaf } each={ (inner, idx) in view.views }  style="{ isVertical ? "width" : "height" }: calc({inner.size}% - {idx === 0 ? 0 : 1}px);">
-    <div if={ idx !== 0 } class="separator" style="{ !isVertical ? "height" : "width" }: 1px; cursor: { !isVertical ? "ns" : "ew" }-resize;" />
+  <div class="view-box" if={ !isLeaf } each={ (inner, idx) in view.views } key={ idx } style="{ isVertical ? "width" : "height" }: calc({inner.size}% - {idx === 0 ? 0 : 1}px);">
+    <div if={ idx !== 0 } class="separator" onmousedown={ resize(idx) } style="{ isVertical ? "width" : "height" }: 1px; cursor: { isVertical ? "ew" : "ns" }-resize;" />
     <div class="view-frame">
       <split-view search-params={ props.searchParams } view-definition={ inner.view } />
     </div>
@@ -14,6 +14,61 @@
         this.view = this.props.viewDefinition;
         this.isLeaf = typeof this.view === "string";
         this.isVertical = this.view.sep === "/";
+
+        if (!this.isLeaf) {
+          this.view.views.forEach(inner => inner.originalSize = inner.size);
+        }
+      },
+      resize(idx) {
+        const screenSize = () => this.isVertical ? window.screen.width : window.screen.height;
+        const eventLocation = e => this.isVertical ? e.screenX : e.screenY;
+        // const calculatePercentage = e => 100 * (eventLocation(e) / screenSize());
+        return e => {
+          // these frames won't change at all.
+          const start = this.view.views.slice(0, idx - 1)
+          // this frame can be reduced down to 0% and expanded up to `size(start)`.
+          const before = this.view.views[idx - 1];
+          // these frames will be resized proportionally using what is left.
+          const after = this.view.views.slice(idx);
+
+          const startPercentage = start.reduce((t, v) => t + v.size, 0);
+
+          // This is a workaround to allow the events to be fired even when hovering an iframe.
+          // We add an invisible div over the whole page, that will make sure that all events are
+          // fired for `document`.
+          const invisibleDiv = document.createElement("div");
+          invisibleDiv.classList.add("invisible-div");
+          invisibleDiv.style.margin = 0;
+          invisibleDiv.style.padding = 0;
+          invisibleDiv.style.height = "100%";
+          invisibleDiv.style.width = "100%";
+          invisibleDiv.style.top = 0;
+          invisibleDiv.style.left = 0;
+          invisibleDiv.style.position = "absolute";
+
+          const move = e => {
+            const p = Math.max(100 * (eventLocation(e) / screenSize()) - startPercentage, 0);
+            before.size = p;
+
+            const remainingSize = 100 - startPercentage - p;
+            const previousAfterSize = after.reduce((t, v) => t + v.size, 0)
+            after.forEach(v => v.size = remainingSize * v.size / previousAfterSize);
+
+            this.update();
+            return false;
+          };
+
+          const stop = () => {
+            this.update();
+            document.body.removeChild(invisibleDiv);
+            document.removeEventListener("mousemove", move);
+            document.removeEventListener("mouseup", stop);
+          }
+
+          document.body.appendChild(invisibleDiv);
+          document.addEventListener("mousemove", move);
+          document.addEventListener("mouseup", stop);
+        };
       },
     }
   </script>
