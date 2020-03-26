@@ -20,20 +20,24 @@
         }
       },
       resize(idx) {
-        const screenSize = () => this.isVertical ? document.body.clientWidth : document.body.clientHeight;
+        const screenSize = () => this.isVertical ? window.innerWidth : window.innerHeight;
         const eventLocation = e => this.isVertical ? e.clientX : e.clientY;
         return e => {
-          // these frames won't change at all.
+          // The minimum resizing limit (percentage) that a frame can have. This prevents resizing to
+          // 0, because once you have a right/bottom frame with that size, it is almost impossible to
+          // put the cursor on top of that instead of the browser window limit.
+          const resizingLimit = 0.5;
+
+          // These frames won't change at all.
           const start = this.view.views.slice(0, idx - 1)
-          // this frame can be reduced down to 0% and expanded up to `size(start)`.
+          // This frame can be reduced down to `resizingLimit` and expanded up to `size(start) - resizingLimit`.
           const before = this.view.views[idx - 1];
-          // these frames will be resized proportionally using what is left.
+          // These frames will be resized proportionally using what is left.
           const after = this.view.views.slice(idx);
 
           const startPercentage = start.reduce((t, v) => t + v.size, 0);
-
-          const initialAfterSize = after.reduce((t, v) => t + v.size, 0);
-          const afterScaleFactors = after.map(initialAfterSize ? v => v.size / initialAfterSize : v => 1 / after.length)
+          const initialAfterSize = after.reduce((t, v) => t + v.size, 0) || after.size;
+          const afterScaleFactors = after.map(v => v.size / initialAfterSize);
 
           // This is a workaround to allow the events to be fired even when hovering an iframe.
           // We add an invisible div over the whole page, that will make sure that all events are
@@ -50,10 +54,11 @@
           invisibleDiv.style.cursor = e.target.style.cursor;
 
           const move = e => {
-            const p = Math.min(Math.max(100 * (eventLocation(e) / screenSize()) - startPercentage, 0), 100 - startPercentage);
-            before.size = p;
+            const newSize = 100 * (eventLocation(e) / screenSize()) - startPercentage;
+            const adjustedSize = Math.min(Math.max(newSize, resizingLimit), 100 - startPercentage - resizingLimit);
+            before.size = adjustedSize;
 
-            const remainingSize = 100 - startPercentage - p;
+            const remainingSize = 100 - startPercentage - adjustedSize;
             after.forEach((v, i) => v.size = remainingSize * afterScaleFactors[i]);
 
             this.update();
