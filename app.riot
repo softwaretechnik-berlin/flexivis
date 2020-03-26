@@ -8,9 +8,7 @@
     export default {
       onBeforeMount() {
         this.searchParams = new URLSearchParams(location.search);
-        console.log(this.searchParams);
         this.viewDefinition = split.parse(this.searchParams.get("split") || '');
-        console.log(this.viewDefinition);
       },
     }
   </script>
