@@ -20,9 +20,8 @@
         }
       },
       resize(idx) {
-        const screenSize = () => this.isVertical ? window.screen.width : window.screen.height;
-        const eventLocation = e => this.isVertical ? e.screenX : e.screenY;
-        // const calculatePercentage = e => 100 * (eventLocation(e) / screenSize());
+        const screenSize = () => this.isVertical ? document.body.clientWidth : document.body.clientHeight;
+        const eventLocation = e => this.isVertical ? e.clientX : e.clientY;
         return e => {
           // these frames won't change at all.
           const start = this.view.views.slice(0, idx - 1)
@@ -48,12 +47,12 @@
           invisibleDiv.style.cursor = e.target.style.cursor;
 
           const move = e => {
-            const p = Math.max(100 * (eventLocation(e) / screenSize()) - startPercentage, 0);
+            const p = Math.min(Math.max(100 * (eventLocation(e) / screenSize()) - startPercentage, 0), 100 - startPercentage);
             before.size = p;
 
             const remainingSize = 100 - startPercentage - p;
             const previousAfterSize = after.reduce((t, v) => t + v.size, 0)
-            after.forEach(v => v.size = remainingSize * v.size / previousAfterSize);
+            after.forEach(v => v.size = (remainingSize * v.size / previousAfterSize) || 0);
 
             this.update();
             return false;
