@@ -1,17 +1,16 @@
 <app>
-  <div id="split-view" />
+  <split-view {...{ viewDefinition, searchParams }} />
 
   <script>
     import * as riot from "riot";
-
     import * as split from "./split";
 
-    const searchParams = new URLSearchParams(location.search);
-    const viewDefinition = split.parse(searchParams.get("split") || '');
-
     export default {
-      onMounted() {
-        riot.mount("#split-view", { viewDefinition, searchParams }, 'split-view');
+      onBeforeMount() {
+        this.searchParams = new URLSearchParams(location.search);
+        console.log(this.searchParams);
+        this.viewDefinition = split.parse(this.searchParams.get("split") || '');
+        console.log(this.viewDefinition);
       },
     }
   </script>
