@@ -3,7 +3,7 @@
   <content-frame if={ isLeaf } definition={ props.searchParams.get(view) } />
   <template if={ !isLeaf } each={ (inner, idx) in view.views } key={ idx }>
     <div if={ idx !== 0 } class="separator" onmousedown={ resize(idx) } style="{ isVertical ? "width" : "height" }: 1px; cursor: { isVertical ? "ew" : "ns" }-resize;" />
-    <div class="view-frame" style="{ isVertical ? "width" : "height" }: calc((100% - {view.views.length - 1}px) * {inner.size/100})">
+    <div class="view-frame" style="{ isVertical ? "width" : "height" }: calc({ inner.size }% - { idx === 0 ? 0 : 1 }px)">
       <split-view search-params={ props.searchParams } view-definition={ inner.view } />
     </div>
   </template>
