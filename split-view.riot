@@ -32,6 +32,9 @@
 
           const startPercentage = start.reduce((t, v) => t + v.size, 0);
 
+          const initialAfterSize = after.reduce((t, v) => t + v.size, 0);
+          const afterScaleFactors = after.map(initialAfterSize ? v => v.size / initialAfterSize : v => 1 / after.length)
+
           // This is a workaround to allow the events to be fired even when hovering an iframe.
           // We add an invisible div over the whole page, that will make sure that all events are
           // fired for `document`.
@@ -51,8 +54,7 @@
             before.size = p;
 
             const remainingSize = 100 - startPercentage - p;
-            const previousAfterSize = after.reduce((t, v) => t + v.size, 0)
-            after.forEach(v => v.size = (remainingSize * v.size / previousAfterSize) || 0);
+            after.forEach((v, i) => v.size = remainingSize * afterScaleFactors[i]);
 
             this.update();
             return false;
