@@ -2,6 +2,7 @@ import "ol/ol.css";
 import Map from "ol/Map";
 import View from "ol/View";
 import XYZ from "ol/source/XYZ";
+import {fromLonLat} from 'ol/proj';
 
 import GeoJSON from "ol/format/GeoJSON";
 import { extend as extendExtent, createEmpty as createExtent } from "ol/extent";
@@ -46,7 +47,7 @@ const HighlightStyle = new Style({
   }),
 });
 
-export const BaseLayerDescriptions = [
+const baseLayerDescriptions = [
   {
     id: "here.reduced.day",
     layerId: "reduced.day",
@@ -76,15 +77,15 @@ export const BaseLayerDescriptions = [
 ];
 
 export class HereGeoJsonMap {
-  constructor(hereAppId, hereAppCode, mapElementId) {
+  constructor(mapElementId, { hereAppId, hereAppCode, center = [0, 0], zoomLevel = 5 }) {
     observable(this);
 
     this.map = new Map({
       layers: [],
       target: mapElementId,
       view: new View({
-        center: [0, 0],
-        zoom: 5,
+        center: fromLonLat(center.reverse()),
+        zoom: zoomLevel,
       }),
     });
 
@@ -94,7 +95,7 @@ export class HereGeoJsonMap {
     });
     this.highlightedFeature = undefined;
 
-    this.baseLayers = BaseLayerDescriptions.map(layerDesc => {
+    this.baseLayers = baseLayerDescriptions.map(layerDesc => {
       const layer =
         layerDesc.type === "here"
           ? new TileLayer({
@@ -121,6 +122,10 @@ export class HereGeoJsonMap {
     });
 
     this.geoJsonLayers = [];
+  }
+
+  layerDescriptions() {
+    return baseLayerDescriptions;
   }
 
   selectHereLayer(id) {
