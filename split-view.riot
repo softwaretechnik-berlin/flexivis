@@ -69,6 +69,7 @@
             document.body.removeChild(invisibleDiv);
             document.removeEventListener("mousemove", move);
             document.removeEventListener("mouseup", stop);
+            window.dispatchEvent(new Event("resize"));
             this.update();
           }
 
