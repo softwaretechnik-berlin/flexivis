@@ -31,7 +31,36 @@ _TODO: Document split parameter and syntax._
 
 ## View Specifications
 
-_TODO: Document view specifications._
+Remaining query parameters specifiy what should be displayed.
+The parameter name is the name of view (matching the name used in the [`split`](#split-syntax) parameter), and the value is a view specification.
+
+The basic format of a view specification is `<prefix>:<url-and-view-specific-params>`.
+
+The prefix specifies the view type. The following view types are supported:
+
+- [`text`: Plaintext](#text)
+- [`vega`: Vega/Vega-Lite](#vega)
+
+_TODO: Document remain view specification types._
+
+### `text`
+
+The `text` prefix specifies that the resource at the given URL should be rendered as plain text.
+
+E.g.: [plaintext JSON file](http://flexivis.infrastruktur.link/?url=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json).
+
+### `json`
+
+The `json` prefix specifies that the resource is a JSON document and should be rendered in a JSON viewer.
+
+E.g.: [JSON file](http://flexivis.infrastruktur.link/?url=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json).
+
+
+### `vega`
+
+The `vega` prefix specifies that the URL represents a [Vega](https://vega.github.io/vega/) or [Vega-Lite](https://vega.github.io/vega-lite/) graph.
+
+E.g.: [visualise # of files vs lines of code](http://flexivis.infrastruktur.link/?split=(graph-data)/source&graph=vega:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&data=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.csv) (as reported by [cloc]()).
 
 
 ## Development
