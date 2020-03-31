@@ -1,6 +1,6 @@
 Root = Unparenthesized / Empty
 
-Empty = '' { return {view:'url', size: 100}; }
+Empty = '' { return 'url'; }
 
 Sep = [/-]
 

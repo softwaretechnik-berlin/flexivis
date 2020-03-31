@@ -150,7 +150,7 @@
         peg$startRuleFunction  = peg$parseRoot,
 
         peg$c0 = "",
-        peg$c1 = function() { return {view:'url', size: 100}; },
+        peg$c1 = function() { return 'url'; },
         peg$c2 = /^[\/\-]/,
         peg$c3 = peg$classExpectation(["/", "-"], false, false),
         peg$c4 = function(view, size) { return { view, size}; },
