@@ -1,0 +1,9 @@
+<svg width="90" height="60" xmlns="http://www.w3.org/2000/svg">
+    <style>* { font-family: sans-serif }</style>
+    <rect width="45" height="60" style="fill: lightblue" />
+    <text x="22.5" y="30" alignment-baseline="middle" text-anchor="middle">foo</text>
+    <rect x="45" width="45" height="30" style="fill: lightgreen" />
+    <text x="67.5" y="15" alignment-baseline="middle" text-anchor="middle">bar</text>
+    <rect x="45" y="30" width="45" height="30" style="fill: pink" />
+    <text x="67.5" y="45" alignment-baseline="middle" text-anchor="middle">baz</text>
+</svg>
