@@ -46,7 +46,7 @@ The optional `layout` parameter specifies how to lay out the individual views in
 <table>
     <tr>
         <td style="min-width: 90px"><img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-foo.svg?sanitize=true"/></td>
-        <td>single view is specified by a name (containing only alphanumeric characters), e.g. <code>layout=foo</code>.</td>
+        <td>A single view is specified by its name (containing only alphanumeric characters), e.g. <code>layout=foo</code>.</td>
     </tr>
     <tr>
         <td><img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-url.svg?sanitize=true"/></td>
@@ -80,22 +80,23 @@ The basic format of a view specification is `<prefix>:<url-and-view-specific-par
 
 The prefix specifies the view type. The following view types are supported:
 
+- [`json`: Plaintext](#json)
 - [`text`: Plaintext](#text)
 - [`vega`: Vega/Vega-Lite](#vega)
 
 _TODO: Document remain view specification types._
-
-### `text`
-
-The `text` prefix specifies that the resource at the given URL should be rendered as plain text.
-
-E.g.: [plaintext JSON file](http://flexivis.infrastruktur.link/?url=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json).
 
 ### `json`
 
 The `json` prefix specifies that the resource is a JSON document and should be rendered in a JSON viewer.
 
 E.g.: [JSON file](http://flexivis.infrastruktur.link/?url=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json).
+
+### `text`
+
+The `text` prefix specifies that the resource at the given URL should be rendered as plain text.
+
+E.g.: [plaintext JSON file](http://flexivis.infrastruktur.link/?url=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json).
 
 
 ### `vega`
