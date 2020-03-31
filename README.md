@@ -44,49 +44,17 @@ The [`layout`](#layout) parameter specifies how to lay out the named views in th
 The optional `layout` parameter specifies how to lay out the individual views in the available screen real estate.
 
 <div style="display: flex; flex-flow: row wrap; align-items: center; space-between: 10px">
-    <svg width="90" height="60" style="display: inline-block; margin: 10 10 10 0">
-        <rect width="90" height="60" style="fill: lightblue" />
-        <text x="45" y="30" alignment-baseline="middle" text-anchor="middle">foo</text>
-    </svg>
+    <img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-foo.svg?sanitize=true" style="display: inline-block; margin: 10px 10px 10px 0" />
     <div style="display: inline-block; width: calc(100% - 100px)">A single view is specified by a name (containing only alphanumeric characters), e.g. <code>layout=foo</code>.</div>
-    <svg width="90" height="60" style="display: inline-block; margin: 10 10 10 0">
-        <rect width="90" height="60" style="fill: lightblue" />
-        <text x="45" y="30" alignment-baseline="middle" text-anchor="middle">url</text>
-    </svg>
+    <img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-url.svg?sanitize=true" style="display: inline-block; margin: 10px 10px 10px 0" />
     <div style="display: inline-block; width: calc(100% - 100px)">When there is no <code>layout</code> parameter, <code>layout=url</code> is implied.</div>
-    <svg width="90" height="60" style="display: inline-block; margin: 10 10 10 0">
-        <rect width="45" height="60" style="fill: lightblue" />
-        <text x="22.5" y="30" alignment-baseline="middle" text-anchor="middle">foo</text>
-        <rect x="45" width="45" height="60" style="fill: lightgreen" />
-        <text x="67.5" y="30" alignment-baseline="middle" text-anchor="middle">bar</text>
-    </svg>
+    <img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-horizontal.svg?sanitize=true" style="display: inline-block; margin: 10px 10px 10px 0" />
     <div style="display: inline-block; width: calc(100% - 100px)">Views can be layed out side-by-side with the <code>/</code> operator: <code>layout=foo/bar</code>.</div>
-    <svg width="90" height="60" style="display: inline-block; margin: 10 10 10 0">
-        <rect width="90" height="20" style="fill: lightblue" />
-        <text x="45" y="10" alignment-baseline="middle" text-anchor="middle">foo</text>
-        <rect y="20" width="90" height="20" style="fill: lightgreen" />
-        <text x="45" y="30" alignment-baseline="middle" text-anchor="middle">bar</text>
-        <rect y="40" width="90" height="20" style="fill: pink" />
-        <text x="45" y="50" alignment-baseline="middle" text-anchor="middle">baz</text>
-    </svg>
+    <img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-vertical.svg?sanitize=true" style="display: inline-block; margin: 10px 10px 10px 0" />
     <div style="display: inline-block; width: calc(100% - 100px)">Views can be layed out in a vertical stack with the <code>-</code> operator: <code>layout=foo-bar-baz</code>.</div>
-    <svg width="90" height="60" style="display: inline-block; margin: 10 10 10 0">
-        <rect width="45" height="60" style="fill: lightblue" />
-        <text x="22.5" y="30" alignment-baseline="middle" text-anchor="middle">foo</text>
-        <rect x="45" width="45" height="30" style="fill: lightgreen" />
-        <text x="67.5" y="15" alignment-baseline="middle" text-anchor="middle">bar</text>
-        <rect x="45" y="30" width="45" height="30" style="fill: pink" />
-        <text x="67.5" y="45" alignment-baseline="middle" text-anchor="middle">baz</text>
-    </svg>
+    <img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-grouping.svg?sanitize=true" style="display: inline-block; margin: 10px 10px 10px 0" />
     <div style="display: inline-block; width: calc(100% - 100px)">Parentheses can be used for grouping: <code>layout=foo/(bar-baz)</code>.</div>
-    <svg width="90" height="60" style="display: inline-block; margin: 10 10 10 0">
-        <rect width="22.5" height="60" style="fill: lightblue" />
-        <text x="11.25" y="30" alignment-baseline="middle" text-anchor="middle">foo</text>
-        <rect x="22.5" width="67.5" height="24" style="fill: lightgreen" />
-        <text x="56.25" y="12" alignment-baseline="middle" text-anchor="middle">bar</text>
-        <rect x="22.5" y="24" width="67.5" height="36" style="fill: pink" />
-        <text x="56.25" y="42" alignment-baseline="middle" text-anchor="middle">baz</text>
-    </svg>
+    <img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-percentage.svg?sanitize=true" style="display: inline-block; margin: 10px 10px 10px 0" />
     <div style="display: inline-block; width: calc(100% - 100px)">A number immediately after a view specifies the percentage of the parent view that it will occupy, with the remaining percentage distributed amongst views without an explicit percentage: <code>layout=foo/(bar40-baz)75</code>.</div>
 </div>
 
