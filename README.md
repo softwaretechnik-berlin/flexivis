@@ -43,20 +43,32 @@ The [`layout`](#layout) parameter specifies how to lay out the named views in th
 
 The optional `layout` parameter specifies how to lay out the individual views in the available screen real estate.
 
-<div style="display: flex; flex-flow: row wrap; align-items: center; space-between: 10px">
-    <img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-foo.svg?sanitize=true" style="display: inline-block; margin: 10px 10px 10px 0" />
-    <div style="display: inline-block; width: calc(100% - 100px)">A single view is specified by a name (containing only alphanumeric characters), e.g. <code>layout=foo</code>.</div>
-    <img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-url.svg?sanitize=true" style="display: inline-block; margin: 10px 10px 10px 0" />
-    <div style="display: inline-block; width: calc(100% - 100px)">When there is no <code>layout</code> parameter, <code>layout=url</code> is implied.</div>
-    <img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-horizontal.svg?sanitize=true" style="display: inline-block; margin: 10px 10px 10px 0" />
-    <div style="display: inline-block; width: calc(100% - 100px)">Views can be layed out side-by-side with the <code>/</code> operator: <code>layout=foo/bar</code>.</div>
-    <img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-vertical.svg?sanitize=true" style="display: inline-block; margin: 10px 10px 10px 0" />
-    <div style="display: inline-block; width: calc(100% - 100px)">Views can be layed out in a vertical stack with the <code>-</code> operator: <code>layout=foo-bar-baz</code>.</div>
-    <img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-grouping.svg?sanitize=true" style="display: inline-block; margin: 10px 10px 10px 0" />
-    <div style="display: inline-block; width: calc(100% - 100px)">Parentheses can be used for grouping: <code>layout=foo/(bar-baz)</code>.</div>
-    <img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-percentage.svg?sanitize=true" style="display: inline-block; margin: 10px 10px 10px 0" />
-    <div style="display: inline-block; width: calc(100% - 100px)">A number immediately after a view specifies the percentage of the parent view that it will occupy, with the remaining percentage distributed amongst views without an explicit percentage: <code>layout=foo/(bar40-baz)75</code>.</div>
-</div>
+<table>
+    <tr>
+        <td style="min-width: 90px"><img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-foo.svg?sanitize=true"/></td>
+        <td>single view is specified by a name (containing only alphanumeric characters), e.g. <code>layout=foo</code>.</td>
+    </tr>
+    <tr>
+        <td><img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-url.svg?sanitize=true"/></td>
+        <td>When there is no <code>layout</code> parameter, <code>layout=url</code> is implied.</td>
+    </tr>
+    <tr>
+        <td><img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-horizontal.svg?sanitize=true"/></td>
+        <td>Views can be layed out side-by-side with the <code>/</code> operator: <code>layout=foo/bar</code>.</td>
+    </tr>
+    <tr>
+        <td><img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-vertical.svg?sanitize=true"/></td>
+        <td>Views can be layed out in a vertical stack with the <code>-</code> operator: <code>layout=foo-bar-baz</code>.</td>
+    </tr>
+    <tr>
+        <td><img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-grouping.svg?sanitize=true"/></td>
+        <td>Parentheses can be used for grouping: <code>layout=foo/(bar-baz)</code>.</td>
+    </tr>
+    <tr>
+        <td><img src="https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/images/layout-percentage.svg?sanitize=true"/></td>
+        <td>A number immediately after a view specifies the percentage of the parent view that it will occupy,<br/> with the remaining percentage distributed amongst views without an explicit percentage:<br/> <code>layout=foo/(bar40-baz)75</code>.</td>
+    </tr>
+</table>
 
 
 ## View Specifications
