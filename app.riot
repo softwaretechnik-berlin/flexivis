@@ -7,7 +7,7 @@
 
     export default {
       onBeforeMount() {
-        this.searchParams = new URLSearchParams(location.search);
+        this.searchParams = new URLSearchParams(location.search || location.hash);
         this.viewDefinition = split.parse(this.searchParams.get("split") || '');
       },
     }
