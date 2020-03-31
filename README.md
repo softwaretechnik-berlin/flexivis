@@ -1,6 +1,7 @@
 # Flexivis
 
 Flexivis is a flexible visualisation tool that allows you to easily visualise diverse types of data in Web browser.
+It lets you create a single URL to visualise data from multiple sources.
 
 - [Example](#example)
 - [Split syntax](#split-syntax)
