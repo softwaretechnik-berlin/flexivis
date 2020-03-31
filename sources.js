@@ -85,6 +85,15 @@ const vegaHandler = retriever => ctx => {
   });
 };
 
+const textHandler = retriever => ctx => {
+  return Promise.resolve(retriever(ctx)).then(source => {
+    const div = document.createElement("div");
+    div.className = "text";
+    div.innerText = source;
+    ctx.element.appendChild(div);
+  })
+};
+
 const get = url => fetch(url).then(r => r.text());
 
 const handlers = {
@@ -93,11 +102,12 @@ const handlers = {
   file: resourceHandler,
   json: jsonHandler(ctx => get(ctx.description)),
   md: markdownHandler(ctx => get(ctx.description)),
-  "md-raw": markdownHandler(ctx => ctx.description),
-  html: htmlHandler,
+  "md-inline": markdownHandler(ctx => ctx.description),
+  "html-inline": htmlHandler,
   map: mapHandler,
   mermaid: mermaidHandler(ctx => get(ctx.description)),
-  "mermaid-raw": mermaidHandler(ctx => ctx.description),
+  "mermaid-inline": mermaidHandler(ctx => ctx.description),
+  text: textHandler(ctx => get(ctx.description)),
   vega: vegaHandler(ctx => get(ctx.description)),
 };
 

@@ -14,16 +14,14 @@ a {
   cursor: pointer;
 }
 
-.markdown {
+content-frame > .text, content-frame > .markdown, content-frame > .json {
   overflow: auto;
   height: 100%;
   width: 100%;
 }
 
-.json {
-  overflow: auto;
-  height: 100%;
-  width: 100%;
+content-frame > .text {
+  white-space: pre;
 }
 
 iframe, .view-frame, .separator {
