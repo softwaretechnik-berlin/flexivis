@@ -74,7 +74,7 @@ The optional `layout` parameter specifies how to lay out the individual views in
 ## View Specifications
 
 Remaining query parameters specifiy what should be displayed.
-The parameter name is the name of view (matching the name used in the [`layout`](#layout) parameter), and the value is a view specification.
+The parameter name is the name of the view (matching the name used in the [`layout`](#layout) parameter), and the value is a view specification.
 
 The basic format of a view specification is `<prefix>:<url-and-view-specific-params>`.
 
