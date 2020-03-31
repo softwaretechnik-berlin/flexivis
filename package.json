@@ -21,7 +21,7 @@
     "start": "parcel index.html",
     "build": "parcel build --no-cache -d dist index.html",
     "build-local-use": "parcel build --no-cache -d dist index.html --public-url ./",
-    "generate-parser": "pegjs -o split.js --export-var module.exports --format umd split.pegjs"
+    "generate-parser": "pegjs -o layout.js --export-var module.exports --format umd layout.pegjs"
   },
   "engines": {
     "node": ">=10.16.0"

@@ -3,12 +3,12 @@
 
   <script>
     import * as riot from "riot";
-    import * as split from "./split";
+    import * as layout from "./layout";
 
     export default {
       onBeforeMount() {
         this.searchParams = new URLSearchParams(location.search || location.hash.replace("#", "?"));
-        this.viewDefinition = split.parse(this.searchParams.get("split") || '');
+        this.viewDefinition = layout.parse(this.searchParams.get("layout") || '');
       },
     }
   </script>
