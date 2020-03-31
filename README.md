@@ -80,9 +80,9 @@ The basic format of a view specification is `<prefix>:<url-and-view-specific-par
 
 The prefix specifies the view type. The following view types are supported:
 
-- [`json`: Plaintext](#json)
+- [`json`: Interactive JSON viewer](#json)
 - [`text`: Plaintext](#text)
-- [`vega`: Vega/Vega-Lite](#vega)
+- [`vega`: Vega/Vega-Lite graphs](#vega)
 
 _TODO: Document remain view specification types._
 
