@@ -2,6 +2,7 @@
   "name": "here-maps",
   "dependencies": {
     "@riotjs/observable": "^4.0.4",
+    "github-markdown-css": "^4.0.0",
     "highlight.js": "^9.18.1",
     "markdown-it": "^10.0.0",
     "mermaid": "^8.4.8",
@@ -14,6 +15,7 @@
   },
   "devDependencies": {
     "@riotjs/parcel-plugin-riot": "^4.0.1",
+    "marked": "^0.8.2",
     "parcel-bundler": "^1.12.4",
     "pegjs": "^0.10.0"
   },
