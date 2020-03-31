@@ -1,21 +1,34 @@
 # Flexivis
 
 Flexivis is a flexible visualisation tool that allows you to easily visualise diverse types of data in Web browser.
-It lets you create a single URL to visualise data from multiple sources.
 
-- [Example](#example)
+- [Overview](#overview)
 - [Split syntax](#split-syntax)
 - [View specifications](#view-specifications)
 - [Development](#development)
 
 
-## Example
+## Overview
 
-[This link has an example flexivis URL](https://flexivis.infrastruktur.link?split=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json). Clicking on the link will render something like this:
+Flexivis combines two main abilities:
+- Render or visualise many types of data.
+- Lay out multiple views into sub-regions of the browser window.
+
+Using Flexivis is simple:
+1. You build a Flexivis URL that describes the various views you'd like to display and optionally the layout that should be used to combine them.
+2. Nagivating to that URL displays the rendered layout.
+
+
+Here's an [example Flexivis URL]:
+```https://flexivis.infrastruktur.link?split=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json```
+
+[example Flexivis URL]: https://flexivis.infrastruktur.link?split=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
+
+It renders something like this:
 
 ![Screenshot of the "Berlin Walk" example in Fleixvis showing a splitscreen with 3 views: a Markdown document in the top-left, a map in bottom-left, and JSON document on the right.](https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk-screenshot.png)
 
-If you look at the URL for the example above, you'll see that it's quite a mouthful, but it's actually not very complicated. Let's break it down. Without the query string, the URL is simply https://flexivis.infrastruktur.link/, which is Flexivis's base URL. There are then 4 query string parameters:
+At first glance, the URL above is quite a mouthful, but it's actually not very complicated. Let's break it down. Without the query string, the URL is simply https://flexivis.infrastruktur.link/, which is Flexivis's base URL. There are then 4 query string parameters:
 - split=(explanation30-map)/source
 - explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md
 - map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
