@@ -8,9 +8,6 @@
     export default {
       onBeforeMount() {
         this.searchParams = new URLSearchParams(location.search || location.hash.replace("#", "?"));
-        if (!this.searchParams.has("url")) {
-          this.searchParams.set("url", "readme:");
-        }
         this.viewDefinition = layout.parse(this.searchParams.get("layout") || '');
       },
     }

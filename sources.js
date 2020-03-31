@@ -24,7 +24,8 @@ const md = new MarkdownIt({
   },
 });
 
-const defaultHandler = ctx => {
+const documentation = "readme:";
+const errorHandler = ctx => {
   ctx.element.innerHTML = `Cannot handle '${ctx.name}'`;
 };
 
@@ -128,8 +129,8 @@ const handlers = {
 };
 
 export function mount(riot, element, definition) {
-  const match = definition.match(/^([^:]+).(.*)/) || [];
-  const handler = handlers[match[1]] || defaultHandler;
+  const match = (definition || documentation).match(/^([^:]+).(.*)/) || [];
+  const handler = handlers[match[1]] || errorHandler;
   const result = new Promise(resolve => {
     resolve(
       handler({
