@@ -15,7 +15,7 @@ const mod = (loadHandlerFactory, retriever) => ctx =>
 
 const readmeHandler = ctx =>
   mod(
-    () => import("./markdown"),
+    () => import("./markdown.js"),
     () => ""
   )(ctx).then(() => {
     const div = ctx.element.children[0];
@@ -28,17 +28,17 @@ const readmeHandler = ctx =>
   });
 
 const handlers = {
-  http: mod(() => import("./frame")),
-  https: mod(() => import("./frame")),
-  file: mod(() => import("./frame")),
-  md: mod(() => import("./markdown"), retrievers.resource),
-  "md-inline": mod(() => import("./markdown"), retrievers.description),
-  json: mod(() => import("./json"), retrievers.resource),
-  text: mod(() => import("./text"), retrievers.resource),
-  vega: mod(() => import("./vega"), retrievers.resource),
-  mermaid: mod(() => import("./mermaid"), retrievers.resource),
-  "mermaid-inline": mod(() => import("./mermaid"), retrievers.description),
-  map: mod(() => import("./map")),
+  http: mod(() => import("./frame.js")),
+  https: mod(() => import("./frame.js")),
+  file: mod(() => import("./frame.js")),
+  md: mod(() => import("./markdown.js"), retrievers.resource),
+  "md-inline": mod(() => import("./markdown.js"), retrievers.description),
+  json: mod(() => import("./json.js"), retrievers.resource),
+  text: mod(() => import("./text.js"), retrievers.resource),
+  vega: mod(() => import("./vega.js"), retrievers.resource),
+  mermaid: mod(() => import("./mermaid.js"), retrievers.resource),
+  "mermaid-inline": mod(() => import("./mermaid.js"), retrievers.description),
+  map: mod(() => import("./map.js")),
   readme: readmeHandler,
 };
 

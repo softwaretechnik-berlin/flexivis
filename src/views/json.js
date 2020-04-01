@@ -1,4 +1,4 @@
-import { SourceHandler } from "../common";
+import { SourceHandler } from "./common.js";
 
 class JsonHandler extends SourceHandler {
   constructor(retriever) {

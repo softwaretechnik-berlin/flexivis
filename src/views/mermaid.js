@@ -1,4 +1,4 @@
-import { sourceRetrieverHandler, SourceHandler } from "../common";
+import { sourceRetrieverHandler, SourceHandler } from "./common.js";
 import mermaid from "mermaid";
 
 class MermaidHandler extends SourceHandler {

@@ -1,7 +1,7 @@
 import "highlight.js/styles/github.css";
 import "github-markdown-css/github-markdown.css";
 
-import { SourceHandler } from "../common";
+import { SourceHandler } from "./common.js";
 
 import hljs from "highlight.js";
 import MarkdownIt from "markdown-it";

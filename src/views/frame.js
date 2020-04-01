@@ -1,4 +1,4 @@
-import { Handler } from "../common";
+import { Handler } from "./common.js";
 
 class FrameHandler extends Handler {
   handle(ctx) {
