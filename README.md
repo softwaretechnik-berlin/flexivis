@@ -83,7 +83,7 @@ The basic format of a view specification is `<prefix>:<url-and-view-specific-par
 The prefix specifies the view type. The following view types are supported:
 
 - [`json`: Interactive JSON viewer](#json)
-- [`mermaid`: asdf](#mermaid)
+- [`mermaid`: Mermaid diagrams](#mermaid)
 - [`text`: Plaintext](#text)
 - [`vega`: Vega/Vega-Lite graphs](#vega)
 
