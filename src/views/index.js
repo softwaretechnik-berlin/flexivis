@@ -1,5 +1,5 @@
 import mermaid from "mermaid";
-import { sourceRetrieverHandler } from "./src/views/common";
+import { sourceRetrieverHandler } from "./common";
 
 // To fix the support of some ES6 features, e.g. nested async functions.
 import "regenerator-runtime/runtime";
@@ -16,13 +16,13 @@ const resourceHandler = ctx => {
 };
 
 const jsonHandler = retriever => ctx =>
-  import("./src/views/json").then(handler => handler(retriever)(ctx));
+  import("./json").then(handler => handler(retriever)(ctx));
 
 const markdownHandler = retriever => ctx =>
-  import("./src/views/markdown").then(handler => handler(retriever)(ctx));
+  import("./markdown").then(handler => handler(retriever)(ctx));
 
 const vegaHandler = retriever => ctx =>
-  import("./src/views/vega").then(handler => handler(retriever)(ctx));
+  import("./vega").then(handler => handler(retriever)(ctx));
 
 const readmeHandler = ctx =>
   markdownHandler(() => "")(ctx).then(() => {
@@ -32,7 +32,7 @@ const readmeHandler = ctx =>
     // use the existing `markdownHandler` directly. There is a workaround
     // documented in https://github.com/parcel-bundler/parcel/issues/970
     // but for now I'd stick with this approach.
-    div.innerHTML = require("./README.md");
+    div.innerHTML = require("../../README.md");
   });
 
 const mapHandler = ctx => {
