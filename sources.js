@@ -1,4 +1,4 @@
-import * as hljs from "highlight.js";
+import hljs from "highlight.js";
 import MarkdownIt from "markdown-it";
 import "highlight.js/styles/github.css";
 import "github-markdown-css/github-markdown.css";
