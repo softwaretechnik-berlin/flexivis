@@ -28,45 +28,42 @@ const errorHandler = ctx => {
   ctx.element.innerHTML = `Cannot handle '${ctx.name}'`;
 };
 
+const sourceRetrieverHandler = f => retriever => ctx =>
+  Promise.resolve(retriever(ctx)).then(source => f(source, ctx));
+
 const resourceHandler = ctx => {
   const iframe = document.createElement("iframe");
   iframe.src = ctx.definition;
   ctx.element.appendChild(iframe);
 };
 
-const jsonHandler = retriever => ctx => {
-  return Promise.resolve(retriever(ctx)).then(source => {
-    const div = document.createElement("div");
-    div.classList.add("json");
-    ctx.element.appendChild(div);
-    ctx.riot.mount(
-      div,
-      { obj: JSON.parse(source), showDepth: 4 },
-      "tree-search"
-    );
-  });
-};
+const jsonHandler = sourceRetrieverHandler((source, ctx) => {
+  const div = document.createElement("div");
+  div.classList.add("json");
+  ctx.element.appendChild(div);
+  ctx.riot.mount(
+    div,
+    { obj: JSON.parse(source), showDepth: 4 },
+    "tree-search"
+  );
+});
 
-const markdownHandler = retriever => ctx => {
-  return Promise.resolve(retriever(ctx)).then(source => {
-    const div = document.createElement("div");
-    div.classList.add("markdown");
-    div.classList.add("markdown-body");
-    div.innerHTML = md.render(source);
-    ctx.element.appendChild(div);
+const markdownHandler = sourceRetrieverHandler((source, ctx) => {
+  const div = document.createElement("div");
+  div.classList.add("markdown");
+  div.classList.add("markdown-body");
+  div.innerHTML = md.render(source);
+  ctx.element.appendChild(div);
 
-    // render any mermaid templates that were added by the highlighter
-    mermaid.init(undefined, ".mermaid");
-  });
-};
+  // render any mermaid templates that were added by the highlighter
+  mermaid.init(undefined, ".mermaid");
+});
 
-const htmlHandler = retriever => ctx => {
-  return Promise.resolve(retriever(ctx)).then(source => {
-    const iframe = document.createElement("iframe");
-    iframe.src = `data:text/html;charset=utf-8,${escape(source)}`;
-    ctx.element.appendChild(iframe);
-  });
-};
+const htmlHandler = sourceRetrieverHandler((source, ctx) => {
+  const iframe = document.createElement("iframe");
+  iframe.src = `data:text/html;charset=utf-8,${escape(source)}`;
+  ctx.element.appendChild(iframe);
+});
 
 const readmeHandler = ctx =>
   markdownHandler(() => "")(ctx).then(() => {
@@ -83,33 +80,27 @@ const mapHandler = ctx => {
   ctx.riot.mount(ctx.element, { sources: ctx.description }, "layer-map");
 };
 
-const mermaidHandler = retriever => ctx => {
-  return Promise.resolve(retriever(ctx)).then(source => {
-    ctx.element.innerHTML = source;
-    mermaid.init(undefined, ctx.element);
-  });
-};
+const mermaidHandler = sourceRetrieverHandler((source, ctx) => {
+  ctx.element.innerHTML = source;
+  mermaid.init(undefined, ctx.element);
+});
 
-const vegaHandler = retriever => ctx => {
-  return Promise.resolve(retriever(ctx)).then(source => {
-    const div = document.createElement("div");
-    div.style.width = "100%";
-    div.style.height = "100%";
-    return import("vega-embed").then(module => {
-      module.default(div, JSON.parse(source));
-      ctx.element.appendChild(div);
-    });
-  });
-};
-
-const textHandler = retriever => ctx => {
-  return Promise.resolve(retriever(ctx)).then(source => {
-    const div = document.createElement("div");
-    div.className = "text";
-    div.innerText = source;
+const vegaHandler = sourceRetrieverHandler((source, ctx) => {
+  const div = document.createElement("div");
+  div.style.width = "100%";
+  div.style.height = "100%";
+  return import("vega-embed").then(module => {
+    module.default(div, JSON.parse(source));
     ctx.element.appendChild(div);
   });
-};
+});
+
+const textHandler = sourceRetrieverHandler((source, ctx) => {
+  const div = document.createElement("div");
+  div.className = "text";
+  div.innerText = source;
+  ctx.element.appendChild(div);
+});
 
 const get = url => fetch(url).then(r => r.text());
 
