@@ -121,7 +121,7 @@ export class HereGeoJsonMap {
       };
     });
 
-    this.geoJsonLayers = [];
+    this.geoJsonLayers = {};
   }
 
   layerDescriptions() {
@@ -134,6 +134,10 @@ export class HereGeoJsonMap {
   }
 
   addGeoJsonLayer(id, url) {
+    if (this.geoJsonLayers[id]) {
+      return false;
+    }
+
     const layer = new VectorLayer({
       source: new VectorSource({
         format: new GeoJSON(),
@@ -143,27 +147,29 @@ export class HereGeoJsonMap {
         return GeoJsonStyles(feature.getProperties());
       },
     });
+    this.geoJsonLayers[id] = layer;
     this.map.addLayer(layer);
-    this.geoJsonLayers.push({ id, layer });
 
     layer.once("change", () => {
       const extent = createExtent();
       Object.values(this.geoJsonLayers).forEach(l => {
-        extendExtent(extent, l.layer.getSource().getExtent());
+        extendExtent(extent, l.getSource().getExtent());
       });
       this.map.getView().fit(extent, {
         padding: [30, 30, 30, 30],
       });
     });
+
+    return true;
   }
 
   enableGeoJsonLayer(id) {
-    this.map.addLayer(this.geoJsonLayers.find(l => l.id === id).layer);
+    this.map.addLayer(this.geoJsonLayers[id]);
     this.updateSelectedFeature();
   }
 
   disableGeoJsonLayer(id) {
-    this.map.removeLayer(this.geoJsonLayers.find(l => l.id === id).layer);
+    this.map.removeLayer(this.geoJsonLayers[id]);
     this.updateSelectedFeature();
   }
 
