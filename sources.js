@@ -1,11 +1,10 @@
-import hljs from "highlight.js";
-import MarkdownIt from "markdown-it";
 import "highlight.js/styles/github.css";
 import "github-markdown-css/github-markdown.css";
 
-import mermaid from "mermaid";
+import hljs from "highlight.js";
+import MarkdownIt from "markdown-it";
 
-import vegaEmbed from "vega-embed";
+import mermaid from "mermaid";
 
 const md = new MarkdownIt({
   typographer: true,
@@ -96,8 +95,10 @@ const vegaHandler = retriever => ctx => {
     const div = document.createElement("div");
     div.style.width = "100%";
     div.style.height = "100%";
-    vegaEmbed(div, JSON.parse(source));
-    ctx.element.appendChild(div);
+    return import("vega-embed").then(module => {
+      module.default(div, JSON.parse(source));
+      ctx.element.appendChild(div);
+    });
   });
 };
 
