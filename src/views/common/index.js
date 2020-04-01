@@ -1,7 +1,4 @@
 export class Handler {
-  constructor() {
-    this.handle.bind(this);
-  }
   handle(ctx) {
     throw `Cannot handle type '${ctx.name}'`;
   }
