@@ -2,7 +2,7 @@ import mermaid from "mermaid";
 import { sourceRetrieverHandler } from "./src/views/common";
 
 // To fix the support of some ES6 features, e.g. nested async functions.
-import 'regenerator-runtime/runtime'
+import "regenerator-runtime/runtime";
 
 const documentation = "readme:";
 const errorHandler = ctx => {
@@ -19,16 +19,11 @@ const jsonHandler = sourceRetrieverHandler((source, ctx) => {
   const div = document.createElement("div");
   div.classList.add("json");
   ctx.element.appendChild(div);
-  ctx.riot.mount(
-    div,
-    { obj: JSON.parse(source), showDepth: 4 },
-    "tree-search"
-  );
+  ctx.riot.mount(div, { obj: JSON.parse(source), showDepth: 4 }, "tree-search");
 });
 
 const markdownHandler = retriever => ctx =>
   import("./src/views/markdown").then(handler => handler(retriever)(ctx));
-
 
 const vegaHandler = retriever => ctx =>
   import("./src/views/vega").then(handler => handler(retriever)(ctx));
