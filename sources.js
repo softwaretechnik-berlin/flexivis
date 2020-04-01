@@ -6,6 +6,9 @@ import MarkdownIt from "markdown-it";
 
 import mermaid from "mermaid";
 
+// To fix the support of some ES6 features, e.g. nested async functions.
+import 'regenerator-runtime/runtime'
+
 const md = new MarkdownIt({
   typographer: true,
   linkify: true,
@@ -85,14 +88,13 @@ const mermaidHandler = sourceRetrieverHandler((source, ctx) => {
   mermaid.init(undefined, ctx.element);
 });
 
-const vegaHandler = sourceRetrieverHandler((source, ctx) => {
+const vegaHandler = sourceRetrieverHandler(async (source, ctx) => {
   const div = document.createElement("div");
   div.style.width = "100%";
   div.style.height = "100%";
-  return import("vega-embed").then(module => {
-    module.default(div, JSON.parse(source));
-    ctx.element.appendChild(div);
-  });
+  const module = await import("vega-embed");
+  module.default(div, JSON.parse(source));
+  ctx.element.appendChild(div);
 });
 
 const textHandler = sourceRetrieverHandler((source, ctx) => {
