@@ -28,12 +28,6 @@ const markdownHandler = retriever => ctx =>
 const vegaHandler = retriever => ctx =>
   import("./src/views/vega").then(handler => handler(retriever)(ctx));
 
-const htmlHandler = sourceRetrieverHandler((source, ctx) => {
-  const iframe = document.createElement("iframe");
-  iframe.src = `data:text/html;charset=utf-8,${escape(source)}`;
-  ctx.element.appendChild(iframe);
-});
-
 const readmeHandler = ctx =>
   markdownHandler(() => "")(ctx).then(() => {
     const div = ctx.element.children[0];
@@ -70,7 +64,6 @@ const handlers = {
   json: jsonHandler(ctx => get(ctx.description)),
   md: markdownHandler(ctx => get(ctx.description)),
   "md-inline": markdownHandler(ctx => ctx.description),
-  "html-inline": htmlHandler(ctx => ctx.description),
   map: mapHandler,
   mermaid: mermaidHandler(ctx => get(ctx.description)),
   "mermaid-inline": mermaidHandler(ctx => ctx.description),
