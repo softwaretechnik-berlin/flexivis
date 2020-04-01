@@ -60,18 +60,18 @@ export function mount(riot, element, definition) {
   definition = definition || documentation;
 
   const index = definition.indexOf(":");
-  const prefix = definition.slice(0, index);
+  const name = definition.slice(0, index);
   const description = definition.slice(index + 1);
 
-  const handler = handlers[prefix] || errorHandler;
+  const handler = handlers[name] || errorHandler;
   const result = new Promise(resolve => {
     resolve(
       handler({
         riot,
         element,
         definition,
-        name: prefix,
-        description: description,
+        name,
+        description,
       })
     );
   });
