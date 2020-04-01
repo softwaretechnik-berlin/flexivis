@@ -1,8 +1,15 @@
-import { sourceRetrieverHandler } from "../common";
+import { SourceHandler } from "../common";
 
-module.exports = sourceRetrieverHandler((source, ctx) => {
-  const div = document.createElement("div");
-  div.className = "text";
-  div.innerText = source;
-  ctx.element.appendChild(div);
-});
+class TextHandler extends SourceHandler {
+  constructor(retriever) {
+    super(retriever);
+  }
+  handleWithSource(source, ctx) {
+    const div = document.createElement("div");
+    div.className = "text";
+    div.innerText = source;
+    ctx.element.appendChild(div);
+  }
+}
+
+module.exports = retriever => new TextHandler(retriever);
