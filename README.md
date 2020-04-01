@@ -83,6 +83,7 @@ The basic format of a view specification is `<prefix>:<url-and-view-specific-par
 The prefix specifies the view type. The following view types are supported:
 
 - [`json`: Interactive JSON viewer](#json)
+- [`mermaid`: asdf](#mermaid)
 - [`text`: Plaintext](#text)
 - [`vega`: Vega/Vega-Lite graphs](#vega)
 
@@ -93,6 +94,19 @@ _TODO: Document remaining view specification types._
 The `json` prefix specifies that the resource is a JSON document and should be rendered in a JSON viewer.
 
 E.g.: [JSON file](http://flexivis.infrastruktur.link/?url=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json).
+
+### `mermaid`
+
+The `mermaid` prefix renders [Mermaid](https://mermaid-js.github.io/mermaid) diagrams. You can either pass
+an URL to a file containing a diagram or use the `mermaid-inline` prefix and pass a URL-encoded string
+containing the diagram's definition.
+
+E.g. [render a diagram](http://flexivis.infrastruktur.link/?url=mermaid-inline:graph%20LR%0A%20%20%20A%20--%3E%20B%20%26%20C--%3E%20D) for the following example:
+
+```mermaid
+graph LR
+   A --> B & C--> D
+```
 
 ### `text`
 
@@ -125,4 +139,3 @@ gem install s3_website
 npm run build
 s3_website push
 ```
-

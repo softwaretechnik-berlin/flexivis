@@ -1,3 +1,6 @@
+// To fix the support of some ES6 features, e.g. nested async functions.
+import "regenerator-runtime/runtime";
+
 import * as riot from "riot";
 
 import Tree from "./tree.riot";
