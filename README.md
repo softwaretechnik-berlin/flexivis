@@ -2,10 +2,12 @@
 
 Flexivis is a flexible visualisation tool that allows you to easily visualise diverse types of data in Web browser.
 
-- [Overview](#overview)
-- [Layout](#layout)
-- [View specifications](#view-specifications)
-- [Development](#development)
+<ul>
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#layout">Layout</a></li>
+    <li><a href="#view-specifications">View specifications</a></li>
+    <li class="hide-in-app"><a href="#development">Development</a></li>
+</ul>
 
 
 ## Overview
@@ -105,6 +107,8 @@ The `vega` prefix specifies that the URL represents a [Vega](https://vega.github
 
 E.g.: [visualise # of files vs lines of code](http://flexivis.infrastruktur.link/?layout=(graph-data)/source&graph=vega:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&data=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.csv) (as reported by [cloc]()).
 
+
+<div class="hide-following-in-app"></div>
 
 ## Development
 
