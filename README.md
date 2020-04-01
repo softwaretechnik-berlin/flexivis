@@ -75,8 +75,8 @@ The optional `layout` parameter specifies how to lay out the individual views in
 
 ## View Specifications
 
-Remaining query parameters specifiy what should be displayed.
-The parameter name is the name of the view (matching the name used in the [`layout`](#layout) parameter), and the value is a view specification.
+All query parameters other than the [`layout`](#layout) parameter specifiy individual views.
+The parameter name is the name of the view (which can then be used in the `layout` parameter), and the value is a view specification.
 
 The basic format of a view specification is `<prefix>:<url-and-view-specific-params>`.
 
@@ -86,7 +86,7 @@ The prefix specifies the view type. The following view types are supported:
 - [`text`: Plaintext](#text)
 - [`vega`: Vega/Vega-Lite graphs](#vega)
 
-_TODO: Document remain view specification types._
+_TODO: Document remaining view specification types._
 
 ### `json`
 
