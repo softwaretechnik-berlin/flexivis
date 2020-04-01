@@ -15,12 +15,8 @@ const resourceHandler = ctx => {
   ctx.element.appendChild(iframe);
 };
 
-const jsonHandler = sourceRetrieverHandler((source, ctx) => {
-  const div = document.createElement("div");
-  div.classList.add("json");
-  ctx.element.appendChild(div);
-  ctx.riot.mount(div, { obj: JSON.parse(source), showDepth: 4 }, "tree-search");
-});
+const jsonHandler = retriever => ctx =>
+  import("./src/views/json").then(handler => handler(retriever)(ctx));
 
 const markdownHandler = retriever => ctx =>
   import("./src/views/markdown").then(handler => handler(retriever)(ctx));
