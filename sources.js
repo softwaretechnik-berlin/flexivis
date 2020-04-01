@@ -1,38 +1,13 @@
-import "highlight.js/styles/github.css";
-import "github-markdown-css/github-markdown.css";
-
-import hljs from "highlight.js";
-import MarkdownIt from "markdown-it";
-
 import mermaid from "mermaid";
+import { sourceRetrieverHandler } from "./src/views/common";
 
 // To fix the support of some ES6 features, e.g. nested async functions.
 import 'regenerator-runtime/runtime'
-
-const md = new MarkdownIt({
-  typographer: true,
-  linkify: true,
-  highlight: (str, lang) => {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return hljs.highlight(lang, str).value;
-      } catch (e) {}
-    } else if (lang === "mermaid") {
-      return `<div class="mermaid">${str}</div>`;
-    }
-
-    // use external default escaping
-    return "";
-  },
-});
 
 const documentation = "readme:";
 const errorHandler = ctx => {
   ctx.element.innerHTML = `Cannot handle '${ctx.name}'`;
 };
-
-const sourceRetrieverHandler = f => retriever => ctx =>
-  Promise.resolve(retriever(ctx)).then(source => f(source, ctx));
 
 const resourceHandler = ctx => {
   const iframe = document.createElement("iframe");
@@ -51,16 +26,12 @@ const jsonHandler = sourceRetrieverHandler((source, ctx) => {
   );
 });
 
-const markdownHandler = sourceRetrieverHandler((source, ctx) => {
-  const div = document.createElement("div");
-  div.classList.add("markdown");
-  div.classList.add("markdown-body");
-  div.innerHTML = md.render(source);
-  ctx.element.appendChild(div);
+const markdownHandler = retriever => ctx =>
+  import("./src/views/markdown").then(handler => handler(retriever)(ctx));
 
-  // render any mermaid templates that were added by the highlighter
-  mermaid.init(undefined, ".mermaid");
-});
+
+const vegaHandler = retriever => ctx =>
+  import("./src/views/vega").then(handler => handler(retriever)(ctx));
 
 const htmlHandler = sourceRetrieverHandler((source, ctx) => {
   const iframe = document.createElement("iframe");
@@ -86,15 +57,6 @@ const mapHandler = ctx => {
 const mermaidHandler = sourceRetrieverHandler((source, ctx) => {
   ctx.element.innerHTML = source;
   mermaid.init(undefined, ctx.element);
-});
-
-const vegaHandler = sourceRetrieverHandler(async (source, ctx) => {
-  const div = document.createElement("div");
-  div.style.width = "100%";
-  div.style.height = "100%";
-  const module = await import("vega-embed");
-  module.default(div, JSON.parse(source));
-  ctx.element.appendChild(div);
 });
 
 const textHandler = sourceRetrieverHandler((source, ctx) => {
