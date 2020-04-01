@@ -120,7 +120,7 @@ iframe, .view-frame, .separator {
   font-weight: bold;
 }
 
-.sidebar {
+.map-box > .sidebar {
   height: 100%;
   width: 0;
   position: absolute;
@@ -134,26 +134,26 @@ iframe, .view-frame, .separator {
   z-index: 110;
 }
 
-.sidebar a {
+.map-box > .sidebar a {
   text-decoration: none;
   font-size: 25px;
   color: gray;
   display: block;
 }
 
-.sidebar a:hover {
+.map-box > .sidebar a:hover {
   color: white;
 }
 
-.sidebar.sidebar-open {
+.map-box > .sidebar.sidebar-open {
   width: 300px;
 }
 
-.open-btn.sidebar-open {
+.map-box > .open-btn.sidebar-open {
   display: none;
 }
 
-.sidebar .close-btn {
+.map-box > .sidebar .close-btn {
   position: absolute;
   top: 0;
   right: 10px;
@@ -161,12 +161,7 @@ iframe, .view-frame, .separator {
   margin-left: 50px;
 }
 
-.map-box {
-  height: 100%;
-  position: relative;
-}
-
-.open-btn {
+.map-box > .open-btn {
   position: absolute;
   left: 0px;
   /* top: 40%; */
@@ -178,6 +173,11 @@ iframe, .view-frame, .separator {
   padding: 10px 15px;
   border: none;
   z-index: 100;
+}
+
+.map-box {
+  height: 100%;
+  position: relative;
 }
 
 .open-btn:hover {
