@@ -1,6 +1,6 @@
 import { SourceHandler } from "./common.js";
 
-class JsonHandler extends SourceHandler {
+export default class JsonHandler extends SourceHandler {
   constructor(retriever) {
     super(retriever);
   }
@@ -11,5 +11,3 @@ class JsonHandler extends SourceHandler {
     ctx.riot.mount(div, { obj: JSON.parse(source), showDepth: 4 }, "tree-search");
   }
 }
-
-module.exports = retriever => new JsonHandler(retriever);

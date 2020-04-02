@@ -3,9 +3,9 @@ const errorHandler = ctx => {
   ctx.element.innerHTML = `Cannot handle '${ctx.name}'`;
 };
 
-const mod = loadHandlerFactory => ctx =>
-  loadHandlerFactory()
-    .then(factory => factory())
+const mod = loadHandlerModule => ctx =>
+  loadHandlerModule()
+    .then(m => new m.default())
     .then(handler => handler.handle(ctx));
 
 const readmeHandler = ctx =>

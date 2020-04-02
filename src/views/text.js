@@ -1,9 +1,6 @@
 import { SourceHandler } from "./common.js";
 
-class TextHandler extends SourceHandler {
-  constructor(retriever) {
-    super(retriever);
-  }
+export default class TextHandler extends SourceHandler {
   handleWithSource(source, ctx) {
     const div = document.createElement("div");
     div.className = "text";
@@ -11,5 +8,3 @@ class TextHandler extends SourceHandler {
     ctx.element.appendChild(div);
   }
 }
-
-module.exports = retriever => new TextHandler(retriever);

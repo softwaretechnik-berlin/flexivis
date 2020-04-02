@@ -24,10 +24,7 @@ const md = new MarkdownIt({
   },
 });
 
-class MarkdownHandler extends SourceHandler {
-  constructor(retriever) {
-    super(retriever);
-  }
+export default class MarkdownHandler extends SourceHandler {
   handleWithSource(source, ctx) {
     const div = document.createElement("div");
     div.classList.add("markdown");
@@ -39,5 +36,3 @@ class MarkdownHandler extends SourceHandler {
     mermaid.init(undefined, ".mermaid");
   }
 }
-
-module.exports = retriever => new MarkdownHandler(retriever);

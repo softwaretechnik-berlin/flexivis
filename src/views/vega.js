@@ -2,10 +2,7 @@ import { SourceHandler } from "./common.js";
 
 import vegaEmbed from "vega-embed";
 
-class VegaHandler extends SourceHandler {
-  constructor(retriever) {
-    super(retriever);
-  }
+export default class VegaHandler extends SourceHandler {
   handleWithSource(source, ctx) {
     const div = document.createElement("div");
     div.style.width = "100%";
@@ -14,5 +11,3 @@ class VegaHandler extends SourceHandler {
     ctx.element.appendChild(div);
   }
 }
-
-module.exports = retriever => new VegaHandler(retriever);

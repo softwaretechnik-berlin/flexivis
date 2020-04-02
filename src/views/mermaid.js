@@ -1,14 +1,9 @@
-import { sourceRetrieverHandler, SourceHandler } from "./common.js";
+import { SourceHandler } from "./common.js";
 import mermaid from "mermaid";
 
-class MermaidHandler extends SourceHandler {
-  constructor(retriever) {
-    super(retriever);
-  }
+export default class MermaidHandler extends SourceHandler {
   handleWithSource(source, ctx) {
     ctx.element.innerHTML = source;
     mermaid.init(undefined, ctx.element);
   }
 }
-
-module.exports = retriever => new MermaidHandler(retriever);
