@@ -1,0 +1,4 @@
+This is just a humble text file.
+There's nothing special here—it's just text.
+
+Just plaintext, that's all.
