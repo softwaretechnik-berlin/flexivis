@@ -1,4 +1,13 @@
+/**
+ * Handles view specifications by rendering them into an element.
+ */
 export class Handler {
+  /**
+   * Renders a view into the given element.
+   * 
+   * @param {{name: string, definition: string, definition: string, element, riot}} ctx 
+   * @returns {Promise.<*>} a promise that is fulfilled when the view is rendered, or rejected if the view cannot be rendered
+   */
   handle(ctx) {
     throw `Cannot handle type '${ctx.name}'`;
   }
@@ -20,6 +29,13 @@ export class SourceHandler extends Handler {
     return this.handleWithSource(source, ctx);
   }
 
+  /**
+   * Renders the source into the given element.
+   * 
+   * @param {string} source the source text to render 
+   * @param {{name: string, definition: string, definition: string, element, riot}} ctx 
+   * @returns {Promise.<*>} a promise that is fulfilled when the view is rendered, or rejected if the view cannot be rendered
+   */
   handleWithSource(source, ctx) {
     return super.handle(ctx);
   }
