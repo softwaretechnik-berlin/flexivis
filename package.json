@@ -1,5 +1,5 @@
 {
-  "name": "here-maps",
+  "name": "flexivis",
   "dependencies": {
     "@riotjs/observable": "^4.0.4",
     "github-markdown-css": "^4.0.0",
