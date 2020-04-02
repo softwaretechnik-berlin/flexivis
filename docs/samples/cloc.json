@@ -5,22 +5,26 @@
   "mark": "circle",
   "width": "container",
   "height": "container",
-  "padding":{"right": 60},
+  "padding":{"top": 10, "right": 60, "bottom": 10, "left": 10},
   "transform": [{"filter": {"not": {"field": "language", "equal": "SUM"}}}],
   "encoding": {
     "x": {
       "field": "files",
       "type": "quantitative",
-      "title": "Number of files"
+      "title": "Number of files",
+      "axis": {
+        "tickCount": 5,
+        "tickMinStep": 1
+      }
     },
     "y": {
       "field": "code",
       "type": "quantitative",
       "scale": {"type": "log"},
-      "title": "Number of files"
+      "title": "Lines of code"
     },
     "size": {
-      "value": 200
+      "value": 300
     },
     "color": {
       "field": "language",
