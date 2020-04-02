@@ -8,33 +8,17 @@ const mod = loadHandlerModule => ctx =>
     .then(m => new m.default())
     .then(handler => handler.handle(ctx));
 
-const readmeHandler = ctx =>
-  mod(
-    () => import("./markdown.js"),
-    () => ""
-  )(ctx).then(() => {
-    const div = ctx.element.children[0];
-    div.classList.add("readme");
-    // `require` already renders the markdown file. Therefore we cannot
-    // use the existing `markdownHandler` directly. There is a workaround
-    // documented in https://github.com/parcel-bundler/parcel/issues/970
-    // but for now I'd stick with this approach.
-    div.innerHTML = require("../../README.md");
-  });
-
 const handlers = {
   http: mod(() => import("./frame.js")),
   https: mod(() => import("./frame.js")),
   file: mod(() => import("./frame.js")),
-  md: mod(() => import("./markdown.js")),
-  "md-inline": mod(() => import("./markdown.js")),
   json: mod(() => import("./json.js")),
   text: mod(() => import("./text.js")),
   vega: mod(() => import("./vega.js")),
   mermaid: mod(() => import("./mermaid.js")),
   "mermaid-inline": mod(() => import("./mermaid.js")),
   map: mod(() => import("./map.js")),
-  readme: readmeHandler,
+  readme: mod(() => import("./readme.js")),
 };
 
 export function mount(riot, element, definition) {
