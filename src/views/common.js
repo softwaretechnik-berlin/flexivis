@@ -13,6 +13,15 @@ export class Handler {
   }
 }
 
+/**
+ * Handles views types that are fully defined by a source string.
+ * 
+ * These handlers can be used in 2 ways:
+ * - By default, the view description is taken to be a URL from which the source should be retrieved.
+ * - When the handler's base name is suffixed with "-inline", the view description itself is taken to be the source.
+ * 
+ * Implementations need only specify how to render the view given the source string.
+ */
 export class SourceHandler extends Handler {
   constructor(retriever) {
     super();
@@ -25,7 +34,7 @@ export class SourceHandler extends Handler {
   }
 
   async handle(ctx) {
-    const source = await this.retriever(ctx);
+    const source = ctx.name.endsWith("-inline") ? ctx.description : await fetch(ctx.description).then(r => r.text());
     return this.handleWithSource(source, ctx);
   }
 

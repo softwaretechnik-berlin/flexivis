@@ -3,14 +3,9 @@ const errorHandler = ctx => {
   ctx.element.innerHTML = `Cannot handle '${ctx.name}'`;
 };
 
-const retrievers = {
-  description: ctx => ctx.description,
-  resource: ctx => fetch(ctx.description).then(r => r.text()),
-};
-
-const mod = (loadHandlerFactory, retriever) => ctx =>
+const mod = loadHandlerFactory => ctx =>
   loadHandlerFactory()
-    .then(factory => factory(retriever))
+    .then(factory => factory())
     .then(handler => handler.handle(ctx));
 
 const readmeHandler = ctx =>
@@ -31,13 +26,13 @@ const handlers = {
   http: mod(() => import("./frame.js")),
   https: mod(() => import("./frame.js")),
   file: mod(() => import("./frame.js")),
-  md: mod(() => import("./markdown.js"), retrievers.resource),
-  "md-inline": mod(() => import("./markdown.js"), retrievers.description),
-  json: mod(() => import("./json.js"), retrievers.resource),
-  text: mod(() => import("./text.js"), retrievers.resource),
-  vega: mod(() => import("./vega.js"), retrievers.resource),
-  mermaid: mod(() => import("./mermaid.js"), retrievers.resource),
-  "mermaid-inline": mod(() => import("./mermaid.js"), retrievers.description),
+  md: mod(() => import("./markdown.js")),
+  "md-inline": mod(() => import("./markdown.js")),
+  json: mod(() => import("./json.js")),
+  text: mod(() => import("./text.js")),
+  vega: mod(() => import("./vega.js")),
+  mermaid: mod(() => import("./mermaid.js")),
+  "mermaid-inline": mod(() => import("./mermaid.js")),
   map: mod(() => import("./map.js")),
   readme: readmeHandler,
 };
