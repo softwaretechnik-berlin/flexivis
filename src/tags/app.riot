@@ -15,9 +15,12 @@
       onBeforeMount() {
         try {
           this.searchParams = new URLSearchParams(location.search || location.hash.replace("#", "?"));
-          const layoutSpec = this.searchParams.get("layout") || '';
+          const layoutSpec = this.searchParams.get("layout");
           try {
-            this.viewDefinition = layout.parse(layoutSpec);
+            this.viewDefinition = 
+              layoutSpec == null
+                ? (this.searchParams.get("url") == null ? null : "url")
+                : layout.parse(layoutSpec);
           } catch (err) {
             if (err.name === "SyntaxError") {
               this.syntaxError = err;

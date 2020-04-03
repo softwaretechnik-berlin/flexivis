@@ -150,7 +150,7 @@
         peg$startRuleFunction  = peg$parseRoot,
 
         peg$c0 = "",
-        peg$c1 = function() { return 'url'; },
+        peg$c1 = function() { return null },
         peg$c2 = function(view, size) { return { view, size}; },
         peg$c3 = "(",
         peg$c4 = peg$literalExpectation("(", false),

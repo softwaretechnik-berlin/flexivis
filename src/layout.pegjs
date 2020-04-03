@@ -1,6 +1,6 @@
 Root = Unparenthesized / Empty
 
-Empty = '' { return 'url'; }
+Empty = '' { return null }
 
 View = view:(Parenthesized / Name) size:Size? { return { view, size}; };
 

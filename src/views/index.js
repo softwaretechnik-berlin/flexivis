@@ -1,5 +1,3 @@
-const documentation = "readme:";
-
 const mod = loadHandlerModule => ctx =>
   loadHandlerModule()
     .then(m => new m.default())
@@ -24,8 +22,6 @@ const handlers = {
 };
 
 export function mount(riot, element, definition) {
-  definition = definition || documentation;
-
   const index = definition.indexOf(":");
   const name = definition.slice(0, index);
   const description = definition.slice(index + 1);
