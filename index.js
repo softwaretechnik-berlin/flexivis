@@ -23,9 +23,4 @@ riot.register("content-frame", ContentFrame);
 import AppComponent from "./src/tags/app.riot";
 import "./index.css";
 
-try {
-    riot.component(AppComponent)(document.getElementById("app"));
-} catch (err) {
-    console.error("UNHANDLED EXCEPTION LOADING THE THING: " + err + "\n" + err.stack);
-    console.error("FULL ERROR OBJECT: ", err);
-}
+riot.component(AppComponent)(document.getElementById("app"));

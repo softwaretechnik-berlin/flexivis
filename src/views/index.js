@@ -26,8 +26,6 @@ export function mount(riot, element, definition) {
   const name = definition.slice(0, index);
   const description = definition.slice(index + 1);
 
-  console.log("riot", riot);
-
   const handler = handlers[name];
   if (!handler) {
     const e = new Error(`Unknown handler "${name}".`);
