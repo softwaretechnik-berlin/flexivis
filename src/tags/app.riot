@@ -1,5 +1,12 @@
 <app>
-  <split-view {...{ viewDefinition, searchParams }} />
+  <error-handler error={err}>
+    <error-view error={syntaxError} title="Layout Syntax Error">
+      <p>{syntaxError.message}</p>
+      <p><pre><code><span style="color: #999">{start}</span><span style="border: 1px solid red; background-color: pink">{middle}</span><span style="color: #999">{end}</span></code></pre></p>
+      <p>You may want to refer to the Layout section of the <a href="/#layout">documentation</a>.</p>
+    </error-view>
+    <split-view if={!syntaxError} {...{ viewDefinition, searchParams }} />
+  </error-handler>
 
   <script>
     import * as riot from "riot";
@@ -7,8 +14,22 @@
 
     export default {
       onBeforeMount() {
-        this.searchParams = new URLSearchParams(location.search || location.hash.replace("#", "?"));
-        this.viewDefinition = layout.parse(this.searchParams.get("layout") || '');
+        try {
+          this.searchParams = new URLSearchParams(location.search || location.hash.replace("#", "?"));
+          const layoutSpec = this.searchParams.get("layout") || '';
+          try {
+            this.viewDefinition = layout.parse(layoutSpec);
+          } catch (err) {
+            if (err.name === "SyntaxError") {
+              this.syntaxError = err;
+              this.start = layoutSpec.substring(0, err.location.start.offset);
+              this.middle = layoutSpec.substring(err.location.start.offset, err.location.end.offset);
+              this.end = layoutSpec.substring(err.location.end.offset);
+            } else throw err;
+          }
+        } catch (err) {
+          this.err = err;
+        }
       },
     }
   </script>

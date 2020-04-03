@@ -3,6 +3,10 @@ import "regenerator-runtime/runtime";
 
 import * as riot from "riot";
 
+import ErrorView from "./src/tags/error-view.riot";
+riot.register("error-view", ErrorView);
+import ErrorFallback from "./src/tags/error-fallback.riot";
+riot.register("error-fallback", ErrorFallback);
 import Tree from "./src/tags/tree.riot";
 riot.register("tree", Tree);
 import TreeSearch from "./src/tags/tree-search.riot";
@@ -19,4 +23,9 @@ riot.register("content-frame", ContentFrame);
 import AppComponent from "./src/tags/app.riot";
 import "./index.css";
 
-riot.component(AppComponent)(document.getElementById("app"));
+try {
+    riot.component(AppComponent)(document.getElementById("app"));
+} catch (err) {
+    console.error("UNHANDLED EXCEPTION LOADING THE THING: " + err + "\n" + err.stack);
+    console.error("FULL ERROR OBJECT: ", err);
+}

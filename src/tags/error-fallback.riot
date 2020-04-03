@@ -1,0 +1,9 @@
+<template>
+  <error-view error={error}>
+    <p>{error}</p>
+    <pre><code>{JSON.stringify(error, null, 2)}</code></pre>
+  </error-view>
+  <template if={!error}>
+    <slot/>
+  </template>
+</template>
