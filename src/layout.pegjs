@@ -2,25 +2,21 @@ Root = Unparenthesized / Empty
 
 Empty = '' { return 'url'; }
 
-Sep = [/-]
-
-View = view:(Parenthesized / Label) size:Int? { return { view, size}; };
+View = view:(Parenthesized / Name) size:Size? { return { view, size}; };
 
 Parenthesized = '(' inner:Unparenthesized ')' { return inner; };
 
-Unparenthesized = Split / SingleView
-
-SingleView = view:View { return view.view }
-
-Split = a:View conts:SplitContinuation+ & { return conts.every(c => c.sep == conts[0].sep) } {
-  let views = [a].concat(conts.map(c => c.view))
+Unparenthesized = a:View splits:(VerticalSplits / HorizontalSplits)? {
+  if (!splits) return a.view
+  let views = [a].concat(splits.views)
   let defaultSize = (100 - views.reduce((a, v) => a + v.size, 0)) / views.filter(v => !v.size).length
   views.forEach(v => v.size = v.size || defaultSize)
-  return { sep: conts[0].sep, views }
+  return { sep: splits.sep, views }
 }
 
-SplitContinuation = sep:Sep view:View { return {sep, view}}
+VerticalSplits = views:("/" v:View {return v} )+ { return {sep: "/", views} }
+HorizontalSplits = views:("-" v:View {return v} )+ { return {sep: "-", views} }
 
-Label = [a-zA-Z]+ { return text(); }
+Name "view name (consisting of alphabetic characters)" = [a-zA-Z]+ { return text(); }
 
-Int = [0-9]+ { return parseInt(text(), 10); }
+Size "size specifier (number between 0 and 100)" = [0-9]+ { return parseInt(text(), 10); }
