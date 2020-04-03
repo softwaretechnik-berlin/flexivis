@@ -8,13 +8,13 @@ Flexivis is a flexible visualisation tool that allows you to easily visualise di
     <li>
         <a href="#view-specifications">View specifications</a>
         <ul>
-            <li><a href="regular-content">Regular Content</a></li>
-            <li><a href="markdown">Markdown</a></li>
-            <li><a href="json">JSON</a></li>
-            <li><a href="text">Text</a></li>
-            <li><a href="map">Map</a></li>
-            <li><a href="mermaid-diagrams">Mermaid Diagrams</a></li>
-            <li><a href="vega-graphs">Vega Graphs</a></li>
+            <li><a href="#regular-content">Regular Content</a></li>
+            <li><a href="#markdown">Markdown</a></li>
+            <li><a href="#json">JSON</a></li>
+            <li><a href="#text">Text</a></li>
+            <li><a href="#map">Map</a></li>
+            <li><a href="#mermaid-diagrams">Mermaid Diagrams</a></li>
+            <li><a href="#vega-graphs">Vega Graphs</a></li>
         </ul>
     </li>
     <li class="hide-in-app"><a href="#development">Development</a></li>
@@ -94,13 +94,13 @@ The basic format of a view specification is `<prefix>:<url-and-view-specific-par
 The prefix specifies the view type. The following view types are supported:
 
 <ul>
-    <li><a href="regular-content">Regular Content</a></li>
-    <li><a href="markdown">Markdown</a></li>
-    <li><a href="json">JSON</a></li>
-    <li><a href="text">Text</a></li>
-    <li><a href="map">Map</a></li>
-    <li><a href="mermaid-diagrams">Mermaid Diagrams</a></li>
-    <li><a href="vega-graphs">Vega Graphs</a></li>
+    <li><a href="#regular-content">Regular Content</a></li>
+    <li><a href="#markdown">Markdown</a></li>
+    <li><a href="#json">JSON</a></li>
+    <li><a href="#text">Text</a></li>
+    <li><a href="#map">Map</a></li>
+    <li><a href="#mermaid-diagrams">Mermaid Diagrams</a></li>
+    <li><a href="#vega-graphs">Vega Graphs</a></li>
 </ul>
 
 

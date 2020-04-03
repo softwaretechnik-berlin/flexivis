@@ -24,7 +24,7 @@ const handlers = yaml.safeLoad(fs.readFileSync('src/views/handlers.yaml', 'utf8'
 
 function renderToc(handlers) {
     return "<ul>\n" + Object.values(handlers)
-        .map(({title}) => `    <li><a href="${title.toLowerCase().replace(/ /g, "-")}">${title}</a></li>\n`)
+        .map(({title}) => `    <li><a href="#${title.toLowerCase().replace(/ /g, "-")}">${title}</a></li>\n`)
         .join("") + "</ul>\n";
 }
 
