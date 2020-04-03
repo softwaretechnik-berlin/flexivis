@@ -34,17 +34,11 @@ export function mount(riot, element, definition) {
     throw e;
   }
   
-  const result = new Promise(resolve => {
-    resolve(
-      handler({
-        riot,
-        element,
-        definition,
-        name,
-        description,
-      })
-    );
+  return handler({
+    riot,
+    element,
+    definition,
+    name,
+    description,
   });
-
-  result.catch(e => console.error(e));
 }

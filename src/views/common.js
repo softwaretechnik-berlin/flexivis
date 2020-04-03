@@ -34,7 +34,9 @@ export class SourceHandler extends Handler {
   }
 
   async handle(ctx) {
-    const source = ctx.name.endsWith("-inline") ? ctx.description : await fetch(ctx.description).then(r => r.text());
+    const source = ctx.name.endsWith("-inline")
+      ? ctx.description
+      : await fetch(ctx.description).catch(e => {throw new Error(`Failed to fetch "${ctx.description}": ${e}`)}).then(r => r.text());
     return this.handleWithSource(source, ctx);
   }
 

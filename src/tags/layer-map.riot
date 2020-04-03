@@ -69,11 +69,10 @@
           // URLs prefixed with ~ are not displayed initially
           const [, hidden, url, name] = source.match(/(~)?([^@]+)(?:@(.+))?/);
           const id = name || url;
-          if (this.map.addGeoJsonLayer(id, url)) {
-            this.layers.push({ id, checked: !hidden });
-            if (hidden) {
-              this.map.disableGeoJsonLayer(id);
-            }
+          this.map.addGeoJsonLayer(id, url);
+          this.layers.push({ id, checked: !hidden });
+          if (hidden) {
+            this.map.disableGeoJsonLayer(id);
           }
         });
       },

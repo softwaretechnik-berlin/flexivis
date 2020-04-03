@@ -1,9 +1,9 @@
 <content-frame>
-  <error-view error={error}>
-    <div if={error.knownHandlers}>
+  <error-view error={state.error}>
+    <div if={state.error.knownHandlers}>
       <p>Known handlers (see the <a href="/">documentation</a> for details):</p>
       <ul>
-        <li each={h in error.knownHandlers.sort()}>{h}</li>
+        <li each={h in state.error.knownHandlers.sort()}>{h}</li>
       </ul>
     </div>
   <error-view/>
@@ -14,11 +14,8 @@
 
     export default {
       onBeforeMount() {
-          try {
-            mount(riot, this.root, this.props.definition);
-          } catch (err) {
-            this.error = err;
-          }
+        new Promise(resolve => resolve(mount(riot, this.root, this.props.definition)))
+          .catch(error => this.update({error}));
       },
     }
   </script>

@@ -135,7 +135,9 @@ export class HereGeoJsonMap {
 
   addGeoJsonLayer(id, url) {
     if (this.geoJsonLayers[id]) {
-      return false;
+      const err = new Error(`Duplicate map layer with id "${id}".`);
+      err.title = "Duplicate Layer Error"
+      throw err;
     }
 
     const layer = new VectorLayer({
@@ -159,8 +161,6 @@ export class HereGeoJsonMap {
         padding: [30, 30, 30, 30],
       });
     });
-
-    return true;
   }
 
   enableGeoJsonLayer(id) {
