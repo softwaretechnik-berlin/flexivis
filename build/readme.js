@@ -56,8 +56,10 @@ function renderExample(handler, number, example) {
 }
 
 async function saveScreenshot(url, filename, viewport) {
+    const path = screenshotsPath + filename
+
     if (!takeScreenshots)
-        return;
+        return path;
 
     sharedBrowser = sharedBrowser || require("puppeteer").launch();
     const browser = await sharedBrowser;
@@ -81,7 +83,6 @@ async function saveScreenshot(url, filename, viewport) {
 
     await new Promise(resolve => setTimeout(resolve, 30000))
 
-    const path = screenshotsPath + filename
     await page.screenshot({ path });
     console.log("Saved screenshot to", path);
 
