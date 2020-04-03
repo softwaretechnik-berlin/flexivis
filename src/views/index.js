@@ -1,7 +1,4 @@
 const documentation = "readme:";
-const errorHandler = ctx => {
-  ctx.element.innerHTML = `Cannot handle '${ctx.name}'`;
-};
 
 const mod = loadHandlerModule => ctx =>
   loadHandlerModule()
@@ -33,7 +30,16 @@ export function mount(riot, element, definition) {
   const name = definition.slice(0, index);
   const description = definition.slice(index + 1);
 
-  const handler = handlers[name] || errorHandler;
+  console.log("riot", riot);
+
+  const handler = handlers[name];
+  if (!handler) {
+    const e = new Error(`Unknown handler "${name}".`);
+    e.title = "Unknown Handler"
+    e.knownHandlers = Object.keys(handlers);
+    throw e;
+  }
+  
   const result = new Promise(resolve => {
     resolve(
       handler({

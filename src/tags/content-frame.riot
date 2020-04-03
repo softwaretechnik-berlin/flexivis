@@ -1,12 +1,24 @@
 <content-frame>
+  <error-view error={error}>
+    <div if={error.knownHandlers}>
+      <p>Known handlers (see the <a href="/">documentation</a> for details):</p>
+      <ul>
+        <li each={h in error.knownHandlers.sort()}>{h}</li>
+      </ul>
+    </div>
+  <error-view/>
   <script>
     import * as riot from "riot";
 
     import { mount } from "../views";
 
     export default {
-      onMounted() {
-        mount(riot, this.root, this.props.definition);
+      onBeforeMount() {
+          try {
+            mount(riot, this.root, this.props.definition);
+          } catch (err) {
+            this.error = err;
+          }
       },
     }
   </script>

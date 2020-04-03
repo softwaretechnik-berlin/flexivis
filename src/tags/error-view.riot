@@ -1,16 +1,17 @@
 <error-view>
   <div if={error} style="box-sizing: border-box; height: 100%; width: 100%; border: 10px solid darkred; padding: 10px; overflow: auto">
-    <h1>{props.title || error.title || "Error"}</h1>
+      <h1>{props.title || error.title || "Error"}</h1>
+    <p>{error.message || error}</p>
     <slot/>
   </div>
   <script>
     export default {
-        onBeforeMount() {
-            if (this.props.error) {
-                this.error = this.props.error;
-                console.error("HI THERE", this.error)
-            }
-        },
+      onBeforeMount() {
+        if (this.props.error) {
+          this.error = this.props.error;
+          console.error(this.error);
+        }
+      }
     }
   </script>
 </error-view>
