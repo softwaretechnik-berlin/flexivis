@@ -20,12 +20,13 @@
     export default {
       onBeforeMount() {
         this.view = this.props.viewDefinition;
-        this.isLeaf = typeof this.view !== "object";
         if (this.view == null) {
+          this.isLeaf = true;
           this.view = "default";
           this.definition = "readme:";
           return;
         }
+        this.isLeaf = typeof this.view === "string";
         this.isVertical = this.view.sep === "/";
 
         if (this.isLeaf) {
