@@ -6,8 +6,8 @@
     <a class="tree-conntrol-reset" onclick={ resetAll }>reset</a>
   </div>
 
-  <span if={ isObject } class="tree-node tree-node-object">
-    &#123; <a class="toggle" onclick={ toggle }>{ show ? '-' : '+' }</a>
+  <span if={ isObject } class="tree-node tree-node-object">&#123;
+    <a class="toggle" onclick={ toggle }>{ show ? '-' : '+' }</a>
     <span if={ show }>
       <ul class="tree-node-list tree-node-object-list">
         <li each={ element in Object.entries(obj) } class="tree-node-item tree-node-object-item">
@@ -17,21 +17,18 @@
         </li>
       </ul>
     </span>
-    &#125;<!-- force that a whitespace isn't added -->
-  </span>
+  &#125;</span>
 
-  <span if={ isArray } class="tree-node tree-node-array">
-    [ <a class="toggle" onclick={ toggle }>{ show ? '-' : '+' }</a>
+  <span if={ isArray } class="tree-node tree-node-array">[
+    <a class="toggle" onclick={ toggle }>{ show ? '-' : '+' }</a>
     <span if={ show }>
       <ul class="tree-node-list tree-node-array-list">
         <li each={ (element, index) in obj } class="tree-node-item tree-node-array-item">
-          <tree parent={ this } obj={ element } customizer={ customizer } show-depth={ showDepth - 1 } show-all={ showAll } path={ '[' + index + ']' } />
-          <span class="separator">,</span>
+          <tree parent={ this } obj={ element } customizer={ customizer } show-depth={ showDepth - 1 } show-all={ showAll } path={ '[' + index + ']' } /><span class="separator">,</span>
         </li>
       </ul>
     </span>
-    ]<!-- force that a whitespace isn't added -->
-  </span>
+  ]</span>
 
   <span if={ isValue } class="tree-value tree-value-{ type }" data-path={ path }><raw html={ renderValue() } /></span>
 
