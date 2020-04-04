@@ -24,7 +24,7 @@ content-frame > .text {
   white-space: pre;
 }
 
-iframe, .view-frame, .separator {
+iframe, .view-frame, split-view > .separator {
   display: inline-block;
   box-sizing: border-box;
   height: 100%;
@@ -37,7 +37,7 @@ iframe, .view-frame, .separator {
   overflow: hidden;
 }
 
-.separator {
+split-view > .separator {
   background: #998;
   position: relative;
 }
@@ -94,17 +94,11 @@ iframe, .view-frame, .separator {
 .tree-node-item {
   margin: 0;
 }
-.tree-node-item:after {
-  content: ",";
-}
-.tree-node-item:last-child:after {
-  content: "";
+.tree-node-item:last-child > .separator {
+  display: none;
 }
 .tree-key {
   font-weight: bold;
-}
-.tree-key:after {
-  content: ": ";
 }
 .tree-value-number {
   color: blue;

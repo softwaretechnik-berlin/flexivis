@@ -11,8 +11,9 @@
     <span if={ show }>
       <ul class="tree-node-list tree-node-object-list">
         <li each={ element in Object.entries(obj) } class="tree-node-item tree-node-object-item">
-          <span class="tree-key"><raw html={ renderKey(element[0]) } /></span> <!-- {element[1]} -->
+          <span class="tree-key"><raw html={ renderKey(element[0]) } />: </span> <!-- {element[1]} -->
           <tree parent={ this } obj={ element[1] } customizer={ customizer } show-depth={ showDepth - 1 } show-all={ showAll } path={ '.' + element[0] } />
+          <span class="separator">,</span>
         </li>
       </ul>
     </span>
@@ -25,6 +26,7 @@
       <ul class="tree-node-list tree-node-array-list">
         <li each={ (element, index) in obj } class="tree-node-item tree-node-array-item">
           <tree parent={ this } obj={ element } customizer={ customizer } show-depth={ showDepth - 1 } show-all={ showAll } path={ '[' + index + ']' } />
+          <span class="separator">,</span>
         </li>
       </ul>
     </span>
