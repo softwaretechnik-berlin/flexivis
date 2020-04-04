@@ -85,6 +85,9 @@ split-view > .separator {
 .tree-controls > a {
   margin: 0 10 0 10;
 }
+.tree-node > .toggle {
+  user-select: none;
+}
 .tree-node-list {
   padding-left: 1em;
   line-height: 1.5em;

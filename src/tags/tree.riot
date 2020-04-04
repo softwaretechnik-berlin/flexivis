@@ -7,7 +7,7 @@
   </div>
 
   <span if={ isObject } class="tree-node tree-node-object">
-    &#123; <a onclick={ toggle }>{ show ? '-' : '+' }</a>
+    &#123; <a class="toggle" onclick={ toggle }>{ show ? '-' : '+' }</a>
     <span if={ show }>
       <ul class="tree-node-list tree-node-object-list">
         <li each={ element in Object.entries(obj) } class="tree-node-item tree-node-object-item">
@@ -21,7 +21,7 @@
   </span>
 
   <span if={ isArray } class="tree-node tree-node-array">
-    [ <a onclick={ toggle }>{ show ? '-' : '+' }</a>
+    [ <a class="toggle" onclick={ toggle }>{ show ? '-' : '+' }</a>
     <span if={ show }>
       <ul class="tree-node-list tree-node-array-list">
         <li each={ (element, index) in obj } class="tree-node-item tree-node-array-item">
