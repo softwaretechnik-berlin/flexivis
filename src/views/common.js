@@ -9,7 +9,7 @@ export class Handler {
 	 * @returns {Promise.<*>} a promise that is fulfilled when the view is rendered, or rejected if the view cannot be rendered
 	 */
 	handle(ctx) {
-		throw `Cannot handle type ’${ctx.name}’`;
+		throw new Error(`Cannot handle type ’${ctx.name}’`);
 	}
 }
 

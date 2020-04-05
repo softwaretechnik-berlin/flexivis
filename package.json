@@ -26,7 +26,7 @@
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build --no-cache -d dist index.html",
-    "lint": "xo --fix --prettier || exit 0",
+    "lint": "xo --fix --prettier --env=browser || exit 0",
     "test": "npm run lint && ava",
     "build-local-use": "parcel build --no-cache -d dist index.html --public-url ./",
     "readme": "node build/readme.js",

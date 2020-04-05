@@ -1,10 +1,6 @@
-import {SourceHandler} from "./common.js";
+import {SourceHandler} from "./common";
 
 export default class JsonHandler extends SourceHandler {
-	constructor(retriever) {
-		super(retriever);
-	}
-
 	handleWithSource(source, ctx) {
 		const div = document.createElement("div");
 		div.classList.add("json");

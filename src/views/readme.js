@@ -1,7 +1,4 @@
-import "highlight.js/styles/github.css";
-import "github-markdown-css/github-markdown.css";
-
-import {Handler} from "./common.js";
+import {Handler} from "./common";
 
 export default class ReadmeHandler extends Handler {
 	handle(ctx) {

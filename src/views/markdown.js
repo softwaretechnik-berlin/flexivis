@@ -1,7 +1,4 @@
-import "highlight.js/styles/github.css";
-import "github-markdown-css/github-markdown.css";
-
-import {SourceHandler} from "./common.js";
+import {SourceHandler} from "./common";
 
 import hljs from "highlight.js";
 import MarkdownIt from "markdown-it";
@@ -14,7 +11,7 @@ const md = new MarkdownIt({
 		if (lang && hljs.getLanguage(lang)) {
 			try {
 				return hljs.highlight(lang, string).value;
-			} catch (error) {}
+			} catch (_) {}
 		} else if (lang === "mermaid") {
 			return `<div class="mermaid">${string}</div>`;
 		}

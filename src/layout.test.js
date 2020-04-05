@@ -1,5 +1,5 @@
 import test from "ava";
-import * as layout from "./layout.js";
+import * as layout from "./layout";
 
 test("parses empty layouts", t => {
 	t.is(layout.parse(""), null);

@@ -1,4 +1,4 @@
-import {Handler} from "./common.js";
+import {Handler} from "./common";
 
 export default class MapHandler extends Handler {
 	handle(ctx) {

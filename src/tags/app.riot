@@ -9,7 +9,7 @@
 
   <script>
     import * as riot from "riot";
-    import * as layout from "../layout.js";
+    import * as layout from "../layout";
 
     export default {
       onBeforeMount() {
@@ -17,7 +17,7 @@
           this.searchParams = new URLSearchParams(location.search || location.hash.replace("#", "?"));
           const layoutSpec = this.searchParams.get("layout");
           try {
-            this.viewDefinition = 
+            this.viewDefinition =
               layoutSpec == null
                 ? (this.searchParams.get("url") == null ? null : "url")
                 : layout.parse(layoutSpec);
