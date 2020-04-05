@@ -32,9 +32,6 @@
     "readme": "node build/readme.js",
     "generate-parser": "pegjs -o src/layout.js --export-var module.exports --format umd src/layout.pegjs; cd docs/grammar; grammkit -t md ../../src/layout.pegjs"
   },
-  "engines": {
-    "node": ">=10.16.0"
-  },
   "ava": {
     "require": [
       "esm"
