@@ -1,5 +1,6 @@
 // To fix the support of some ES6 features, e.g. nested async functions.
-import * as _ from "regenerator-runtime/runtime";
+// eslint-disable-next-line import/no-unassigned-import
+import "regenerator-runtime/runtime";
 
 import * as riot from "riot";
 
