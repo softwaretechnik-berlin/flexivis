@@ -37,6 +37,10 @@ iframe, .view-frame, split-view > .separator {
   overflow: hidden;
 }
 
+split-view > .separator:hover, split-view > .separator.resizing {
+  background: #444;
+}
+
 split-view > .separator {
   background: #998;
   position: relative;

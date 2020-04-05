@@ -73,6 +73,8 @@
           invisibleDiv.style.position = "absolute";
           invisibleDiv.style.cursor = e.target.style.cursor;
 
+          e.target.classList.add("resizing");
+
           const move = e => {
             const newSize = 100 * (eventLocation(e) / screenSize()) - startPercentage;
             const adjustedSize = Math.min(Math.max(newSize, resizingLimit), 100 - startPercentage - resizingLimit);
@@ -89,6 +91,7 @@
             document.body.removeChild(invisibleDiv);
             document.removeEventListener("mousemove", move);
             document.removeEventListener("mouseup", stop);
+            e.target.classList.remove("resizing");
             window.dispatchEvent(new Event("resize"));
             this.update();
           }
