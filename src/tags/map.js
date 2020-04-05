@@ -1,4 +1,3 @@
-import "ol/ol.css";
 import Map from "ol/Map";
 import View from "ol/View";
 import XYZ from "ol/source/XYZ";
@@ -14,7 +13,7 @@ import observable from "@riotjs/observable";
 
 const defaultColor = "darkgrey";
 
-const GeoJsonStyles = properties =>
+const geoJsonStyles = properties =>
 	new Style({
 		stroke: new Stroke({
 			color: properties.stroke || defaultColor,
@@ -92,8 +91,8 @@ export class HereGeoJsonMap {
 			}),
 		});
 
-		this.map.on("singleclick", e => {
-			this.lastClickedPixel = e.pixel;
+		this.map.on("singleclick", event => {
+			this.lastClickedPixel = event.pixel;
 			this.updateSelectedFeature();
 		});
 		this.highlightedFeature = undefined;
@@ -149,7 +148,7 @@ export class HereGeoJsonMap {
 				url,
 			}),
 			style: feature => {
-				return GeoJsonStyles(feature.getProperties());
+				return geoJsonStyles(feature.getProperties());
 			},
 		});
 		this.geoJsonLayers[id] = layer;
@@ -182,9 +181,13 @@ export class HereGeoJsonMap {
 			: [];
 
 		features.forEach(f => f.setStyle(undefined));
-		this.highlightedFeature && this.highlightedFeature.setStyle(undefined);
+		if (this.highlightedFeature) {
+			this.highlightedFeature.setStyle(undefined);
+		}
 
-		if (features.length !== 0) {
+		if (features.length === 0) {
+			this.trigger("feature-selected", undefined);
+		} else {
 			const featureIndex =
 				(features.indexOf(this.highlightedFeature) + 1) % features.length;
 			(this.highlightedFeature = features[featureIndex]).setStyle(
@@ -195,8 +198,6 @@ export class HereGeoJsonMap {
 			);
 			delete properties.geometry;
 			this.trigger("feature-selected", properties);
-		} else {
-			this.trigger("feature-selected", undefined);
 		}
 	}
 }

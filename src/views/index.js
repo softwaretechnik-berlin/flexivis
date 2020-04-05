@@ -1,7 +1,7 @@
-const mod = loadHandlerModule => ctx =>
-	loadHandlerModule()
-		.then(m => new m.default())
-		.then(handler => handler.handle(ctx));
+const mod = loadHandlerModule => async ctx => {
+	const Handler = (await loadHandlerModule()).default;
+	return new Handler().handle(ctx);
+};
 
 const handlers = {
 	http: mod(() => import("./frame.js")),
@@ -28,10 +28,10 @@ export function mount(riot, element, definition) {
 
 	const handler = handlers[name];
 	if (!handler) {
-		const e = new Error(`Unknown handler "${name}".`);
-		e.title = "Unknown Handler";
-		e.knownHandlers = Object.keys(handlers);
-		throw e;
+		const error = new Error(`Unknown handler "${name}".`);
+		error.title = "Unknown Handler";
+		error.knownHandlers = Object.keys(handlers);
+		throw error;
 	}
 
 	return handler({

@@ -1,26 +1,25 @@
 // To fix the support of some ES6 features, e.g. nested async functions.
-import "regenerator-runtime/runtime";
+import * as _ from "regenerator-runtime/runtime";
 
 import * as riot from "riot";
 
-import ErrorView from "./src/tags/error-view.riot";
+import ErrorView from "./src/tags/error-view";
 riot.register("error-view", ErrorView);
-import ErrorFallback from "./src/tags/error-fallback.riot";
+import ErrorFallback from "./src/tags/error-fallback";
 riot.register("error-fallback", ErrorFallback);
-import Tree from "./src/tags/tree.riot";
+import Tree from "./src/tags/tree";
 riot.register("tree", Tree);
-import TreeSearch from "./src/tags/tree-search.riot";
+import TreeSearch from "./src/tags/tree-search";
 riot.register("tree-search", TreeSearch);
-import SplitView from "./src/tags/split-view.riot";
+import SplitView from "./src/tags/split-view";
 riot.register("split-view", SplitView);
-import Raw from "./src/tags/raw.riot";
+import Raw from "./src/tags/raw";
 riot.register("raw", Raw);
-import LayerMap from "./src/tags/layer-map.riot";
+import LayerMap from "./src/tags/layer-map";
 riot.register("layer-map", LayerMap);
-import ContentFrame from "./src/tags/content-frame.riot";
+import ContentFrame from "./src/tags/content-frame";
 riot.register("content-frame", ContentFrame);
 
-import AppComponent from "./src/tags/app.riot";
-import "./index.css";
+import AppComponent from "./src/tags/app";
 
 riot.component(AppComponent)(document.querySelector("#app"));
