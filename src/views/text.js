@@ -1,4 +1,4 @@
-import {SourceHandler} from "./common";
+import { SourceHandler } from "./common";
 
 export default class TextHandler extends SourceHandler {
 	handleWithSource(source, ctx) {

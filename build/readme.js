@@ -36,7 +36,7 @@ function renderToc(handlers) {
 		"<ul>\n" +
 		Object.values(handlers)
 			.map(
-				({title}) =>
+				({ title }) =>
 					`    <li><a href="#${title
 						.toLowerCase()
 						.replace(/ /g, "-")}">${title}</a></li>\n`
@@ -54,7 +54,7 @@ function renderDescriptions(handlers) {
 
 async function renderDescription([
 	name,
-	{title, prefixes, description, examples},
+	{ title, prefixes, description, examples },
 ]) {
 	const renderedExamples = await Promise.all(
 		examples.map((example, i) => renderExample(name, i + 1, example))
@@ -105,14 +105,14 @@ async function saveScreenshot(url, filename, viewport) {
 		process.exit(1);
 	});
 
-	await page.setViewport(viewport || {width: 1440, height: 798});
+	await page.setViewport(viewport || { width: 1440, height: 798 });
 
 	console.log("Loading", url);
 	await Promise.all([page.waitForNavigation(), page.goto(url)]);
 
 	await new Promise(resolve => setTimeout(resolve, 30000));
 
-	await page.screenshot({path});
+	await page.screenshot({ path });
 	console.log("Saved screenshot to", path);
 
 	await page.close();

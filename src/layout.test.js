@@ -17,16 +17,16 @@ test("parses two split views", t => {
 	t.deepEqual(layout.parse("a/b"), {
 		sep: "/",
 		views: [
-			{size: 50, view: "a"},
-			{size: 50, view: "b"},
+			{ size: 50, view: "a" },
+			{ size: 50, view: "b" },
 		],
 	});
 
 	t.deepEqual(layout.parse("a-b"), {
 		sep: "-",
 		views: [
-			{size: 50, view: "a"},
-			{size: 50, view: "b"},
+			{ size: 50, view: "a" },
+			{ size: 50, view: "b" },
 		],
 	});
 });
@@ -35,18 +35,18 @@ test("parses multiple views split in the same direction", t => {
 	t.deepEqual(layout.parse("a/b/c"), {
 		sep: "/",
 		views: [
-			{size: 100 / 3, view: "a"},
-			{size: 100 / 3, view: "b"},
-			{size: 100 / 3, view: "c"},
+			{ size: 100 / 3, view: "a" },
+			{ size: 100 / 3, view: "b" },
+			{ size: 100 / 3, view: "c" },
 		],
 	});
 
 	t.deepEqual(layout.parse("a-b-c"), {
 		sep: "-",
 		views: [
-			{size: 100 / 3, view: "a"},
-			{size: 100 / 3, view: "b"},
-			{size: 100 / 3, view: "c"},
+			{ size: 100 / 3, view: "a" },
+			{ size: 100 / 3, view: "b" },
+			{ size: 100 / 3, view: "c" },
 		],
 	});
 });
@@ -99,18 +99,18 @@ test("parses nested views with configurable sizes", t => {
 	t.deepEqual(layout.parse("a30/(x15-(y/(z)10))/b40"), {
 		sep: "/",
 		views: [
-			{view: "a", size: 30},
+			{ view: "a", size: 30 },
 			{
 				view: {
 					sep: "-",
 					views: [
-						{view: "x", size: 15},
+						{ view: "x", size: 15 },
 						{
 							view: {
 								sep: "/",
 								views: [
-									{view: "y", size: 90},
-									{view: "z", size: 10},
+									{ view: "y", size: 90 },
+									{ view: "z", size: 10 },
 								],
 							},
 							size: 85,
@@ -119,7 +119,7 @@ test("parses nested views with configurable sizes", t => {
 				},
 				size: 30,
 			},
-			{view: "b", size: 40},
+			{ view: "b", size: 40 },
 		],
 	});
 });

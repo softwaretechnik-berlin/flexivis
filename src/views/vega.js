@@ -1,4 +1,4 @@
-import {SourceHandler} from "./common";
+import { SourceHandler } from "./common";
 
 import vegaEmbed from "vega-embed";
 

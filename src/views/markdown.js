@@ -1,4 +1,4 @@
-import {SourceHandler} from "./common";
+import { SourceHandler } from "./common";
 
 import hljs from "highlight.js";
 import MarkdownIt from "markdown-it";

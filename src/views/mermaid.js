@@ -1,4 +1,4 @@
-import {SourceHandler} from "./common";
+import { SourceHandler } from "./common";
 import mermaid from "mermaid";
 
 export default class MermaidHandler extends SourceHandler {

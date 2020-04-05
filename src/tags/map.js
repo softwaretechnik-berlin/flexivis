@@ -1,13 +1,13 @@
 import Map from "ol/Map";
 import View from "ol/View";
 import XYZ from "ol/source/XYZ";
-import {fromLonLat} from "ol/proj";
+import { fromLonLat } from "ol/proj";
 
 import GeoJSON from "ol/format/GeoJSON";
-import {extend as extendExtent, createEmpty as createExtent} from "ol/extent";
-import {Tile as TileLayer, Vector as VectorLayer} from "ol/layer";
-import {Vector as VectorSource, OSM as OSMSource} from "ol/source";
-import {Circle as CircleStyle, Fill, Stroke, Style} from "ol/style";
+import { extend as extendExtent, createEmpty as createExtent } from "ol/extent";
+import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
+import { Vector as VectorSource, OSM as OSMSource } from "ol/source";
+import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
 
 import observable from "@riotjs/observable";
 
@@ -78,7 +78,7 @@ const baseLayerDescriptions = [
 export class HereGeoJsonMap {
 	constructor(
 		mapElementId,
-		{hereAppId, hereAppCode, center = [0, 0], zoomLevel = 5}
+		{ hereAppId, hereAppCode, center = [0, 0], zoomLevel = 5 }
 	) {
 		observable(this);
 

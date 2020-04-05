@@ -1,4 +1,4 @@
-import {Handler} from "./common";
+import { Handler } from "./common";
 
 export default class ReadmeHandler extends Handler {
 	handle(ctx) {

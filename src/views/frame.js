@@ -1,4 +1,4 @@
-import {Handler} from "./common";
+import { Handler } from "./common";
 
 export default class FrameHandler extends Handler {
 	handle(ctx) {
