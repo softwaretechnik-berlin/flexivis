@@ -23,4 +23,4 @@ riot.register("content-frame", ContentFrame);
 import AppComponent from "./src/tags/app.riot";
 import "./index.css";
 
-riot.component(AppComponent)(document.getElementById("app"));
+riot.component(AppComponent)(document.querySelector("#app"));

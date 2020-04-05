@@ -14,20 +14,30 @@
   },
   "devDependencies": {
     "@riotjs/parcel-plugin-riot": "^4.0.1",
+    "ava": "^3.6.0",
+    "esm": "^3.2.25",
     "grammkit": "^0.7.1",
     "marked": "^0.8.2",
     "parcel-bundler": "^1.12.4",
     "pegjs": "^0.10.0",
-    "puppeteer": "^2.1.1"
+    "puppeteer": "^2.1.1",
+    "xo": "^0.28.3"
   },
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build --no-cache -d dist index.html",
+    "lint": "xo --fix --prettier || exit 0",
+    "test": "npm run lint && ava",
     "build-local-use": "parcel build --no-cache -d dist index.html --public-url ./",
     "readme": "node build/readme.js",
     "generate-parser": "pegjs -o src/layout.js --export-var module.exports --format umd src/layout.pegjs; cd docs/grammar; grammkit -t md ../../src/layout.pegjs"
   },
   "engines": {
     "node": ">=10.16.0"
+  },
+  "ava": {
+    "require": [
+      "esm"
+    ]
   }
 }
