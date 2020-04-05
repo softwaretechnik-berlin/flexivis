@@ -83,6 +83,8 @@ The optional `layout` parameter specifies how to lay out the individual views in
     </tr>
 </table>
 
+A detailed specification of the layout format can be found [here](docs/grammar/layout.md).
+
 
 ## View Specifications
 
