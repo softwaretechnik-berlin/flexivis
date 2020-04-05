@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const yaml = require("js-yaml");
 const fs = require("fs");
 
@@ -5,8 +7,8 @@ const baseUrl = "https://flexivis.infrastruktur.link/";
 // Const baseUrl = "http://localhost:1234/";
 const takeScreenshots = true;
 
-screenshotsPath = "docs/images/";
-sharedBrowser = null;
+const screenshotsPath = "docs/images/";
+let sharedBrowser = null;
 
 const handlers = yaml.safeLoad(
 	fs.readFileSync("src/views/handlers.yaml", "utf8")
@@ -20,7 +22,9 @@ const handlers = yaml.safeLoad(
 	const descriptions = await renderDescriptions(handlers);
 	await berlinWalk;
 	const browser = await sharedBrowser;
-	!browser || browser.close();
+	if (!browser) {
+		browser.close();
+	}
 
 	console.log(renderToc(handlers));
 	console.log("");
@@ -53,10 +57,10 @@ async function renderDescription([
 	{title, prefixes, description, examples},
 ]) {
 	const renderedExamples = await Promise.all(
-		examples.map((e, i) => renderExample(name, i + 1, e))
+		examples.map((example, i) => renderExample(name, i + 1, example))
 	);
 	return `### ${title}\n\nView specification prefix${
-		prefixes.length == 1 ? "" : "s"
+		prefixes.length === 1 ? "" : "s"
 	}: ${prefixes
 		.map(p => "`" + p + "`")
 		.join(", ")}.\n\n${description}\n\n${renderedExamples.join("\n")}`;
@@ -67,7 +71,7 @@ function renderExample(handler, number, example) {
 	const rawUrl = `${baseUrl}?${query}`;
 
 	const intro = example.intro ? example.intro + "\n\n" : "";
-	const url = "```\n" + `${rawUrl}\n` + "```\n";
+	const url = "```\n" + rawUrl + "\n```\n";
 	const preScreenshot = intro + url;
 
 	if (example.screenshot === false) return preScreenshot;
