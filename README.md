@@ -90,10 +90,10 @@ A detailed specification of the layout format can be found [here](docs/grammar/l
 
 ## View Specifications
 
-All query parameters other than the [`layout`](#layout) parameter specifiy individual views.
+All query parameters other than the [`layout`](#layout) parameter specify individual views.
 The parameter name is the name of the view (which can then be used in the `layout` parameter), and the value is a view specification.
 
-The basic format of a view specification is `<prefix>:<url-and-view-specific-params>`.
+The basic format of a view specification is `<prefix>:<resource>`. Optionally, configurations can be passed to both the view or the resources listed before the value, for example: `(abc=123;xyz=789)<prefix>:(hello=true;hide)<resource>`. A detailed specification of the view format is available [here](docs/grammar/view.md).
 
 The prefix specifies the view type. The following view types are supported:
 
@@ -107,7 +107,6 @@ The prefix specifies the view type. The following view types are supported:
     <li><a href="#mermaid-diagrams">Mermaid Diagrams</a></li>
     <li><a href="#vega-graphs">Vega Graphs</a></li>
 </ul>
-
 
 ### Regular Content
 
@@ -179,6 +178,22 @@ https://flexivis.infrastruktur.link/?layout=a/b&a=map:https://raw.githubusercont
 
 <a href="https://flexivis.infrastruktur.link/?layout=a/b&amp;a=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&amp;b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_map-1_0_document_0_main.png" style="border: 1px solid #ccc; max-height: 300px"/></a>
 
+The view allows the following configurations:
+
+- `center`: the latitude/longitude to center the map, e.g. `52.554101,13.463528`.
+- `zoomLevel`: the zoom level of the map.
+- `layer`: the layer type.
+
+The resources can also be configured:
+
+- `hidden`: initially hide this resource.
+- `id`: the label to be used by this resource:
+
+Here is an example on how to use these configurations:
+
+```
+(center=52.554101,13.463528;zoomLevel=16;layer=osm)map:(id=walk;hidden)https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
+```
 
 ### Mermaid Diagrams
 
