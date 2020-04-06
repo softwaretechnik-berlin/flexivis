@@ -5,16 +5,17 @@ const examples = require("./examples.js");
 const handlers = examples.handlers;
 
 (() => {
-    const readme = fs.readFileSync("README.md", "utf8");
-    const toc = renderToc(handlers);
+	const readme = fs.readFileSync("README.md", "utf8");
+	const toc = renderToc(handlers);
 
-    fs.writeFileSync("README.md",
-        updateSection(
-            updateSection(readme, "view specifications table of contents", toc),
-            "view specifications",
-            toc + "\n\n" + renderDescriptions(handlers)
-        )
-    );
+	fs.writeFileSync(
+		"README.md",
+		updateSection(
+			updateSection(readme, "view specifications table of contents", toc),
+			"view specifications",
+			toc + "\n\n" + renderDescriptions(handlers)
+		)
+	);
 })();
 
 function renderToc(handlers) {
@@ -65,15 +66,25 @@ function renderExample(example) {
 }
 
 function updateSection(original, sectionName, section) {
-    const lines = original.split("\n");
-    const beginMarkerLine = lines.findIndex(s => s.includes(`<!-- BEGIN ${sectionName} -->`)) + 1;
-    const lastContentLine = lines.findIndex(s => s.includes(`<!-- END ${sectionName} -->`));
-    if (beginMarkerLine < 1 || lastContentLine <= beginMarkerLine)
-        throw new Error(`Can't find section "${sectionName} (begin marker on line ${beginMarkerLine}, end marker on line ${lastContentLine + 1})`);
-    const indentation = lines[beginMarkerLine - 1].match(/^ */)[0];
-    const sectionLines = section.split("\n");
-    trailingCharacters = sectionLines.pop();
-    if (trailingCharacters != '') sectionLines.push(trailingCharacters);
-    lines.splice(beginMarkerLine, lastContentLine - beginMarkerLine, ...sectionLines.map(l => indentation + l));
-    return lines.join("\n");
+	const lines = original.split("\n");
+	const beginMarkerLine =
+		lines.findIndex(s => s.includes(`<!-- BEGIN ${sectionName} -->`)) + 1;
+	const lastContentLine = lines.findIndex(s =>
+		s.includes(`<!-- END ${sectionName} -->`)
+	);
+	if (beginMarkerLine < 1 || lastContentLine <= beginMarkerLine)
+		throw new Error(
+			`Can’t find section "${sectionName} (begin marker on line ${beginMarkerLine}, end marker on line ${lastContentLine +
+				1})`
+		);
+	const indentation = lines[beginMarkerLine - 1].match(/^ */)[0];
+	const sectionLines = section.split("\n");
+	trailingCharacters = sectionLines.pop();
+	if (trailingCharacters != "") sectionLines.push(trailingCharacters);
+	lines.splice(
+		beginMarkerLine,
+		lastContentLine - beginMarkerLine,
+		...sectionLines.map(l => indentation + l)
+	);
+	return lines.join("\n");
 }
