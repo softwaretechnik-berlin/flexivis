@@ -1,0 +1,146 @@
+{
+  "id": "flexivis",
+  "viewports": [
+    {
+      "label": "tablet",
+      "width": 1440,
+      "height": 798
+    }
+  ],
+  "scenarios": [
+    {
+      "label": "berlin-walk",
+      "url": "http://localhost:1234/?layout=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
+      "label": "frame-1",
+      "url": "http://localhost:1234/?layout=a/b&a=https://wikipedia.org&b=https://example.com",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=https://wikipedia.org&b=https://example.com",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
+      "label": "markdown-1",
+      "url": "http://localhost:1234/?layout=a/b&a=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/markdown.md&b=md-inline:This pane contains **inline** Markdown content taken _from the URL_.",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/markdown.md&b=md-inline:This pane contains **inline** Markdown content taken _from the URL_.",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
+      "label": "json-1",
+      "url": "http://localhost:1234/?layout=a/b&a=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/package-lock.json&b=json-inline:{\"name\": \"inline JSON example\", \"id\": 42, \"values\": [\"foo\", \"baz\", \"bar\"]}",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/package-lock.json&b=json-inline:{\"name\": \"inline JSON example\", \"id\": 42, \"values\": [\"foo\", \"baz\", \"bar\"]}",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
+      "label": "text-1",
+      "url": "http://localhost:1234/?layout=(a-b)/c&a=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/plaintext.txt&b=text-inline:This is just _plain_ inline text from the URL&c=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/README.md",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=(a-b)/c&a=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/plaintext.txt&b=text-inline:This is just _plain_ inline text from the URL&c=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/README.md",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
+      "label": "map-1",
+      "url": "http://localhost:1234/?layout=a/b&a=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
+      "label": "mermaid-1",
+      "url": "http://localhost:1234/?layout=(a-b)/c&a=mermaid:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&c=mermaid-inline:graph TB; p[mermaid-inline prefix] --> URL; s[Mermaid source] --> URL -->|Flexivis| r[Rendered Diagram]",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=(a-b)/c&a=mermaid:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&c=mermaid-inline:graph TB; p[mermaid-inline prefix] --> URL; s[Mermaid source] --> URL -->|Flexivis| r[Rendered Diagram]",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
+      "label": "vega-1",
+      "url": "http://localhost:1234/?layout=(a-c30)/b&a=vega:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&c=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.csv",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=(a-c30)/b&a=vega:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&c=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.csv",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
+      "label": "vega-2",
+      "url": "http://localhost:1234/?url=vega-inline:{\"data\": {\"values\": [{\"factor\": \"awesomeness\", \"score\": 10}, {\"factor\": \"weirdness\", \"score\": 3}, {\"factor\": \"color\", \"score\": 7}]}, \"mark\": \"bar\", \"encoding\": {\"x\": {\"field\": \"factor\", \"type\": \"nominal\"}, \"y\": {\"field\": \"score\", \"type\": \"quantitative\"}, \"color\": {\"field\": \"factor\", \"type\": \"nominal\"}}, \"height\": \"container\", \"width\": 100}",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?url=vega-inline:{\"data\": {\"values\": [{\"factor\": \"awesomeness\", \"score\": 10}, {\"factor\": \"weirdness\", \"score\": 3}, {\"factor\": \"color\", \"score\": 7}]}, \"mark\": \"bar\", \"encoding\": {\"x\": {\"field\": \"factor\", \"type\": \"nominal\"}, \"y\": {\"field\": \"score\", \"type\": \"quantitative\"}, \"color\": {\"field\": \"factor\", \"type\": \"nominal\"}}, \"height\": \"container\", \"width\": 100}",
+      "viewports": [
+        {
+          "height": 400,
+          "width": 400,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    }
+  ],
+  "paths": {
+    "bitmaps_reference": "tests/visual/backstop_data/bitmaps_reference",
+    "bitmaps_test": "tests/visual/backstop_data/bitmaps_test",
+    "engine_scripts": "tests/visual/backstop_data/engine_scripts",
+    "html_report": "tests/visual/backstop_data/html_report",
+    "ci_report": "tests/visual/backstop_data/ci_report"
+  },
+  "report": [
+    "CI"
+  ],
+  "engine": "puppeteer",
+  "engineOptions": {
+    "args": [
+      "--no-sandbox"
+    ]
+  },
+  "asyncCompareLimit": 50
+}
