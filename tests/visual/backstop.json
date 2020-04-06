@@ -22,6 +22,32 @@
       "delay": 2000
     },
     {
+      "label": "illegal-layout",
+      "url": "http://localhost:1234/?layout=a/",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
+      "label": "nonsense-view",
+      "url": "http://localhost:1234/?layout=a/b&a=text-inline:This is fine&b=nonsense",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=text-inline:This is fine&b=nonsense",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
       "label": "frame-1",
       "url": "http://localhost:1234/?layout=a/b&a=https://wikipedia.org&b=https://example.com",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=https://wikipedia.org&b=https://example.com",
