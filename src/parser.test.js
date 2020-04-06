@@ -1,17 +1,6 @@
 import test from "ava";
 import Parser from "./parser";
 
-// TEST CASES for parsers/view:
-// readme
-// readme:
-// https://example.com
-// (center=0.0,0.0;zoomLevel=10)map:(a=3)http://example.com/geojson
-// (center=0.0,0,0)map:http://example.com/geojson1;http://example.com/geojson2
-// (center=0.0,0,0;configWithoutValue)map:http://example.com/geojson1;http://example.com/geojson2
-// (center=0.0,0,0;configWithoutValue;b=123)map:http://example.com/geojson1;(kml)http://example.com/geojson2
-// (center=0.0,0,0;configWithoutValue)map:(geojson;hide)http://example.com/geojson1;(kml;whatever=51)http://example.com/geojson2
-// (center=0.0,0,0;configWithoutValue)map:(geojson;hide)http://example.com/geojson1;(kml;whatever=51)$someData
-
 test("combines the layout and view parsers", t => {
 	const parser = new Parser(
 		new URLSearchParams(
