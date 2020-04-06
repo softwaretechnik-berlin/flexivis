@@ -59,46 +59,19 @@ test("parses multiple resources", t => {
 test("parses configurations", t => {
 	t.deepEqual(
 		view.parse(
-			"(center=0.0,0.0;configWithoutValue)map:(geojson;hide)http://example.com/geojson1;(kml;whatever=51)$someData"
+			"(center=0.0,0.0;configWithoutValue)map:(geojson;hide)http://example.com/geojson1;(kml;whatever=1,2,3)$someData"
 		),
 		{
 			type: "map",
-			config: [
-				{
-					key: "center",
-					value: ["0.0", "0.0"],
-				},
-				{
-					key: "configWithoutValue",
-					value: null,
-				},
-			],
+			config: { center: ["0.0", "0.0"], configWithoutValue: null },
 			resources: [
 				{
 					value: "http://example.com/geojson1",
-					config: [
-						{
-							key: "geojson",
-							value: null,
-						},
-						{
-							key: "hide",
-							value: null,
-						},
-					],
+					config: { geojson: null, hide: null },
 				},
 				{
 					value: "$someData",
-					config: [
-						{
-							key: "kml",
-							value: null,
-						},
-						{
-							key: "whatever",
-							value: "51",
-						},
-					],
+					config: { kml: null, whatever: ["1", "2", "3"] },
 				},
 			],
 		}

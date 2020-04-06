@@ -31,17 +31,15 @@
 
     export default {
       onMounted() {
-        const configs = Object.fromEntries(this.props.config.map(({ key, value}) => [key, value]));
-
         this.mapId = Math.floor(Math.random() * 10000);
         this.map = new HereGeoJsonMap(
           this.root.getElementsByClassName('map')[0],
-          Object.assign(configs, {
+          Object.assign(this.props.config, {
             hereAppId: "x6sXIaeWkAPvZYeyrAhx",
             hereAppCode: "YopQln8NuXmBTMW1rOKvmg",
           }),
         );
-        this.defaultLayer = configs.layer || "here.reduced.day";
+        this.defaultLayer = this.props.config.layer || "here.reduced.day";
         this.layerDescriptions = this.map.layerDescriptions();
 
         this.map.selectHereLayer(this.defaultLayer);
@@ -49,9 +47,8 @@
 
         this.layers = [];
         this.props.resources.map(({ value, config }) => {
-          const configMap = Object.fromEntries(config.map(({ key, value}) => [key, value]));
-          const hidden = configMap.hasOwnProperty("hidden") && configMap.hidden !== "false"
-          const id = configMap.id || value;
+          const hidden = config.hasOwnProperty("hidden") && config.hidden !== "false"
+          const id = config.id || value;
           this.map.addGeoJsonLayer(id, value);
           this.layers.push({ id, checked: !hidden });
           if (hidden) {

@@ -17,7 +17,7 @@ ConfigurationList =
     { return pairs; }
   )*
   ')'
-  { return [head, ...tail].flat(); };
+  { return Object.fromEntries([head, ...tail]); };
 Configuration =
   key:ConfigurationKey
   value:(
@@ -26,7 +26,7 @@ Configuration =
     { return v; }
   )?
   {
-    return { key, value };
+    return [key, value];
   }
 ConfigurationKey =
   [a-zA-Z]+

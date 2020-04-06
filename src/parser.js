@@ -23,10 +23,10 @@ export default class LayoutParser {
 		if (!this.params.has(name)) {
 			return {
 				type: "error",
-				config: [
-					{ key: "title", value: `Missing parameter for view ’${name}’.` },
-					{ key: "message", value: `The parameter ’${name}’ is not defined.` },
-				],
+				config: {
+					title: `Missing parameter for view ’${name}’.`,
+					message: `The parameter ’${name}’ is not defined.`,
+				},
 			};
 		}
 

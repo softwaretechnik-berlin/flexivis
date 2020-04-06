@@ -14,12 +14,9 @@ test("combines the layout and view parsers", t => {
 			{
 				view: {
 					type: "nap",
-					config: [
-						{
-							key: "when",
-							value: "never",
-						},
-					],
+					config: {
+						when: "never",
+					},
 					resources: [],
 				},
 				size: 50,
@@ -47,12 +44,9 @@ test("combines the layout and view parsers", t => {
 									},
 									{
 										value: "$json2",
-										config: [
-											{
-												key: "hide",
-												value: null,
-											},
-										],
+										config: {
+											hide: null,
+										},
 									},
 								],
 							},

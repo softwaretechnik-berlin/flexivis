@@ -6,11 +6,9 @@ const mod = loadHandlerModule => async ctx => {
 };
 
 const errorHandler = ctx => {
-	const configObject = Object.fromEntries(
-		ctx.view.config.map(({ key, value }) => [key, value])
-	);
-	const error = new Error(configObject.message);
-	error.title = configObject.title || "Error";
+	const config = ctx.view.config;
+	const error = new Error(config.message);
+	error.title = config.title || "Error";
 	throw error;
 };
 
