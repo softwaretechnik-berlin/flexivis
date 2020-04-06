@@ -30,7 +30,17 @@ export default class LayoutParser {
 			};
 		}
 
-		return viewParser.parse(this.params.get(name));
+		try {
+			return viewParser.parse(this.params.get(name));
+		} catch (error) {
+			return {
+				type: "error",
+				config: {
+					title: `Failed to parse view ${name}`,
+					message: error.message,
+				}
+			};
+		}
 	}
 
 	_parseView(view) {
