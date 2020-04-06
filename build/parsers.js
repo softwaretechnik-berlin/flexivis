@@ -14,7 +14,7 @@ const run = (cmd, options) =>
 		console.error(out.stderr);
 	});
 
-glob("src/*.pegjs")
+glob("src/parser/*.pegjs")
 	.then(files => {
 		return Promise.all(
 			files.map(async file => {
