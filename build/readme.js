@@ -79,8 +79,8 @@ function updateSection(original, sectionName, section) {
 		);
 	const indentation = lines[beginMarkerLine - 1].match(/^ */)[0];
 	const sectionLines = section.split("\n");
-	trailingCharacters = sectionLines.pop();
-	if (trailingCharacters != "") sectionLines.push(trailingCharacters);
+	const trailingCharacters = sectionLines.pop();
+	if (trailingCharacters !== "") sectionLines.push(trailingCharacters);
 	lines.splice(
 		beginMarkerLine,
 		lastContentLine - beginMarkerLine,
