@@ -36,9 +36,9 @@ export default class LayoutParser {
 			return {
 				type: "error",
 				config: {
-					title: `Failed to parse view '${name}'`,
+					title: `Failed to parse view ’${name}’`,
 					message: error.message,
-				}
+				},
 			};
 		}
 	}
