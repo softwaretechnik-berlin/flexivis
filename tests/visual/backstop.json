@@ -35,9 +35,35 @@
       "delay": 2000
     },
     {
+      "label": "missing-view",
+      "url": "http://localhost:1234/?layout=a/b&a=text-inline:This is fine",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=text-inline:This is fine",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
       "label": "nonsense-view",
       "url": "http://localhost:1234/?layout=a/b&a=text-inline:This is fine&b=nonsense",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=text-inline:This is fine&b=nonsense",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
+      "label": "view-error-duplicate-map-layer",
+      "url": "http://localhost:1234/?layout=a/b&a=text-inline:This is fine&b=map:http://example.com/nonsense.json;http://example.com/nonsense.json",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=text-inline:This is fine&b=map:http://example.com/nonsense.json;http://example.com/nonsense.json",
       "viewports": [
         {
           "height": 798,

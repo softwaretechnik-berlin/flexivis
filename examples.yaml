@@ -3,8 +3,12 @@ general:
     query: "layout=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"
   illegal-layout:
     query: "layout=a/"
+  missing-view:
+    query: "layout=a/b&a=text-inline:This is fine"
   nonsense-view:
     query: "layout=a/b&a=text-inline:This is fine&b=nonsense"
+  view-error-duplicate-map-layer:
+    query: "layout=a/b&a=text-inline:This is fine&b=map:http://example.com/nonsense.json;http://example.com/nonsense.json"
 
 handlers:
   frame:
