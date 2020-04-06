@@ -20,7 +20,7 @@ handlers:
       - intro:
           If your browser environment permits it (e.g. if you build Flexivis locally and open it from a `file:` URL),
           you can also load content from `file:` URLs.
-          This can be useful to visualise build outputs, for example.        
+          This can be useful to visualise build outputs, for example.
         query: "layout=a/b&a=file://results.html&b=file://generated-image.png"
         screenshot: false
 
@@ -48,19 +48,36 @@ handlers:
   map:
     prefixes: [map]
     title: Map
-    description: Renders GeoJSON on an interactive map.
+    description: |
+      Renders GeoJSON on an interactive map.
+      The view allows the following configurations:
+
+      - `center`: the latitude/longitude to center the map, e.g. `52.554101,13.463528`.
+      - `zoomLevel`: the zoom level of the map.
+      - `layer`: the layer type.
+
+      The resources can also be configured:
+
+      - `hidden`: initially hide this resource.
+      - `id`: the label to be used by this resource:
+
+      Here is an example on how to use these configurations:
+
+      ```
+      (center=52.554101,13.463528;zoomLevel=16;layer=osm)map:(id=walk;hidden)https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
+      ```
     examples:
       # TODO after fixing markdown display, use `md` instead of `text` to show JSON source
       - query: "layout=a/b&a=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"
       # TODO - 'map-inline:{"type": "Feature", "geometry": {"type": "Point", "coordinates": [6.140556, 46.226667]}, "properties": {"wikipedia": "https://en.wikipedia.org/wiki/Palace_of_Nations"}}'
-    
+
   mermaid:
     prefixes: [mermaid, mermaid-inline]
     title: Mermaid Diagrams
     description: Renders [mermaid](https://mermaid-js.github.io/mermaid/) diagrams.
     examples:
-      - query: 'layout=(a-b)/c&a=mermaid:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&c=mermaid-inline:graph TB; p[mermaid-inline prefix] --> URL; s[Mermaid source] --> URL -->|Flexivis| r[Rendered Diagram]'
-    
+      - query: 'layout=(a-b)/c&a=mermaid:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&c=mermaid-inline:graph TB; p[mermaid-inline prefix] --> URL; s[Mermaid source] --> URL -->%7CFlexivis%7C r[Rendered Diagram]'
+
   vega:
     prefixes: [vega, vega-inline]
     title: Vega Graphs

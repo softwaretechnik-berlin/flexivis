@@ -108,6 +108,7 @@ The prefix specifies the view type. The following view types are supported:
     <li><a href="#vega-graphs">Vega Graphs</a></li>
 </ul>
 
+
 ### Regular Content
 
 View specification prefixs: `http`, `https`, `file`.
@@ -171,13 +172,6 @@ https://flexivis.infrastruktur.link/?layout=(a-b)/c&a=text:https://raw.githubuse
 View specification prefix: `map`.
 
 Renders GeoJSON on an interactive map.
-
-```
-https://flexivis.infrastruktur.link/?layout=a/b&a=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
-```
-
-<a href="https://flexivis.infrastruktur.link/?layout=a/b&amp;a=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&amp;b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_map-1_0_document_0_main.png" style="border: 1px solid #ccc; max-height: 300px"/></a>
-
 The view allows the following configurations:
 
 - `center`: the latitude/longitude to center the map, e.g. `52.554101,13.463528`.
@@ -195,6 +189,14 @@ Here is an example on how to use these configurations:
 (center=52.554101,13.463528;zoomLevel=16;layer=osm)map:(id=walk;hidden)https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
 ```
 
+
+```
+https://flexivis.infrastruktur.link/?layout=a/b&a=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
+```
+
+<a href="https://flexivis.infrastruktur.link/?layout=a/b&amp;a=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&amp;b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_map-1_0_document_0_main.png" style="border: 1px solid #ccc; max-height: 300px"/></a>
+
+
 ### Mermaid Diagrams
 
 View specification prefixs: `mermaid`, `mermaid-inline`.
@@ -202,10 +204,10 @@ View specification prefixs: `mermaid`, `mermaid-inline`.
 Renders [mermaid](https://mermaid-js.github.io/mermaid/) diagrams.
 
 ```
-https://flexivis.infrastruktur.link/?layout=(a-b)/c&a=mermaid:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&c=mermaid-inline:graph TB; p[mermaid-inline prefix] --> URL; s[Mermaid source] --> URL -->|Flexivis| r[Rendered Diagram]
+https://flexivis.infrastruktur.link/?layout=(a-b)/c&a=mermaid:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&c=mermaid-inline:graph TB; p[mermaid-inline prefix] --> URL; s[Mermaid source] --> URL -->%7CFlexivis%7C r[Rendered Diagram]
 ```
 
-<a href="https://flexivis.infrastruktur.link/?layout=(a-b)/c&amp;a=mermaid:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&amp;b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&amp;c=mermaid-inline:graph TB; p[mermaid-inline prefix] --> URL; s[Mermaid source] --> URL -->|Flexivis| r[Rendered Diagram]"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_mermaid-1_0_document_0_main.png" style="border: 1px solid #ccc; max-height: 300px"/></a>
+<a href="https://flexivis.infrastruktur.link/?layout=(a-b)/c&amp;a=mermaid:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&amp;b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&amp;c=mermaid-inline:graph TB; p[mermaid-inline prefix] --> URL; s[Mermaid source] --> URL -->%7CFlexivis%7C r[Rendered Diagram]"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_mermaid-1_0_document_0_main.png" style="border: 1px solid #ccc; max-height: 300px"/></a>
 
 
 ### Vega Graphs
