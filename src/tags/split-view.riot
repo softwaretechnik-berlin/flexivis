@@ -1,18 +1,9 @@
 <split-view>
-
-  <error-view error={missingDefinition}>
-    <div if={knownViews.length}>
-      <p>Known views from URL parameters:</p>
-      <ul>
-        <li each={v in knownViews}>"{v}"</li>
-      </ul>
-    </div>
-  </error-view>
-  <content-frame if={ isLeaf } name={view} definition={definition} />
+  <content-frame if={ isLeaf } view={ view } />
   <template if={ !isLeaf } each={ (inner, idx) in (view && view.views) } key={ idx }>
     <div if={ idx !== 0 } class="separator" onmousedown={ resize(idx) } style="{ isVertical ? "width" : "height" }: 1px; cursor: { isVertical ? "ew" : "ns" }-resize;" />
     <div class="view-frame" style="{ isVertical ? "width" : "height" }: calc({ inner.size }% - { idx === 0 ? 0 : 1 }px)">
-      <split-view search-params={ props.searchParams } view-definition={ inner.view } />
+      <split-view view-definition={ inner.view } />
     </div>
   </template>
 
@@ -20,22 +11,9 @@
     export default {
       onBeforeMount() {
         this.view = this.props.viewDefinition;
-        if (this.view == null) {
-          this.isLeaf = true;
-          this.view = "default";
-          this.definition = "readme:";
-          return;
-        }
-        this.isLeaf = typeof this.view === "string";
+        this.isLeaf = this.view.type !== undefined;
         this.isVertical = this.view.sep === "/";
-
-        if (this.isLeaf) {
-          this.definition = this.props.searchParams.get(this.view);
-          if (!this.definition) {
-            this.missingDefinition = new Error(`Missing parameter for view "${this.view}".`);
-            this.knownViews = Array.from(this.props.searchParams.keys()).filter(v => v !== "layout").sort();
-          }
-        } else {
+        if (!this.isLeaf) {
           this.view.views.forEach(inner => inner.originalSize = inner.size);
         }
       },

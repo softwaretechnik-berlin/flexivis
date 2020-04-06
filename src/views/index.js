@@ -1,6 +1,17 @@
+import * as riot from "riot";
+
 const mod = loadHandlerModule => async ctx => {
 	const Handler = (await loadHandlerModule()).default;
 	return new Handler().handle(ctx);
+};
+
+const errorHandler = ctx => {
+	const configObject = Object.fromEntries(
+		ctx.view.config.map(({ key, value }) => [key, value])
+	);
+	const error = new Error(configObject.message);
+	error.title = configObject.title || "Error";
+	throw error;
 };
 
 const handlers = {
@@ -19,16 +30,13 @@ const handlers = {
 	"mermaid-inline": mod(() => import("./mermaid.js")),
 	map: mod(() => import("./map.js")),
 	readme: mod(() => import("./readme.js")),
+	error: errorHandler,
 };
 
-export function mount(riot, element, definition) {
-	const index = definition.indexOf(":");
-	const name = definition.slice(0, index);
-	const description = definition.slice(index + 1);
-
-	const handler = handlers[name];
+export function mount(element, view) {
+	const handler = handlers[view.type];
 	if (!handler) {
-		const error = new Error(`Unknown handler "${name}".`);
+		const error = new Error(`Unknown handler "${view.type}".`);
 		error.title = "Unknown Handler";
 		error.knownHandlers = Object.keys(handlers);
 		throw error;
@@ -37,8 +45,6 @@ export function mount(riot, element, definition) {
 	return handler({
 		riot,
 		element,
-		definition,
-		name,
-		description,
+		view,
 	});
 }

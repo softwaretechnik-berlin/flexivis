@@ -1,12 +1,12 @@
 Root =
   config:ConfigurationList?
-  view:ViewType
+  type:ViewType
   resources:(
   	':'
     list:ResourceList?
     { return list; }
   )?
-  { return { view, config: config || [], resources: resources || [] }; }
+  { return { type, config: config || [], resources: resources || [] }; }
 
 ConfigurationList =
   '('
@@ -41,7 +41,7 @@ ConfigurationValue =
   { return tail.length === 0 ? head.join("") : [head, ...tail].map(str => str.join("")); }
 
 ViewType =
-  [a-zA-Z]+
+  [a-zA-Z-]+
   { return text(); }
 
 ResourceList =

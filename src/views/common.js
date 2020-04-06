@@ -34,11 +34,12 @@ export class SourceHandler extends Handler {
 	}
 
 	async handle(ctx) {
-		const source = ctx.name.endsWith("-inline")
-			? ctx.description
-			: await fetch(ctx.description)
+		const mainResourceValue = ctx.view.resources[0].value;
+		const source = ctx.view.type.endsWith("-inline")
+			? mainResourceValue
+			: await fetch(mainResourceValue)
 					.catch(error => {
-						throw new Error(`Failed to fetch "${ctx.description}": ${error}`);
+						throw new Error(`Failed to fetch "${mainResourceValue}": ${error}`);
 					})
 					.then(r => r.text());
 		return this.handleWithSource(source, ctx);

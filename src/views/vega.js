@@ -9,8 +9,8 @@ export default class VegaHandler extends SourceHandler {
 		div.style.height = "100%";
 		vegaEmbed(div, JSON.parse(source), {
 			loader: {
-				baseURL: ctx.name
-					? ctx.description.replace(/(.*)\/.*/, "$1")
+				baseURL: ctx.view.type
+					? ctx.view.resources[0].value.replace(/(.*)\/.*/, "$1")
 					: undefined,
 			},
 		});

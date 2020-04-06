@@ -26,28 +26,12 @@
   </div>
 
   <script>
-    import * as riot from "riot";
     import { HereGeoJsonMap } from "./map"
+    import * as riot from "riot";
 
     export default {
       onMounted() {
-        const [configs, sources] = (() => {
-          const configsIndex = this.props.sources.lastIndexOf("!");
-          const [sourcesStr, configsStr] = configsIndex === -1
-            ? [this.props.sources, ""]
-            : [this.props.sources.substring(0, configsIndex), this.props.sources.substring(configsIndex + 1)];
-
-          const params = new URLSearchParams(configsStr.split(";").join("&"));
-
-          return [
-            {
-              layer: params.get("layer") || undefined,
-              zoomLevel: params.has("zoom") ? parseInt(params.get("zoom")) : undefined,
-              center: params.has("center") ? params.get("center").split(",").map(v => parseFloat(v)) : undefined,
-            },
-            sourcesStr.split(';').filter(v => v),
-          ];
-        })();
+        const configs = Object.fromEntries(this.props.config.map(({ key, value}) => [key, value]));
 
         this.mapId = Math.floor(Math.random() * 10000);
         this.map = new HereGeoJsonMap(
@@ -64,12 +48,11 @@
         this.map.on("feature-selected", properties => this.update({ obj: properties }));
 
         this.layers = [];
-        sources.forEach(source => {
-          // format: (~)(url)(@name)
-          // URLs prefixed with ~ are not displayed initially
-          const [, hidden, url, name] = source.match(/(~)?([^@]+)(?:@(.+))?/);
-          const id = name || url;
-          this.map.addGeoJsonLayer(id, url);
+        this.props.resources.map(({ value, config }) => {
+          const configMap = Object.fromEntries(config.map(({ key, value}) => [key, value]));
+          const hidden = configMap.hasOwnProperty("hidden") && configMap.hidden !== "false"
+          const id = configMap.id || value;
+          this.map.addGeoJsonLayer(id, value);
           this.layers.push({ id, checked: !hidden });
           if (hidden) {
             this.map.disableGeoJsonLayer(id);

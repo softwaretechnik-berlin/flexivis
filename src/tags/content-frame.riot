@@ -7,15 +7,14 @@
       </ul>
     </div>
   <error-view/>
-  <script>
-    import * as riot from "riot";
 
+  <script>
     import { mount } from "../views";
 
     export default {
       onBeforeMount() {
-        new Promise(resolve => resolve(mount(riot, this.root, this.props.definition)))
-          .catch(error => this.update({error}));
+        new Promise(resolve => resolve(mount(this.root, this.props.view)))
+          .catch(error => this.update({ error }));
       },
     }
   </script>

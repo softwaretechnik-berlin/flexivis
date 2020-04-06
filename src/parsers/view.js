@@ -151,8 +151,8 @@
 
         peg$c0 = ":",
         peg$c1 = peg$literalExpectation(":", false),
-        peg$c2 = function(config, view, list) { return list; },
-        peg$c3 = function(config, view, resources) { return { view, config: config || [], resources: resources || [] }; },
+        peg$c2 = function(config, type, list) { return list; },
+        peg$c3 = function(config, type, resources) { return { type, config: config || [], resources: resources || [] }; },
         peg$c4 = "(",
         peg$c5 = peg$literalExpectation("(", false),
         peg$c6 = ";",
@@ -176,10 +176,12 @@
         peg$c22 = peg$literalExpectation(",", false),
         peg$c23 = function(head, values) { return values; },
         peg$c24 = function(head, tail) { return tail.length === 0 ? head.join("") : [head, ...tail].map(str => str.join("")); },
-        peg$c25 = function(head, resources) { return resources; },
-        peg$c26 = function(config, value) { return { value, config: config || [] }; },
-        peg$c27 = /^[^;]/,
-        peg$c28 = peg$classExpectation([";"], true, false),
+        peg$c25 = /^[a-zA-Z\-]/,
+        peg$c26 = peg$classExpectation([["a", "z"], ["A", "Z"], "-"], false, false),
+        peg$c27 = function(head, resources) { return resources; },
+        peg$c28 = function(config, value) { return { value, config: config || [] }; },
+        peg$c29 = /^[^;]/,
+        peg$c30 = peg$classExpectation([";"], true, false),
 
         peg$currPos          = 0,
         peg$savedPos         = 0,
@@ -678,22 +680,22 @@
 
       s0 = peg$currPos;
       s1 = [];
-      if (peg$c16.test(input.charAt(peg$currPos))) {
+      if (peg$c25.test(input.charAt(peg$currPos))) {
         s2 = input.charAt(peg$currPos);
         peg$currPos++;
       } else {
         s2 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c17); }
+        if (peg$silentFails === 0) { peg$fail(peg$c26); }
       }
       if (s2 !== peg$FAILED) {
         while (s2 !== peg$FAILED) {
           s1.push(s2);
-          if (peg$c16.test(input.charAt(peg$currPos))) {
+          if (peg$c25.test(input.charAt(peg$currPos))) {
             s2 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s2 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c17); }
+            if (peg$silentFails === 0) { peg$fail(peg$c26); }
           }
         }
       } else {
@@ -727,7 +729,7 @@
           s5 = peg$parseResource();
           if (s5 !== peg$FAILED) {
             peg$savedPos = s3;
-            s4 = peg$c25(s1, s5);
+            s4 = peg$c27(s1, s5);
             s3 = s4;
           } else {
             peg$currPos = s3;
@@ -751,7 +753,7 @@
             s5 = peg$parseResource();
             if (s5 !== peg$FAILED) {
               peg$savedPos = s3;
-              s4 = peg$c25(s1, s5);
+              s4 = peg$c27(s1, s5);
               s3 = s4;
             } else {
               peg$currPos = s3;
@@ -790,7 +792,7 @@
         s2 = peg$parseResourceValue();
         if (s2 !== peg$FAILED) {
           peg$savedPos = s0;
-          s1 = peg$c26(s1, s2);
+          s1 = peg$c28(s1, s2);
           s0 = s1;
         } else {
           peg$currPos = s0;
@@ -809,22 +811,22 @@
 
       s0 = peg$currPos;
       s1 = [];
-      if (peg$c27.test(input.charAt(peg$currPos))) {
+      if (peg$c29.test(input.charAt(peg$currPos))) {
         s2 = input.charAt(peg$currPos);
         peg$currPos++;
       } else {
         s2 = peg$FAILED;
-        if (peg$silentFails === 0) { peg$fail(peg$c28); }
+        if (peg$silentFails === 0) { peg$fail(peg$c30); }
       }
       if (s2 !== peg$FAILED) {
         while (s2 !== peg$FAILED) {
           s1.push(s2);
-          if (peg$c27.test(input.charAt(peg$currPos))) {
+          if (peg$c29.test(input.charAt(peg$currPos))) {
             s2 = input.charAt(peg$currPos);
             peg$currPos++;
           } else {
             s2 = peg$FAILED;
-            if (peg$silentFails === 0) { peg$fail(peg$c28); }
+            if (peg$silentFails === 0) { peg$fail(peg$c30); }
           }
         }
       } else {
