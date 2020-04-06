@@ -37,6 +37,9 @@
   "ava": {
     "require": [
       "esm"
+    ],
+    "files": [
+      "!tests/visual"
     ]
   }
 }
