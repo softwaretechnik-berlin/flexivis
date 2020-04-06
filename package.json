@@ -29,7 +29,7 @@
     "start": "parcel index.html",
     "build": "parcel build --no-cache -d dist index.html",
     "lint": "xo --fix --prettier --env=browser || exit 0",
-    "test": "npm run lint && ava",
+    "test": "npm run lint && ava && npm run backstop test",
     "build-local-use": "parcel build --no-cache -d dist index.html --public-url ./",
     "readme": "node build/readme.js",
     "generate-parser": "pegjs -o src/layout.js --export-var module.exports --format umd src/layout.pegjs; cd docs/grammar; grammkit -t md ../../src/layout.pegjs"
