@@ -25,13 +25,12 @@ function renderToc(handlers) {
 }
 
 function renderDescriptions(handlers) {
-	return Object.entries(handlers).map(renderDescription).join("\n\n")
+	return Object.values(handlers)
+		.map(renderDescription)
+		.join("\n\n");
 }
 
-function renderDescription([
-	name,
-	{ title, prefixes, description, examples },
-]) {
+function renderDescription({ title, prefixes, description, examples }) {
 	const renderedExamples = examples.map(renderExample).join("\n");
 	return `### ${title}\n\nView specification prefix${
 		prefixes.length === 1 ? "" : "s"
@@ -43,14 +42,16 @@ function renderDescription([
 function renderExample(example) {
 	const intro = example.intro ? example.intro + "\n\n" : "";
 	const url = "```\n" + example.canonicalUrl + "\n```\n";
-    const screenshot = example.screenshotPath
-        ? `\n<a href="${example.canonicalUrl
+	const screenshot = example.screenshotPath
+		? `\n<a href="${example.canonicalUrl
 				.replace(/&/g, "&amp;")
 				.replace(
 					/"/g,
 					"&quot;"
-				)}"><img alt="rendering of the URL shown above" src="${example.screenshotPath}" style="border: 1px solid #ccc; max-height: 300px"/></a>\n`
-        : '';
+				)}"><img alt="rendering of the URL shown above" src="${
+				example.screenshotPath
+		  }" style="border: 1px solid #ccc; max-height: 300px"/></a>\n`
+		: "";
 
-    return preScreenshot = intro + url + screenshot;
+	return intro + url + screenshot;
 }
