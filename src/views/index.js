@@ -1,5 +1,5 @@
 import * as riot from "riot";
-import didYouMean from "didYouMean";
+import didYouMean from "didyoumean";
 
 const mod = loadHandlerModule => async ctx => {
 	const Handler = (await loadHandlerModule()).default;
