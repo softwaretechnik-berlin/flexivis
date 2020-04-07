@@ -3,7 +3,9 @@
 @import "highlight.js/styles/github.css";
 @import "github-markdown-css/github-markdown.css";
 
-html, body, #app {
+html,
+body,
+#app {
   height: 100%;
   overflow: hidden;
 }
@@ -19,7 +21,18 @@ a {
   cursor: pointer;
 }
 
-content-frame > .text, content-frame > .markdown, content-frame > .json {
+error-view > div {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  border: 10px solid darkred;
+  padding: 10px;
+  overflow: auto;
+}
+
+content-frame > .text,
+content-frame > .markdown,
+content-frame > .json {
   overflow: auto;
   height: 100%;
   width: 100%;
@@ -29,7 +42,9 @@ content-frame > .text {
   white-space: pre;
 }
 
-iframe, .view-frame, split-view > .separator {
+iframe,
+.view-frame,
+split-view > .separator {
   display: inline-block;
   box-sizing: border-box;
   height: 100%;
@@ -42,7 +57,8 @@ iframe, .view-frame, split-view > .separator {
   overflow: hidden;
 }
 
-split-view > .separator:hover, split-view > .separator.resizing {
+split-view > .separator:hover,
+split-view > .separator.resizing {
   background: #444;
 }
 

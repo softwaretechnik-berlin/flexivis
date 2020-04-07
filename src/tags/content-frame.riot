@@ -1,12 +1,5 @@
 <content-frame>
-  <error-view error={state.error}>
-    <div if={state.error.knownHandlers}>
-      <p>Known handlers (see the <a href="/">documentation</a> for details):</p>
-      <ul>
-        <li each={h in state.error.knownHandlers.sort()}>{h}</li>
-      </ul>
-    </div>
-  </error-view>
+  <error-view error={ state.error } />
 
   <script>
     import { mount } from "../views";
