@@ -12,7 +12,6 @@
         const parser = new Parser(new URLSearchParams(queryString));
         try {
           this.viewDefinition = parser.parse();
-          console.log(this.viewDefinition);
         } catch (error) {
           this.error = error;
         }

@@ -48,7 +48,6 @@ export default class LayoutParser {
 
 	get(name) {
 		if (!this.params.has(name)) {
-			console.log("no view parameter", name);
 			const error = new Error(`Missing parameter for view ’${name}’.`);
 			error.name = "UndefinedView";
 			error.availableParams = Array.from(this.params.keys()).filter(
@@ -62,7 +61,6 @@ export default class LayoutParser {
 		try {
 			return viewParser.parse(viewParameter);
 		} catch (error) {
-			console.log("invalid view parameter", error);
 			return {
 				error: handleError(
 					error,
