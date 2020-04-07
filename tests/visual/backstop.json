@@ -1,5 +1,15 @@
 {
   "id": "flexivis",
+  "report": [
+    "CI"
+  ],
+  "engine": "puppeteer",
+  "engineOptions": {
+    "args": [
+      "--no-sandbox"
+    ]
+  },
+  "asyncCompareLimit": 50,
   "viewports": [
     {
       "label": "tablet",
@@ -7,6 +17,13 @@
       "height": 798
     }
   ],
+  "paths": {
+    "bitmaps_reference": "tests/visual/backstop_data/bitmaps_reference",
+    "bitmaps_test": "tests/visual/backstop_data/bitmaps_test",
+    "engine_scripts": "tests/visual/backstop_data/engine_scripts",
+    "html_report": "tests/visual/backstop_data/html_report",
+    "ci_report": "tests/visual/backstop_data/ci_report"
+  },
   "scenarios": [
     {
       "label": "berlin-walk",
@@ -216,22 +233,5 @@
       ],
       "delay": 2000
     }
-  ],
-  "paths": {
-    "bitmaps_reference": "tests/visual/backstop_data/bitmaps_reference",
-    "bitmaps_test": "tests/visual/backstop_data/bitmaps_test",
-    "engine_scripts": "tests/visual/backstop_data/engine_scripts",
-    "html_report": "tests/visual/backstop_data/html_report",
-    "ci_report": "tests/visual/backstop_data/ci_report"
-  },
-  "report": [
-    "CI"
-  ],
-  "engine": "puppeteer",
-  "engineOptions": {
-    "args": [
-      "--no-sandbox"
-    ]
-  },
-  "asyncCompareLimit": 50
+  ]
 }
