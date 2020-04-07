@@ -27,7 +27,7 @@
     "xo": "^0.28.3"
   },
   "scripts": {
-    "backstop": "node build/backstop-config.js && backstop --config tests/visual/backstop.json",
+    "backstop": "node build/backstop-config.js && backstop --config tests/visual/backstop.json --docker",
     "start": "parcel index.html",
     "build": "parcel build --no-cache -d dist index.html",
     "lint": "xo --fix --prettier --env=browser || exit 0",

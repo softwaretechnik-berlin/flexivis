@@ -1,5 +1,5 @@
 const canonicalBaseUrl = "https://flexivis.infrastruktur.link/";
-const localBaseUrl = "http://localhost:1234/";
+const testBaseUrl = "http://host.docker.internal:1234/";
 
 const fs = require("fs");
 const yaml = require("js-yaml");
@@ -20,7 +20,7 @@ Object.entries(examples.handlers).forEach(([handler, spec]) =>
 
 function enrichExample(id, example) {
 	example.id = id;
-	example.localUrl = `${localBaseUrl}?${example.query}`;
+	example.testUrl = `${testBaseUrl}?${example.query}`;
 	example.canonicalUrl = `${canonicalBaseUrl}?${example.query}`;
 	example.screenshot = example.screenshot !== false;
 	if (example.screenshot)

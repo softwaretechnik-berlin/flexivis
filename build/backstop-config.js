@@ -10,7 +10,7 @@ backstopConfig.scenarios = Object.values(examples.all)
 	.filter(ex => ex.screenshot)
 	.map(ex => ({
 		label: ex.id,
-		url: ex.localUrl,
+		url: ex.testUrl,
 		referenceUrl: ex.canonicalUrl,
 		viewports: [
 			Object.assign({ height: 798, width: 1440, label: "main" }, ex.viewport),

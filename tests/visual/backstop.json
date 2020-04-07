@@ -27,7 +27,7 @@
   "scenarios": [
     {
       "label": "berlin-walk",
-      "url": "http://localhost:1234/?layout=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
+      "url": "http://host.docker.internal:1234/?layout=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
       "viewports": [
         {
@@ -40,7 +40,7 @@
     },
     {
       "label": "empty-layout",
-      "url": "http://localhost:1234/?layout=",
+      "url": "http://host.docker.internal:1234/?layout=",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=",
       "viewports": [
         {
@@ -53,7 +53,7 @@
     },
     {
       "label": "illegal-layout",
-      "url": "http://localhost:1234/?layout=a/",
+      "url": "http://host.docker.internal:1234/?layout=a/",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/",
       "viewports": [
         {
@@ -66,7 +66,7 @@
     },
     {
       "label": "missing-view",
-      "url": "http://localhost:1234/?layout=a/b&a=text-inline:This is fine",
+      "url": "http://host.docker.internal:1234/?layout=a/b&a=text-inline:This is fine",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=text-inline:This is fine",
       "viewports": [
         {
@@ -79,7 +79,7 @@
     },
     {
       "label": "illegal-view",
-      "url": "http://localhost:1234/?layout=a/b&a=text-inline:This is fine&b=4124",
+      "url": "http://host.docker.internal:1234/?layout=a/b&a=text-inline:This is fine&b=4124",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=text-inline:This is fine&b=4124",
       "viewports": [
         {
@@ -92,7 +92,7 @@
     },
     {
       "label": "misspelled-view",
-      "url": "http://localhost:1234/?layout=a/b&a=text-inline:This is fine&b=marmeid",
+      "url": "http://host.docker.internal:1234/?layout=a/b&a=text-inline:This is fine&b=marmeid",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=text-inline:This is fine&b=marmeid",
       "viewports": [
         {
@@ -105,7 +105,7 @@
     },
     {
       "label": "nonsense-view",
-      "url": "http://localhost:1234/?layout=a/b&a=text-inline:This is fine&b=nonsense",
+      "url": "http://host.docker.internal:1234/?layout=a/b&a=text-inline:This is fine&b=nonsense",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=text-inline:This is fine&b=nonsense",
       "viewports": [
         {
@@ -118,7 +118,7 @@
     },
     {
       "label": "view-error-duplicate-map-layer",
-      "url": "http://localhost:1234/?layout=a/b&a=text-inline:This is fine&b=map:http://example.com/nonsense.json;http://example.com/nonsense.json",
+      "url": "http://host.docker.internal:1234/?layout=a/b&a=text-inline:This is fine&b=map:http://example.com/nonsense.json;http://example.com/nonsense.json",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=text-inline:This is fine&b=map:http://example.com/nonsense.json;http://example.com/nonsense.json",
       "viewports": [
         {
@@ -131,7 +131,7 @@
     },
     {
       "label": "frame-1",
-      "url": "http://localhost:1234/?layout=a/b&a=https://wikipedia.org&b=https://example.com",
+      "url": "http://host.docker.internal:1234/?layout=a/b&a=https://wikipedia.org&b=https://example.com",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=https://wikipedia.org&b=https://example.com",
       "viewports": [
         {
@@ -144,7 +144,7 @@
     },
     {
       "label": "markdown-1",
-      "url": "http://localhost:1234/?layout=a/b&a=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/markdown.md&b=md-inline:This pane contains **inline** Markdown content taken _from the URL_.",
+      "url": "http://host.docker.internal:1234/?layout=a/b&a=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/markdown.md&b=md-inline:This pane contains **inline** Markdown content taken _from the URL_.",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/markdown.md&b=md-inline:This pane contains **inline** Markdown content taken _from the URL_.",
       "viewports": [
         {
@@ -157,7 +157,7 @@
     },
     {
       "label": "json-1",
-      "url": "http://localhost:1234/?layout=a/b&a=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/package-lock.json&b=json-inline:{\"name\": \"inline JSON example\", \"id\": 42, \"values\": [\"foo\", \"baz\", \"bar\"]}",
+      "url": "http://host.docker.internal:1234/?layout=a/b&a=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/package-lock.json&b=json-inline:{\"name\": \"inline JSON example\", \"id\": 42, \"values\": [\"foo\", \"baz\", \"bar\"]}",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/package-lock.json&b=json-inline:{\"name\": \"inline JSON example\", \"id\": 42, \"values\": [\"foo\", \"baz\", \"bar\"]}",
       "viewports": [
         {
@@ -170,7 +170,7 @@
     },
     {
       "label": "text-1",
-      "url": "http://localhost:1234/?layout=(a-b)/c&a=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/plaintext.txt&b=text-inline:This is just _plain_ inline text from the URL&c=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/README.md",
+      "url": "http://host.docker.internal:1234/?layout=(a-b)/c&a=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/plaintext.txt&b=text-inline:This is just _plain_ inline text from the URL&c=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/README.md",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=(a-b)/c&a=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/plaintext.txt&b=text-inline:This is just _plain_ inline text from the URL&c=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/README.md",
       "viewports": [
         {
@@ -183,7 +183,7 @@
     },
     {
       "label": "map-1",
-      "url": "http://localhost:1234/?layout=a/b&a=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
+      "url": "http://host.docker.internal:1234/?layout=a/b&a=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
       "viewports": [
         {
@@ -196,7 +196,7 @@
     },
     {
       "label": "mermaid-1",
-      "url": "http://localhost:1234/?layout=(a-b)/c&a=mermaid:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&c=mermaid-inline:graph TB; p[mermaid-inline prefix] --> URL; s[Mermaid source] --> URL -->%7CFlexivis%7C r[Rendered Diagram]",
+      "url": "http://host.docker.internal:1234/?layout=(a-b)/c&a=mermaid:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&c=mermaid-inline:graph TB; p[mermaid-inline prefix] --> URL; s[Mermaid source] --> URL -->%7CFlexivis%7C r[Rendered Diagram]",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=(a-b)/c&a=mermaid:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/mermaid.mmd&c=mermaid-inline:graph TB; p[mermaid-inline prefix] --> URL; s[Mermaid source] --> URL -->%7CFlexivis%7C r[Rendered Diagram]",
       "viewports": [
         {
@@ -209,7 +209,7 @@
     },
     {
       "label": "vega-1",
-      "url": "http://localhost:1234/?layout=(a-c30)/b&a=vega:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&c=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.csv",
+      "url": "http://host.docker.internal:1234/?layout=(a-c30)/b&a=vega:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&c=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.csv",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=(a-c30)/b&a=vega:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.json&c=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/cloc.csv",
       "viewports": [
         {
@@ -222,7 +222,7 @@
     },
     {
       "label": "vega-2",
-      "url": "http://localhost:1234/?url=vega-inline:{\"data\": {\"values\": [{\"factor\": \"awesomeness\", \"score\": 10}, {\"factor\": \"weirdness\", \"score\": 3}, {\"factor\": \"color\", \"score\": 7}]}, \"mark\": \"bar\", \"encoding\": {\"x\": {\"field\": \"factor\", \"type\": \"nominal\"}, \"y\": {\"field\": \"score\", \"type\": \"quantitative\"}, \"color\": {\"field\": \"factor\", \"type\": \"nominal\"}}, \"height\": \"container\", \"width\": 100}",
+      "url": "http://host.docker.internal:1234/?url=vega-inline:{\"data\": {\"values\": [{\"factor\": \"awesomeness\", \"score\": 10}, {\"factor\": \"weirdness\", \"score\": 3}, {\"factor\": \"color\", \"score\": 7}]}, \"mark\": \"bar\", \"encoding\": {\"x\": {\"field\": \"factor\", \"type\": \"nominal\"}, \"y\": {\"field\": \"score\", \"type\": \"quantitative\"}, \"color\": {\"field\": \"factor\", \"type\": \"nominal\"}}, \"height\": \"container\", \"width\": 100}",
       "referenceUrl": "https://flexivis.infrastruktur.link/?url=vega-inline:{\"data\": {\"values\": [{\"factor\": \"awesomeness\", \"score\": 10}, {\"factor\": \"weirdness\", \"score\": 3}, {\"factor\": \"color\", \"score\": 7}]}, \"mark\": \"bar\", \"encoding\": {\"x\": {\"field\": \"factor\", \"type\": \"nominal\"}, \"y\": {\"field\": \"score\", \"type\": \"quantitative\"}, \"color\": {\"field\": \"factor\", \"type\": \"nominal\"}}, \"height\": \"container\", \"width\": 100}",
       "viewports": [
         {
