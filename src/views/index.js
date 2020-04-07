@@ -5,13 +5,6 @@ const mod = loadHandlerModule => async ctx => {
 	return new Handler().handle(ctx);
 };
 
-const errorHandler = ctx => {
-	const config = ctx.view.config;
-	const error = new Error(config.message);
-	error.title = config.title || "Error";
-	throw error;
-};
-
 const handlers = {
 	http: mod(() => import("./frame.js")),
 	https: mod(() => import("./frame.js")),
@@ -28,7 +21,6 @@ const handlers = {
 	"mermaid-inline": mod(() => import("./mermaid.js")),
 	map: mod(() => import("./map.js")),
 	readme: mod(() => import("./readme.js")),
-	error: errorHandler,
 };
 
 export function mount(element, view) {

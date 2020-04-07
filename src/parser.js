@@ -21,25 +21,16 @@ export default class LayoutParser {
 
 	get(name) {
 		if (!this.params.has(name)) {
-			return {
-				type: "error",
-				config: {
-					title: `Missing parameter for view ’${name}’.`,
-					message: `The parameter ’${name}’ is not defined.`,
-				},
-			};
+			const error = new Error(`The parameter ’${name}’ is not defined.`);
+			error.title = `Missing parameter for view ’${name}’.`;
+			return { error };
 		}
 
 		try {
 			return viewParser.parse(this.params.get(name));
 		} catch (error) {
-			return {
-				type: "error",
-				config: {
-					title: `Failed to parse view ’${name}’`,
-					message: error.message,
-				},
-			};
+			error.title = `Failed to parse view ’${name}’`;
+			return { error };
 		}
 	}
 

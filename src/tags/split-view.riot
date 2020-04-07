@@ -11,7 +11,7 @@
     export default {
       onBeforeMount() {
         this.view = this.props.viewDefinition;
-        this.isLeaf = this.view.type !== undefined;
+        this.isLeaf = this.view.error || this.view.type !== undefined;
         this.isVertical = this.view.sep === "/";
         if (!this.isLeaf) {
           this.view.views.forEach(inner => inner.originalSize = inner.size);

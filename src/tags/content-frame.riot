@@ -13,8 +13,10 @@
 
     export default {
       onBeforeMount() {
-        new Promise(resolve => resolve(mount(this.root, this.props.view)))
-          .catch(error => this.update({ error }));
+        this.state.error = this.props.view.error;
+        if (!this.state.error)
+          new Promise((resolve, reject) => resolve(mount(this.root, this.props.view)))
+            .catch(error => this.update({ error }));
       },
     }
   </script>
