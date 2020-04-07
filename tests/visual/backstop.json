@@ -61,6 +61,19 @@
       "delay": 2000
     },
     {
+      "label": "illegal-view",
+      "url": "http://localhost:1234/?layout=a/b&a=text-inline:This is fine&b=4124",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=text-inline:This is fine&b=4124",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
       "label": "misspelled-view",
       "url": "http://localhost:1234/?layout=a/b&a=text-inline:This is fine&b=marmeid",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=text-inline:This is fine&b=marmeid",

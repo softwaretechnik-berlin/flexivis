@@ -7,6 +7,8 @@ general:
     query: "layout=a/"
   missing-view:
     query: "layout=a/b&a=text-inline:This is fine"
+  illegal-view:
+    query: "layout=a/b&a=text-inline:This is fine&b=4124"
   misspelled-view:
     query: "layout=a/b&a=text-inline:This is fine&b=marmeid"
   nonsense-view:
