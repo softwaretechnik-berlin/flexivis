@@ -13,7 +13,7 @@
     export default {
       onBeforeMount() {
         const queryString = location.search || location.hash.replace("#", "?");
-        const parser = new Parser(new URLSearchParams(queryString))
+        const parser = new Parser(new URLSearchParams(queryString));
         try {
           this.viewDefinition = parser.parse();
         } catch (error) {

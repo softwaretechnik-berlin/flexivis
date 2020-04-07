@@ -29,7 +29,9 @@ export function mount(element, view) {
 	if (!handler) {
 		const knownHandlers = Object.keys(handlers);
 		const suggestedHandler = didYouMean(view.type, knownHandlers);
-		const suggestion = suggestedHandler ? ` Did you mean "${suggestedHandler}"?` : '';
+		const suggestion = suggestedHandler
+			? ` Did you mean "${suggestedHandler}"?`
+			: "";
 		const error = new Error(`Unknown handler "${view.type}".${suggestion}`);
 		error.title = "Unknown Handler";
 		error.knownHandlers = knownHandlers;
