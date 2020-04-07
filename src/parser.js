@@ -19,7 +19,7 @@ const handleError = (error, name, title, input) => {
 	return error;
 };
 
-export default class LayoutParser {
+class LayoutParser {
 	constructor(parameters) {
 		if (!parameters.has("layout")) {
 			parameters.set("layout", "url");
@@ -28,20 +28,20 @@ export default class LayoutParser {
 			}
 		}
 
-		this.layout = parameters.get("layout");
 		this.params = parameters;
 	}
 
 	parse() {
+		const layout = this.params.get("layout");
 		try {
-			const layoutSpec = layoutParser.parse(this.layout);
+			const layoutSpec = layoutParser.parse(layout);
 			return this._parseView(layoutSpec);
 		} catch (error) {
 			throw handleError(
 				error,
 				"InvalidLayout",
 				"Invalid ’layout’ Parameter",
-				this.layout
+				layout
 			);
 		}
 	}
@@ -82,4 +82,8 @@ export default class LayoutParser {
 		});
 		return view;
 	}
+}
+
+export default function parse(parameters) {
+	return new LayoutParser(parameters).parse();
 }

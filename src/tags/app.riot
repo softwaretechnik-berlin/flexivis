@@ -4,14 +4,13 @@
   <split-view if={!syntaxError} {...{ viewDefinition }} />
 
   <script>
-    import Parser from "../parser";
+    import parse from "../parser";
 
     export default {
       onBeforeMount() {
-        const queryString = location.search || location.hash.replace("#", "?");
-        const parser = new Parser(new URLSearchParams(queryString));
         try {
-          this.viewDefinition = parser.parse();
+          const queryString = location.search || location.hash.replace("#", "?");
+          this.viewDefinition = parse(new URLSearchParams(queryString));
         } catch (error) {
           this.error = error;
         }

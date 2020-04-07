@@ -1,14 +1,12 @@
 import test from "ava";
-import Parser from "./parser";
+import parse from "./parser";
 
 test("combines the layout and view parsers", t => {
-	const parser = new Parser(
-		new URLSearchParams(
-			"?layout=a/(b-c)&a=(when=never)nap&b=lap&c=map:json1;(hide)$json2"
-		)
+	const parameters = new URLSearchParams(
+		"?layout=a/(b-c)&a=(when=never)nap&b=lap&c=map:json1;(hide)$json2"
 	);
 
-	t.deepEqual(parser.parse(), {
+	t.deepEqual(parse(parameters), {
 		sep: "/",
 		views: [
 			{
