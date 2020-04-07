@@ -6,8 +6,6 @@ import * as riot from "riot";
 
 import ErrorView from "./src/tags/error-view";
 riot.register("error-view", ErrorView);
-import ErrorFallback from "./src/tags/error-fallback";
-riot.register("error-fallback", ErrorFallback);
 import Tree from "./src/tags/tree";
 riot.register("tree", Tree);
 import TreeSearch from "./src/tags/tree-search";
