@@ -22,6 +22,19 @@
       "delay": 2000
     },
     {
+      "label": "empty-layout",
+      "url": "http://localhost:1234/?layout=",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000
+    },
+    {
       "label": "illegal-layout",
       "url": "http://localhost:1234/?layout=a/",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/",

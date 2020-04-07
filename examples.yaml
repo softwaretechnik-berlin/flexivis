@@ -1,6 +1,8 @@
 general:
   berlin-walk:
     query: "layout=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"
+  empty-layout:
+    query: "layout="
   illegal-layout:
     query: "layout=a/"
   missing-view:
