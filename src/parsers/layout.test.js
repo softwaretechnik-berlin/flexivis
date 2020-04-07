@@ -1,10 +1,6 @@
 import test from "ava";
 import * as layout from "./layout";
 
-test("parses empty layouts", t => {
-	t.is(layout.parse(""), null);
-});
-
 test("parses a single view", t => {
 	t.is(layout.parse("a"), "a");
 });

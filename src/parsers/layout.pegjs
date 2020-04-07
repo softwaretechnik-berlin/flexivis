@@ -1,10 +1,4 @@
-Root = Unparenthesized / Empty
-
-Empty = '' { return null }
-
-View = view:(Parenthesized / Name) size:Size? { return { view, size}; };
-
-Parenthesized = '(' inner:Unparenthesized ')' { return inner; };
+Root = Unparenthesized
 
 Unparenthesized = a:View splits:(VerticalSplits / HorizontalSplits)? {
   if (!splits) return a.view
@@ -13,6 +7,10 @@ Unparenthesized = a:View splits:(VerticalSplits / HorizontalSplits)? {
   views.forEach(v => v.size = v.size || defaultSize)
   return { sep: splits.sep, views }
 }
+
+View = view:(Parenthesized / Name) size:Size? { return { view, size}; };
+
+Parenthesized = '(' inner:Unparenthesized ')' { return inner; };
 
 VerticalSplits = views:("/" v:View {return v} )+ { return {sep: "/", views} }
 HorizontalSplits = views:("-" v:View {return v} )+ { return {sep: "-", views} }

@@ -8,13 +8,14 @@
 
 ![Root](./layout/Root.svg)
 
-References: [Unparenthesized](#Unparenthesized), [Empty](#Empty)
+References: [Unparenthesized](#Unparenthesized)
 
-### Empty
+### Unparenthesized
 
-![Empty](./layout/Empty.svg)
+![Unparenthesized](./layout/Unparenthesized.svg)
 
-Used by: [Root](#Root)
+Used by: [Root](#Root), [Parenthesized](#Parenthesized)
+References: [View](#View), [VerticalSplits](#VerticalSplits), [HorizontalSplits](#HorizontalSplits)
 
 ### View
 
@@ -29,13 +30,6 @@ References: [Parenthesized](#Parenthesized), [Name](#Name), [Size](#Size)
 
 Used by: [View](#View)
 References: [Unparenthesized](#Unparenthesized)
-
-### Unparenthesized
-
-![Unparenthesized](./layout/Unparenthesized.svg)
-
-Used by: [Root](#Root), [Parenthesized](#Parenthesized)
-References: [View](#View), [VerticalSplits](#VerticalSplits), [HorizontalSplits](#HorizontalSplits)
 
 ### VerticalSplits
 
