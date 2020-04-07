@@ -3,6 +3,7 @@
   "dependencies": {
     "@riotjs/observable": "^4.0.4",
     "backstopjs": "^4.5.0",
+    "didyoumean": "^1.2.1",
     "github-markdown-css": "^4.0.0",
     "highlight.js": "^9.18.1",
     "markdown-it": "^10.0.0",

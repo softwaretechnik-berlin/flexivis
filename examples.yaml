@@ -5,6 +5,8 @@ general:
     query: "layout=a/"
   missing-view:
     query: "layout=a/b&a=text-inline:This is fine"
+  misspelled-view:
+    query: "layout=a/b&a=text-inline:This is fine&b=marmeid"
   nonsense-view:
     query: "layout=a/b&a=text-inline:This is fine&b=nonsense"
   view-error-duplicate-map-layer:

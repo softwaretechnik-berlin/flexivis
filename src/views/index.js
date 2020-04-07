@@ -1,4 +1,5 @@
 import * as riot from "riot";
+import didYouMean from "didYouMean";
 
 const mod = loadHandlerModule => async ctx => {
 	const Handler = (await loadHandlerModule()).default;
@@ -26,9 +27,12 @@ const handlers = {
 export function mount(element, view) {
 	const handler = handlers[view.type];
 	if (!handler) {
-		const error = new Error(`Unknown handler "${view.type}".`);
+		const knownHandlers = Object.keys(handlers);
+		const suggestedHandler = didYouMean(view.type, knownHandlers);
+		const suggestion = suggestedHandler ? ` Did you mean "${suggestedHandler}"?` : '';
+		const error = new Error(`Unknown handler "${view.type}".${suggestion}`);
 		error.title = "Unknown Handler";
-		error.knownHandlers = Object.keys(handlers);
+		error.knownHandlers = knownHandlers;
 		throw error;
 	}
 
