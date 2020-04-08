@@ -1,7 +1,7 @@
 <error-view>
   <div if={ error }>
     <h1>{ error.title || error.name }</h1>
-    <p>{error.message || error}</p>
+    <p>{ error.message || error }</p>
 
     <div if={ error.name === "InvalidLayout" }>
       <p><pre><code><span style="color: #999">{error.prefixSection}</span><span style="border: 1px solid red; background-color: pink">{error.errorSection}</span><span style="color: #999">{error.suffixSection}</span></code></pre></p>
@@ -34,24 +34,13 @@
   <script>
     export default {
       onBeforeMount() {
-        this.updateError(this.props.error);
+        this.updateError();
       },
       onBeforeUpdate() {
-        this.updateError(this.props.error);
+        this.updateError();
       },
-      updateError(error) {
-          // if (error.name === "SyntaxError") {
-          //   this.syntaxError = error;
-          //   this.start = parser.layout.slice(
-          //     0,
-          //     Math.max(0, error.location.start.offset)
-          //   );
-          //   this.middle = parser.layout.substring(
-          //     error.location.start.offset,
-          //     error.location.end.offset
-          //   );
-          //   this.end = parser.layout.slice(Math.max(0, error.location.end.offset));
-          // }
+      updateError() {
+        const error = this.props.error;
         if (error) {
           console.error(error);
           this.error = error instanceof Error ? error : new Error(error);
