@@ -55,7 +55,8 @@ handlers:
     prefixes: [map]
     title: Map
     description: |
-      Renders GeoJSON on an interactive map.
+      Renders GeoJSON documents on an interactive map.
+
       The view allows the following configurations:
 
       - `center`: the latitude/longitude to center the map, e.g. `52.554101,13.463528`.
@@ -65,13 +66,15 @@ handlers:
       The resources can also be configured:
 
       - `hidden`: initially hide this resource.
-      - `id`: the label to be used by this resource:
+      - `id`: an ID for the resource.
 
-      Here is an example on how to use these configurations:
+      The following view definition exemplifies how how to use the configurations:
 
       ```
       (center=52.554101,13.463528;zoomLevel=16;layer=osm)map:(id=walk;hidden)https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
       ```
+
+      Multiple resources can be displayed at once by separating them with `;`.
     examples:
       # TODO after fixing markdown display, use `md` instead of `text` to show JSON source
       - query: "layout=a/b&a=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"

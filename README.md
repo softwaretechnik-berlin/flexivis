@@ -93,9 +93,9 @@ A detailed specification of the layout format can be found [here](docs/grammar/l
 All query parameters other than the [`layout`](#layout) parameter specify individual views.
 The parameter name is the name of the view (which can then be used in the `layout` parameter), and the value is a view specification.
 
-The basic format of a view specification is `<prefix>:<resource>`. Optionally, configurations can be passed to both the view or the resources listed before the value, for example: `(abc=123;xyz=789)<prefix>:(hello=true;hide)<resource>`. A detailed specification of the view format is available [here](docs/grammar/view.md).
+The basic format of a view specification is `<prefix>:<resource>`. The prefix specifies the view type. Optionally, configurations can be passed to both the view or the resources listed before the value, for example: `(abc=123;xyz=789)<prefix>:(hello=true;hide)<resource>`. A detailed specification of the view format is available [here](docs/grammar/view.md).
 
-The prefix specifies the view type. The following view types are supported:
+The following view types are supported:
 
 <!-- BEGIN view specifications -->
 <ul>
@@ -171,7 +171,8 @@ https://flexivis.infrastruktur.link/?layout=(a-b)/c&a=text:https://raw.githubuse
 
 View specification prefix: `map`.
 
-Renders GeoJSON on an interactive map.
+Renders GeoJSON documents on an interactive map.
+
 The view allows the following configurations:
 
 - `center`: the latitude/longitude to center the map, e.g. `52.554101,13.463528`.
@@ -181,13 +182,15 @@ The view allows the following configurations:
 The resources can also be configured:
 
 - `hidden`: initially hide this resource.
-- `id`: the label to be used by this resource:
+- `id`: an ID for the resource.
 
-Here is an example on how to use these configurations:
+The following view definition exemplifies how how to use the configurations:
 
 ```
 (center=52.554101,13.463528;zoomLevel=16;layer=osm)map:(id=walk;hidden)https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
 ```
+
+Multiple resources can be displayed at once by separating them with `;`.
 
 
 ```
