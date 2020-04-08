@@ -32,13 +32,16 @@ ConfigurationKey =
   [a-zA-Z]+
   { return text(); }
 ConfigurationValue =
-  head:[^;),]*
-  tail:(
-    ','
-    values:[^;),]*
-    { return values; }
-  )*
-  { return tail.length === 0 ? head.join("") : [head, ...tail].map(str => str.join("")); }
+  ConfigurationList /
+  (
+    head:[^;),]*
+    tail:(
+      ','
+      values:[^;),]*
+      { return values; }
+    )*
+    { return tail.length === 0 ? head.join("") : [head, ...tail].map(str => str.join("")); }
+  )
 
 ViewType =
   [a-zA-Z-]+

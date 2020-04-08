@@ -77,3 +77,19 @@ test("parses configurations", t => {
 		}
 	);
 });
+
+test("parses nested configurations", t => {
+	t.deepEqual(view.parse("(a=(b=(c=3);d=true);e=false)hello"), {
+		type: "hello",
+		config: {
+			a: {
+				b: {
+					c: "3",
+				},
+				d: "true",
+			},
+			e: "false",
+		},
+		resources: [],
+	});
+});

@@ -14,7 +14,7 @@ References: [ConfigurationList](#ConfigurationList), [ViewType](#ViewType), [Res
 
 ![ConfigurationList](./view/ConfigurationList.svg)
 
-Used by: [Root](#Root), [Resource](#Resource)
+Used by: [Root](#Root), [ConfigurationValue](#ConfigurationValue), [Resource](#Resource)
 References: [Configuration](#Configuration)
 
 ### Configuration
@@ -35,6 +35,7 @@ Used by: [Configuration](#Configuration)
 ![ConfigurationValue](./view/ConfigurationValue.svg)
 
 Used by: [Configuration](#Configuration)
+References: [ConfigurationList](#ConfigurationList)
 
 ### ViewType
 
