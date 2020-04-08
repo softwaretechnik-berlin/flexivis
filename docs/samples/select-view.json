@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "layout": "a/b",
+    "a": "(center=${lat},${lng};zoomLevel=17;layer=osm)map",
+    "b": "text-inline:Hello from ${label} (${id})!"
+  },
+  "items": [
+    {
+      "id": "fernsehturm",
+      "label": "Fernsehturm",
+      "lat": "52.520760",
+      "lng": "13.409336",
+      "description": "The Berliner Fernsehturm is a television tower in central Berlin."
+    },
+    {
+      "id": "victory-column",
+      "label": "Berlin Victory Column",
+      "lat": "52.514517",
+      "lng": "13.349978",
+      "description": "The Victory Column is a major tourist attraction in the city of Berlin."
+    }
+  ],
+  "modals": {
+    "Details": "text-inline:${description}"
+  }
+}
