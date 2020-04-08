@@ -225,3 +225,21 @@ content-frame > .readme .hide-following-in-app,
 content-frame > .readme .hide-following-in-app ~ * {
   display: none;
 }
+
+.select-box {
+  width: 100%;
+  text-align: center;
+  padding: 5px;
+  background-color: #dddddd;
+  font-weight: bold;
+  box-sizing: border-box;
+  border-bottom: 1px solid #606060;
+}
+
+.select-box .select-input-invalid {
+  background-color: #e26b62;
+}
+
+.select-box .select-input-changed {
+  background-color: #fbf66b;
+}

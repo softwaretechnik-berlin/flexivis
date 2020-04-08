@@ -22,6 +22,8 @@ const handlers = {
 	"mermaid-inline": mod(() => import("./mermaid.js")),
 	map: mod(() => import("./map.js")),
 	readme: mod(() => import("./readme.js")),
+	select: mod(() => import("./select.js")),
+	"select-inline": mod(() => import("./select.js")),
 };
 
 export const knownHandlers = Object.keys(handlers);

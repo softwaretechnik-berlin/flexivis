@@ -18,8 +18,10 @@ import LayerMap from "./src/tags/layer-map";
 riot.register("layer-map", LayerMap);
 import ContentFrame from "./src/tags/content-frame";
 riot.register("content-frame", ContentFrame);
-
+import ItemSelect from "./src/tags/item-select";
+riot.register("item-select", ItemSelect);
 import AppComponent from "./src/tags/app";
+riot.register("app", AppComponent);
 
 riot.component(AppComponent)(document.querySelector("#app"), {
 	queryString: location.search || location.hash.replace("#", "?"),
