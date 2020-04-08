@@ -21,4 +21,6 @@ riot.register("content-frame", ContentFrame);
 
 import AppComponent from "./src/tags/app";
 
-riot.component(AppComponent)(document.querySelector("#app"));
+riot.component(AppComponent)(document.querySelector("#app"), {
+	queryString: location.search || location.hash.replace("#", "?"),
+});

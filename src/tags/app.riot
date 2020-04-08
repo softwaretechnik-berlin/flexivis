@@ -9,8 +9,7 @@
     export default {
       onBeforeMount() {
         try {
-          const queryString = location.search || location.hash.replace("#", "?");
-          this.viewDefinition = parse(new URLSearchParams(queryString));
+          this.viewDefinition = parse(new URLSearchParams(this.props.queryString));
         } catch (error) {
           this.error = error;
         }
