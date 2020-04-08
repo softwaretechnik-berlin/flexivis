@@ -42,7 +42,7 @@ function renderDescriptions(handlers) {
 function renderDescription({ title, prefixes, description, examples }) {
 	const renderedExamples = examples.map(renderExample).join("\n");
 	return `### ${title}\n\nView specification prefix${
-		prefixes.length === 1 ? "" : "s"
+		prefixes.length === 1 ? "" : "es"
 	}: ${prefixes
 		.map(p => "`" + p + "`")
 		.join(", ")}.\n\n${description}\n\n${renderedExamples}`;

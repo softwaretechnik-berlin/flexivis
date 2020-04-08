@@ -111,7 +111,7 @@ The following view types are supported:
 
 ### Regular Content
 
-View specification prefixs: `http`, `https`, `file`.
+View specification prefixes: `http`, `https`, `file`.
 
 HTTP/S URLs can be loaded and displayed in IFrames.
 
@@ -130,7 +130,7 @@ https://flexivis.infrastruktur.link/?layout=a/b&a=file://results.html&b=file://g
 
 ### Markdown
 
-View specification prefixs: `md`, `md-inline`.
+View specification prefixes: `md`, `md-inline`.
 
 Render [Markdown](https://en.wikipedia.org/wiki/Markdown) content.
 
@@ -143,7 +143,7 @@ https://flexivis.infrastruktur.link/?layout=a/b&a=md:https://raw.githubuserconte
 
 ### JSON
 
-View specification prefixs: `json`, `json-inline`.
+View specification prefixes: `json`, `json-inline`.
 
 Render JSON in an interactive viewer.
 
@@ -156,7 +156,7 @@ https://flexivis.infrastruktur.link/?layout=a/b&a=json:https://raw.githubusercon
 
 ### Text
 
-View specification prefixs: `text`, `text-inline`.
+View specification prefixes: `text`, `text-inline`.
 
 Display plain text. This can be used to display the source of a visualisation alongside the visualisation itself.
 
@@ -202,7 +202,7 @@ https://flexivis.infrastruktur.link/?layout=a/b&a=map:https://raw.githubusercont
 
 ### Mermaid Diagrams
 
-View specification prefixs: `mermaid`, `mermaid-inline`.
+View specification prefixes: `mermaid`, `mermaid-inline`.
 
 Renders [mermaid](https://mermaid-js.github.io/mermaid/) diagrams.
 
@@ -215,7 +215,7 @@ https://flexivis.infrastruktur.link/?layout=(a-b)/c&a=mermaid:https://raw.github
 
 ### Vega Graphs
 
-View specification prefixs: `vega`, `vega-inline`.
+View specification prefixes: `vega`, `vega-inline`.
 
 Renders [Vega](https://vega.github.io/vega/) and [Vega-Lite](https://vega.github.io/vega-lite/) graphs.
 
