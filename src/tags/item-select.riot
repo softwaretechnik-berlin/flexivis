@@ -5,16 +5,28 @@
     </select>
     <input class="select-input { state.selectClass }" type="text" value={ state.inputId } onkeyup={ onIdInput } onpaste={ onIdInput }/>
     <button class="select-btn" onclick={ onGoClick }>Select</button>
+    <button class="select-btn" each={ modal in Object.entries(props.modals) } onclick={ showModal(modal[0], modal[1]) }>{ modal[0] }</button>
   </div>
 
   <div class="app" />
 
-  <!-- TODO: add modal support -->
+  <modal if={ state.modalQueryString } on-close={ onModalClosed } title={ state.modalTitle }>
+    <app query-string={ state.modalQueryString } />
+  </modal>
 
   <script>
     import * as riot from "riot";
 
     export default {
+      onBeforeMount() {
+        this.baseQuery = "?" + Object.entries(this.props.parameters).map(([key, value]) => `${key}=${value}`).join("&");
+      },
+      onMounted() {
+        this.appElement = this.root.getElementsByClassName("app")[0];
+        if (this.props.items.length !== 0) {
+          this.setItem(this.props.items[0]);
+        }
+      },
       onIdInput(event) {
         const inputId = event.target.value;
         this.update({
@@ -40,23 +52,29 @@
         this.update({
           inputId: item.id,
           selectedId: item.id,
+          selectedItem: item,
           selectClass: undefined,
         });
 
-        const queryString = Object.entries(item)
-          .reduce((q, [key, value]) => q.replace(`\${${key}}`, value), this.baseQuery);
-
         riot.unmount(this.appElement, true);
-        riot.mount(this.appElement, { queryString }, "app");
+        riot.mount(this.appElement, {
+          queryString: this.prepareQueryString(this.baseQuery),
+        }, "app");
       },
-      onBeforeMount() {
-        this.baseQuery = "?" + Object.entries(this.props.parameters).map(([key, value]) => `${key}=${value}`).join("&");
+      showModal(name, viewDefinition) {
+        return e => {
+          this.update({
+            modalQueryString: this.prepareQueryString(`?url=${viewDefinition}`),
+            modalTitle: name,
+          });
+        };
       },
-      onMounted() {
-        this.appElement = this.root.getElementsByClassName("app")[0];
-        if (this.props.items.length !== 0) {
-          this.setItem(this.props.items[0]);
-        }
+      onModalClosed() {
+        this.update({ modalQueryString: undefined });
+      },
+      prepareQueryString(queryString) {
+        return Object.entries(this.state.selectedItem)
+          .reduce((q, [key, value]) => q.replace(`\${${key}}`, value), queryString);
       },
     }
   </script>

@@ -20,6 +20,8 @@ import ContentFrame from "./src/tags/content-frame";
 riot.register("content-frame", ContentFrame);
 import ItemSelect from "./src/tags/item-select";
 riot.register("item-select", ItemSelect);
+import Modal from "./src/tags/modal";
+riot.register("modal", Modal);
 import AppComponent from "./src/tags/app";
 riot.register("app", AppComponent);
 

@@ -1,0 +1,28 @@
+<modal>
+
+  <div if={ state.show } class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+      <span class="close" onclick={ closeModal }>&times;</span>
+      <h2>{ props.title || " " }</h2>
+    </div>
+    <div class="modal-body">
+      <slot />
+    </div>
+  </div>
+
+  <script>
+    export default {
+      onBeforeMount() {
+        this.state.show = true;
+      },
+      onUpdated() {
+        this.onBeforeMount();
+      },
+      closeModal(e) {
+        this.update({ show: false });
+        this.props.onClose();
+      }
+    }
+  </script>
+</modal>
