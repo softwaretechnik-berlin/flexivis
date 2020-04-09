@@ -10,17 +10,20 @@
       "label": "Fernsehturm",
       "lat": "52.520760",
       "lng": "13.409336",
-      "description": "The Berliner Fernsehturm is a television tower in central Berlin."
+      "description": "The Berliner Fernsehturm is a television tower in central Berlin.",
+      "wikipedia": "https://en.wikipedia.org/wiki/Fernsehturm_Berlin"
     },
     {
       "id": "victory-column",
       "label": "Berlin Victory Column",
       "lat": "52.514517",
       "lng": "13.349978",
-      "description": "The Victory Column is a major tourist attraction in the city of Berlin."
+      "description": "The Victory Column is a major tourist attraction in the city of Berlin.",
+      "wikipedia": "https://en.wikipedia.org/wiki/Berlin_Victory_Column"
     }
   ],
   "modals": {
-    "Details": "text-inline:${description}"
+    "Description": "text-inline:${description}",
+    "Wikipedia": "${wikipedia}"
   }
 }
