@@ -16,6 +16,7 @@ backstopConfig.scenarios = Object.values(examples.all)
 			Object.assign({ height: 798, width: 1440, label: "main" }, ex.viewport),
 		],
 		delay: 2000,
+		onReadyScript: ex.onReadyScript,
 	}));
 
 fs.writeFileSync(

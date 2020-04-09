@@ -15,6 +15,9 @@ general:
     query: "layout=a/b&a=text-inline:This is fine&b=nonsense"
   view-error-duplicate-map-layer:
     query: "layout=a/b&a=text-inline:This is fine&b=map:http://example.com/nonsense.json;http://example.com/nonsense.json"
+  open-modal-select-view:
+    query: "layout=banner/capitals60&banner=text-inline:Select%20a%20capital!&capitals=(default=br)select-inline:{%20%22items%22:%20[%20{%20%22id%22:%20%22de%22,%20%22label%22:%20%22Germany%22,%20%22capital%22:%20%22Berlin%22%20},%20{%20%22id%22:%20%22ca%22,%20%22label%22:%20%22Canada%22,%20%22capital%22:%20%22Ottawa%22%20},%20{%20%22id%22:%20%22br%22,%20%22label%22:%20%22Brazil%22,%20%22capital%22:%20%22Brasilia%22%20}%20],%20%22parameters%22:%20{%20%22layout%22:%20%22a%22,%20%22a%22:%20%22text-inline:Welcome%20to%20${capital},%20capital%20of%20${label}!%22%20},%20%22modals%22:%20{%20%22Wikipedia%22:%20%22https://en.wikipedia.org/wiki/${capital}%22%20}%20}"
+    onReadyScript: "open-first-modal-in-select-view-and-wait-iframe.js"
 
 handlers:
   frame:

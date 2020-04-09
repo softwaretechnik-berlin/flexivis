@@ -5,7 +5,7 @@
     </select>
     <input class="select-input { state.selectClass }" type="text" value={ state.inputId } onkeyup={ onIdInput } onpaste={ onIdInput }/>
     <button class="select-btn" onclick={ onGoClick }>Select</button>
-    <button class="select-btn" each={ modal in Object.entries(props.definition.modals) } onclick={ showModal(modal[0], modal[1]) }>{ modal[0] }</button>
+    <button class="select-btn select-modal-btn-{idx}" each={ (modal, idx) in Object.entries(props.definition.modals) } onclick={ showModal(modal[0], modal[1]) }>{ modal[0] }</button>
   </div>
 
   <div class="app" />
@@ -46,8 +46,8 @@
       },
       onMounted() {
         this.appElement = this.root.getElementsByClassName("app")[0];
-        const initialSelection = this.props.definition.items.find(item => item.id === this.props.config.default) || 
-                                 this.props.definition.items[0] 
+        const initialSelection = this.props.definition.items.find(item => item.id === this.props.config.default) ||
+                                 this.props.definition.items[0]
 
         if (initialSelection) {
           this.setItem(initialSelection);
