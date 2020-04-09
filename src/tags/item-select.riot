@@ -1,11 +1,11 @@
 <item-select>
   <div class="select-box">
     <select onchange={ onItemSelected }>
-      <option each={ item in props.items } value={ item.id } key={ item.id } selected={ item.id === state.selectedId }>{ item.label || item.id }</option>
+      <option each={ item in props.definition.items } value={ item.id } key={ item.id } selected={ item.id === state.selectedId }>{ item.label || item.id }</option>
     </select>
     <input class="select-input { state.selectClass }" type="text" value={ state.inputId } onkeyup={ onIdInput } onpaste={ onIdInput }/>
     <button class="select-btn" onclick={ onGoClick }>Select</button>
-    <button class="select-btn" each={ modal in Object.entries(props.modals) } onclick={ showModal(modal[0], modal[1]) }>{ modal[0] }</button>
+    <button class="select-btn" each={ modal in Object.entries(props.definition.modals) } onclick={ showModal(modal[0], modal[1]) }>{ modal[0] }</button>
   </div>
 
   <div class="app" />
@@ -19,12 +19,12 @@
 
     export default {
       onBeforeMount() {
-        this.baseQuery = "?" + Object.entries(this.props.parameters).map(([key, value]) => `${key}=${value}`).join("&");
+        this.baseQuery = "?" + Object.entries(this.props.definition.parameters).map(([key, value]) => `${key}=${value}`).join("&");
 
         this.keyboardShortcutsHandler = e => {
           const nextItem = inc => {
-            const currentIndex = this.props.items.findIndex(item => item.id === this.state.selectedId);
-            const newItem = this.props.items[currentIndex + inc];
+            const currentIndex = this.props.definition.items.findIndex(item => item.id === this.state.selectedId);
+            const newItem = this.props.definition.items[currentIndex + inc];
             if (newItem) {
               this.setItem(newItem);
             }
@@ -46,8 +46,11 @@
       },
       onMounted() {
         this.appElement = this.root.getElementsByClassName("app")[0];
-        if (this.props.items.length !== 0) {
-          this.setItem(this.props.items[0]);
+        const initialSelection = this.props.definition.items.find(item => item.id === this.props.config.default) || 
+                                 this.props.definition.items[0] 
+
+        if (initialSelection) {
+          this.setItem(initialSelection);
         }
 
         window.addEventListener("keydown", this.keyboardShortcutsHandler, true);
@@ -66,7 +69,7 @@
         }
       },
       onGoClick() {
-        const item = this.props.items.find(item => item.id === this.state.inputId);
+        const item = this.props.definition.items.find(item => item.id === this.state.inputId);
         if (item) {
           this.setItem(item);
         } else {
@@ -74,7 +77,7 @@
         }
       },
       onItemSelected(event) {
-        this.setItem(this.props.items[event.target.selectedIndex]);
+        this.setItem(this.props.definition.items[event.target.selectedIndex]);
       },
       setItem(item) {
         this.update({
