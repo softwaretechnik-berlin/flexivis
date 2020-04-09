@@ -23,7 +23,10 @@ module.exports = config => {
 			},
 			config
 		)
-	);
+	).use(require("markdown-it-headinganchor"), {
+		anchorClass: "heading-anchor",
+		slugify: string => string.replace(/\s+/g, "-").toLowerCase(),
+	});
 
 	return source => md.render(source);
 };
