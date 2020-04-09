@@ -16,6 +16,7 @@ Flexivis is a flexible visualisation tool that allows you to easily visualise di
             <li><a href="#map">Map</a></li>
             <li><a href="#mermaid-diagrams">Mermaid Diagrams</a></li>
             <li><a href="#vega-graphs">Vega Graphs</a></li>
+            <li><a href="#item-select">Item Select</a></li>
         </ul>
         <!-- END view specifications table of contents -->
     </li>
@@ -106,6 +107,7 @@ The following view types are supported:
     <li><a href="#map">Map</a></li>
     <li><a href="#mermaid-diagrams">Mermaid Diagrams</a></li>
     <li><a href="#vega-graphs">Vega Graphs</a></li>
+    <li><a href="#item-select">Item Select</a></li>
 </ul>
 
 
@@ -232,6 +234,75 @@ https://flexivis.infrastruktur.link/?url=vega-inline:{"data": {"values": [{"fact
 ```
 
 <a href="https://flexivis.infrastruktur.link/?url=vega-inline:{&quot;data&quot;: {&quot;values&quot;: [{&quot;factor&quot;: &quot;awesomeness&quot;, &quot;score&quot;: 10}, {&quot;factor&quot;: &quot;weirdness&quot;, &quot;score&quot;: 3}, {&quot;factor&quot;: &quot;color&quot;, &quot;score&quot;: 7}]}, &quot;mark&quot;: &quot;bar&quot;, &quot;encoding&quot;: {&quot;x&quot;: {&quot;field&quot;: &quot;factor&quot;, &quot;type&quot;: &quot;nominal&quot;}, &quot;y&quot;: {&quot;field&quot;: &quot;score&quot;, &quot;type&quot;: &quot;quantitative&quot;}, &quot;color&quot;: {&quot;field&quot;: &quot;factor&quot;, &quot;type&quot;: &quot;nominal&quot;}}, &quot;height&quot;: &quot;container&quot;, &quot;width&quot;: 100}"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_vega-2_0_document_0_main.png" style="border: 1px solid #ccc; max-height: 300px"/></a>
+
+
+### Item Select
+
+View specification prefixes: `select`, `select-inline`.
+
+Accepts a list of items, and displays a customized view for each selection.
+
+This view expects a JSON resource with the following basic format:
+
+```json
+{
+  "items": [ ... ],
+  "parameters": { ... },
+  "modals": { ... }
+}
+```
+
+`items` contain multiple JSON objects. Each object must contain an `id` field that uniquely identifies that item.
+Although optional, the field called `label` is also special. If set, that will the display name used by the Select view.
+Besides that, the objects can contain any other desired fields and values. The following is a valid example of the field:
+
+```json
+{
+  "items": [
+    { "id": "de", "label": "Germany", "capital": "Berlin" },
+    { "id": "ca", "label": "Canada", "capital": "Ottawa" },
+    { "id": "br", "label": "Brazil", "capital": "Brasilia" }
+  ]
+}
+```
+
+`parameters` contains parameters that follow the URL parameter format accepted by Flexivis. However, they can also contain
+template expressions expresses by `${field}`, where the field is part of the items. For example:
+
+```json
+{
+  "parameters": {
+    "layout": "a",
+    "a": "text-inline:Welcome to ${capital}, capital of ${label}!"
+  }
+}
+```
+
+`modals` contains a list of modals that can be shown with further details for each item. For every modal defined, a button will
+be added to the page, using the key as the button label, and the value as the modal's view type. For instance:
+
+```json
+{
+  "modals": {
+    "Wikipedia": "https://en.wikipedia.org/wiki/${capital}"
+  }
+}
+```
+
+The view permits the user to define the item that is initially selected by specifying the item's id under the `default` key.
+
+
+```
+https://flexivis.infrastruktur.link/?layout=banner/capitals60&banner=text-inline:Select%20a%20capital!&capitals=(default=br)select-inline:{%20%22items%22:%20[%20{%20%22id%22:%20%22de%22,%20%22label%22:%20%22Germany%22,%20%22capital%22:%20%22Berlin%22%20},%20{%20%22id%22:%20%22ca%22,%20%22label%22:%20%22Canada%22,%20%22capital%22:%20%22Ottawa%22%20},%20{%20%22id%22:%20%22br%22,%20%22label%22:%20%22Brazil%22,%20%22capital%22:%20%22Brasilia%22%20}%20],%20%22parameters%22:%20{%20%22layout%22:%20%22a%22,%20%22a%22:%20%22text-inline:Welcome%20to%20${capital},%20capital%20of%20${label}!%22%20},%20%22modals%22:%20{%20%22Wikipedia%22:%20%22https://en.wikipedia.org/wiki/${capital}%22%20}%20}
+```
+
+<a href="https://flexivis.infrastruktur.link/?layout=banner/capitals60&amp;banner=text-inline:Select%20a%20capital!&amp;capitals=(default=br)select-inline:{%20%22items%22:%20[%20{%20%22id%22:%20%22de%22,%20%22label%22:%20%22Germany%22,%20%22capital%22:%20%22Berlin%22%20},%20{%20%22id%22:%20%22ca%22,%20%22label%22:%20%22Canada%22,%20%22capital%22:%20%22Ottawa%22%20},%20{%20%22id%22:%20%22br%22,%20%22label%22:%20%22Brazil%22,%20%22capital%22:%20%22Brasilia%22%20}%20],%20%22parameters%22:%20{%20%22layout%22:%20%22a%22,%20%22a%22:%20%22text-inline:Welcome%20to%20${capital},%20capital%20of%20${label}!%22%20},%20%22modals%22:%20{%20%22Wikipedia%22:%20%22https://en.wikipedia.org/wiki/${capital}%22%20}%20}"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_select-1_0_document_0_main.png" style="border: 1px solid #ccc; max-height: 300px"/></a>
+
+```
+https://flexivis.infrastruktur.link/?url=select:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/select-view.json
+```
+
+<a href="https://flexivis.infrastruktur.link/?url=select:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/select-view.json"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_select-2_0_document_0_main.png" style="border: 1px solid #ccc; max-height: 300px"/></a>
 <!-- END view specifications -->
 
 

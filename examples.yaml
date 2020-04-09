@@ -98,4 +98,61 @@ handlers:
         viewport: { width: 400, height: 400 }
         query: 'url=vega-inline:{"data": {"values": [{"factor": "awesomeness", "score": 10}, {"factor": "weirdness", "score": 3}, {"factor": "color", "score": 7}]}, "mark": "bar", "encoding": {"x": {"field": "factor", "type": "nominal"}, "y": {"field": "score", "type": "quantitative"}, "color": {"field": "factor", "type": "nominal"}}, "height": "container", "width": 100}'
 
+  select:
+    prefixes: [select, select-inline]
+    title: Item Select
+    description: |
+      Accepts a list of items, and displays a customized view for each selection.
+
+      This view expects a JSON resource with the following basic format:
+
+      ```json
+      {
+        "items": [ ... ],
+        "parameters": { ... },
+        "modals": { ... }
+      }
+      ```
+
+      `items` contain multiple JSON objects. Each object must contain an `id` field that uniquely identifies that item.
+      Although optional, the field called `label` is also special. If set, that will the display name used by the Select view.
+      Besides that, the objects can contain any other desired fields and values. The following is a valid example of the field:
+
+      ```json
+      {
+        "items": [
+          { "id": "de", "label": "Germany", "capital": "Berlin" },
+          { "id": "ca", "label": "Canada", "capital": "Ottawa" },
+          { "id": "br", "label": "Brazil", "capital": "Brasilia" }
+        ]
+      }
+      ```
+
+      `parameters` contains parameters that follow the URL parameter format accepted by Flexivis. However, they can also contain
+      template expressions expresses by `${field}`, where the field is part of the items. For example:
+
+      ```json
+      {
+        "parameters": {
+          "layout": "a",
+          "a": "text-inline:Welcome to ${capital}, capital of ${label}!"
+        }
+      }
+      ```
+
+      `modals` contains a list of modals that can be shown with further details for each item. For every modal defined, a button will
+      be added to the page, using the key as the button label, and the value as the modal's view type. For instance:
+
+      ```json
+      {
+        "modals": {
+          "Wikipedia": "https://en.wikipedia.org/wiki/${capital}"
+        }
+      }
+      ```
+
+      The view permits the user to define the item that is initially selected by specifying the item's id under the `default` key.
+    examples:
+      - query: "layout=banner/capitals60&banner=text-inline:Select%20a%20capital!&capitals=(default=br)select-inline:{%20%22items%22:%20[%20{%20%22id%22:%20%22de%22,%20%22label%22:%20%22Germany%22,%20%22capital%22:%20%22Berlin%22%20},%20{%20%22id%22:%20%22ca%22,%20%22label%22:%20%22Canada%22,%20%22capital%22:%20%22Ottawa%22%20},%20{%20%22id%22:%20%22br%22,%20%22label%22:%20%22Brazil%22,%20%22capital%22:%20%22Brasilia%22%20}%20],%20%22parameters%22:%20{%20%22layout%22:%20%22a%22,%20%22a%22:%20%22text-inline:Welcome%20to%20${capital},%20capital%20of%20${label}!%22%20},%20%22modals%22:%20{%20%22Wikipedia%22:%20%22https://en.wikipedia.org/wiki/${capital}%22%20}%20}"
+      - query: "url=select:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/select-view.json"
   # TODO: Deal with README, which isn't documented here. Arguably it shouldn't be a named view handler.
