@@ -3,9 +3,8 @@
   "dependencies": {
     "@riotjs/observable": "^4.0.4",
     "didyoumean": "^1.2.1",
+    "flexivis-md": "file:build/flexivis-md",
     "github-markdown-css": "^4.0.0",
-    "highlight.js": "^9.18.1",
-    "markdown-it": "^10.0.0",
     "mermaid": "^8.4.8",
     "ol": "6.1.1",
     "riot": "^4.11.1",
@@ -22,6 +21,7 @@
     "grammkit": "^0.7.1",
     "marked": "^0.8.2",
     "parcel-bundler": "^1.12.4",
+    "parcel-plugin-render-md": "file:build/parcel-plugin-render-md",
     "pegjs": "^0.10.0",
     "puppeteer": "^2.1.1",
     "xo": "^0.28.3"

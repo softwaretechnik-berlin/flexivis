@@ -1,0 +1,10 @@
+{
+  "name": "parcel-plugin-render-md",
+  "version": "0.1.0",
+  "description": "Parcel Plugin Render Markdown",
+  "main": "index.js",
+  "devDependencies": {},
+  "dependencies": {
+    "flexivis-md": "file:../flexivis-md"
+  }
+}
