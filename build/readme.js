@@ -59,7 +59,7 @@ function renderExample(example) {
 					"&quot;"
 				)}"><img alt="rendering of the URL shown above" src="${
 				example.screenshotPath
-		  }" style="border: 1px solid #ccc; max-height: 300px"/></a>\n`
+		  }"/></a>\n`
 		: "";
 
 	return intro + url + screenshot;
