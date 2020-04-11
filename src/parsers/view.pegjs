@@ -1,12 +1,18 @@
 Root =
-  config:ConfigurationList?
-  type:ViewType
-  resources:(
+  config:ConfigurationList? view:(InlineView / RegularView) {
+    view.config = config || [];
+    return view;
+  }
+
+InlineView = type:ViewType ':inline:' content:(.* { return text(); }) {
+  return { type, resources: [{ config: [], value: "data:," + encodeURIComponent(content) }] }
+}
+RegularView = type:ViewType resources:(
   	':'
     list:ResourceList?
     { return list; }
   )?
-  { return { type, config: config || [], resources: resources || [] }; }
+  { return { type, resources: resources || [] }; }
 
 ConfigurationList =
   '('

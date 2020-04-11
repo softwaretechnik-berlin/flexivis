@@ -7,9 +7,13 @@
     export default {
       onBeforeMount() {
         this.state.error = this.props.view.error;
+
+        const handleError = error => this.update({ error });
+
+
         if (!this.state.error)
-          new Promise((resolve, reject) => resolve(mount(this.root, this.props.view)))
-            .catch(error => this.update({ error }));
+          new Promise((resolve, reject) => resolve(mount(this.root, this.props.view, handleError)))
+            .catch(handleError);
       },
     }
   </script>

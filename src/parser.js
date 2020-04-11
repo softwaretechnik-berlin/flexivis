@@ -1,5 +1,6 @@
 import * as layoutParser from "./parsers/layout";
 import * as viewParser from "./parsers/view";
+import DataSource from "./data-source";
 
 const handleError = (error, name, title, input) => {
 	if (error.name === "SyntaxError") {
@@ -19,8 +20,15 @@ const handleError = (error, name, title, input) => {
 	return error;
 };
 
+const retrieveText = url =>
+	fetch(url)
+		.catch(error => {
+			throw new Error(`Failed to fetch "${url}": ${error}`);
+		})
+		.then(r => r.text());
+
 class LayoutParser {
-	constructor(parameters) {
+	constructor(parameters, retrieve) {
 		if (!parameters.has("layout")) {
 			parameters.set("layout", "url");
 			if (!parameters.has("url")) {
@@ -29,6 +37,8 @@ class LayoutParser {
 		}
 
 		this.params = parameters;
+		this.retrieve = retrieve;
+		this.dataSourceCache = new Map();
 	}
 
 	parse() {
@@ -59,7 +69,30 @@ class LayoutParser {
 
 		const viewParameter = this.params.get(name);
 		try {
-			return viewParser.parse(viewParameter);
+			const parsed = viewParser.parse(viewParameter);
+
+			parsed.resources.forEach(resource => {
+				const name = resource.value;
+				let url;
+
+				if (resource.value.startsWith("$")) {
+					if (!this.params.has(name)) {
+						throw new Error(`Shared source ’${name}’ is not available.`);
+					}
+
+					url = this.params.get(resource.value);
+				} else {
+					url = resource.value;
+				}
+
+				resource.value = this.dataSourceCache.has(name)
+					? this.dataSourceCache.get(name)
+					: this.dataSourceCache
+							.set(name, new DataSource(name, url, this.retrieve(url)))
+							.get(name);
+			});
+
+			return parsed;
 		} catch (error) {
 			return {
 				error: handleError(
@@ -84,6 +117,6 @@ class LayoutParser {
 	}
 }
 
-export default function parse(parameters) {
-	return new LayoutParser(parameters).parse();
+export default function parse(parameters, retrieve = retrieveText) {
+	return new LayoutParser(parameters, retrieve).parse();
 }

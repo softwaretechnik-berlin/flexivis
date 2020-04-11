@@ -2,7 +2,7 @@
   "parameters": {
     "layout": "a/b",
     "a": "(center=${lat},${lng};zoomLevel=17;layer=osm)map",
-    "b": "text-inline:Hello from ${label} (${id})!"
+    "b": "text:inline:Hello from ${label} (${id})!"
   },
   "items": [
     {
@@ -23,7 +23,7 @@
     }
   ],
   "modals": {
-    "Description": "text-inline:${description}",
+    "Description": "text:inline:${description}",
     "Wikipedia": "${wikipedia}"
   }
 }

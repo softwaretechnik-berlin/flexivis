@@ -12,7 +12,7 @@
         <div class="features">
           <span each={ (layer, i) in layers }>
             <input type="checkbox" id="feature-checkbox-{mapId}-{i}" checked={ layer.checked } onclick={ toggleGeoJsonLayer(layer.id) }/>
-            <label for="feature-checkbox-{mapId}-{i}">{ layer.id }</label><br/>
+            <label for="feature-checkbox-{mapId}-{i}">{ layer.id }<span if={ layer.state === "loading" }>⚙️</span></label><br/>
           </span>
         </div>
       </div>
@@ -47,13 +47,27 @@
 
         this.layers = [];
         this.props.resources.map(({ value, config }) => {
+          const id = config.id || value.name;
           const hidden = config.hasOwnProperty("hidden") && config.hidden !== "false"
-          const id = config.id || value;
-          this.map.addGeoJsonLayer(id, value);
-          this.layers.push({ id, checked: !hidden });
-          if (hidden) {
-            this.map.disableGeoJsonLayer(id);
-          }
+
+          const layer = { id, checked: !hidden, state: "loading" };
+          this.layers.push(layer);
+
+          this.map.addGeoJsonLayer(id, "");
+
+          value.observe((error, geoJson) => {
+            if (error) {
+              layer.state = "error";
+              this.props.handleError(error);
+            } else {
+              this.map.replaceGeoJsonLayer(id, geoJson);
+              if (hidden) {
+                this.map.disableGeoJsonLayer(id);
+              }
+              layer.state = "loaded";
+            }
+            this.update();
+          });
         });
       },
       onUpdated() {

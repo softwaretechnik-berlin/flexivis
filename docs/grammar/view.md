@@ -8,7 +8,21 @@
 
 ![Root](./view/Root.svg)
 
-References: [ConfigurationList](#ConfigurationList), [ViewType](#ViewType), [ResourceList](#ResourceList)
+References: [ConfigurationList](#ConfigurationList), [InlineView](#InlineView), [RegularView](#RegularView)
+
+### InlineView
+
+![InlineView](./view/InlineView.svg)
+
+Used by: [Root](#Root)
+References: [ViewType](#ViewType)
+
+### RegularView
+
+![RegularView](./view/RegularView.svg)
+
+Used by: [Root](#Root)
+References: [ViewType](#ViewType), [ResourceList](#ResourceList)
 
 ### ConfigurationList
 
@@ -41,13 +55,13 @@ References: [ConfigurationList](#ConfigurationList)
 
 ![ViewType](./view/ViewType.svg)
 
-Used by: [Root](#Root)
+Used by: [InlineView](#InlineView), [RegularView](#RegularView)
 
 ### ResourceList
 
 ![ResourceList](./view/ResourceList.svg)
 
-Used by: [Root](#Root)
+Used by: [RegularView](#RegularView)
 References: [Resource](#Resource)
 
 ### Resource

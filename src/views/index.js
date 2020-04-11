@@ -11,24 +11,19 @@ const handlers = {
 	https: mod(() => import("./frame.js")),
 	file: mod(() => import("./frame.js")),
 	md: mod(() => import("./markdown.js")),
-	"md-inline": mod(() => import("./markdown.js")),
 	json: mod(() => import("./json.js")),
-	"json-inline": mod(() => import("./json.js")),
 	text: mod(() => import("./text.js")),
-	"text-inline": mod(() => import("./text.js")),
 	vega: mod(() => import("./vega.js")),
-	"vega-inline": mod(() => import("./vega.js")),
 	mermaid: mod(() => import("./mermaid.js")),
-	"mermaid-inline": mod(() => import("./mermaid.js")),
 	map: mod(() => import("./map.js")),
 	readme: mod(() => import("./readme.js")),
 	select: mod(() => import("./select.js")),
-	"select-inline": mod(() => import("./select.js")),
+	edit: mod(() => import("./edit.js")),
 };
 
 export const knownHandlers = Object.keys(handlers);
 
-export function mount(element, view) {
+export function mount(element, view, handleError) {
 	const handler = handlers[view.type];
 	if (!handler) {
 		const suggestedHandler = didYouMean(view.type, knownHandlers);
@@ -46,5 +41,6 @@ export function mount(element, view) {
 		riot,
 		element,
 		view,
+		handleError,
 	});
 }

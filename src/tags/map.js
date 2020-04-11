@@ -3,7 +3,7 @@ import View from "ol/View";
 import XYZ from "ol/source/XYZ";
 import { fromLonLat } from "ol/proj";
 
-import GeoJSON from "ol/format/GeoJSON";
+import { GeoJSON } from "ol/format";
 import { extend as extendExtent, createEmpty as createExtent } from "ol/extent";
 import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
 import { Vector as VectorSource, OSM as OSMSource } from "ol/source";
@@ -135,7 +135,16 @@ export class HereGeoJsonMap {
 		this.baseLayers.find(l => l.id === id).layer.setVisible(true);
 	}
 
-	addGeoJsonLayer(id, url) {
+	replaceGeoJsonLayer(id, newGeoJson) {
+		if (this.geoJsonLayers[id]) {
+			this.disableGeoJsonLayer(id);
+			delete this.geoJsonLayers[id];
+		}
+
+		this.addGeoJsonLayer(id, newGeoJson);
+	}
+
+	addGeoJsonLayer(id, geoJson) {
 		if (this.geoJsonLayers[id]) {
 			const err = new Error(`Duplicate map layer with id "${id}".`);
 			err.title = "Duplicate Layer Error";
@@ -145,7 +154,7 @@ export class HereGeoJsonMap {
 		const layer = new VectorLayer({
 			source: new VectorSource({
 				format: new GeoJSON(),
-				url,
+				url: "data:," + encodeURIComponent(geoJson),
 			}),
 			style: feature => {
 				return geoJsonStyles(feature.getProperties());
