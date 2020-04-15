@@ -158,5 +158,5 @@ handlers:
     examples:
       - query: "layout=banner/capitals60&banner=text:inline:Select%20a%20capital!&capitals=(default=br)select:inline:%7B%22items%22%3A%5B%7B%22id%22%3A%22de%22%2C%22label%22%3A%22Germany%22%2C%22capital%22%3A%22Berlin%22%7D%2C%7B%22id%22%3A%22ca%22%2C%22label%22%3A%22Canada%22%2C%22capital%22%3A%22Ottawa%22%7D%2C%7B%22id%22%3A%22br%22%2C%22label%22%3A%22Brazil%22%2C%22capital%22%3A%22Brasilia%22%7D%5D%2C%22parameters%22%3A%7B%22layout%22%3A%22a%22%2C%22a%22%3A%22text%3Ainline%3AWelcome%20to%20%24%7Bcapital%7D%2C%20capital%20of%20%24%7Blabel%7D!%22%7D%2C%22modals%22%3A%7B%22Wikipedia%22%3A%22https%3A%2F%2Fen.wikipedia.org%2Fwiki%2F%24%7Bcapital%7D%22%7D%7D"
       - query: "url=select:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/select-view.json"
-        delay: 10000
+        delay: 20000
   # TODO: Deal with README, which isn't documented here. Arguably it shouldn't be a named view handler.
