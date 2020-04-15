@@ -58,10 +58,12 @@ test("allows unsubscribing", async t => {
 	const source = new DataSource("hi", "file://hi");
 
 	const values = [];
-	const subscription = source.observe((error, value) => {
+	const x = (error, value) => {
 		values.push({ error, value });
 		subscription.cancel();
-	});
+	};
+
+	const subscription = source.observe(x);
 
 	const results = new Promise(resolve => {
 		let total = 0;
