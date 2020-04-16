@@ -15,6 +15,7 @@
   "devDependencies": {
     "@ava/typescript": "^1.1.1",
     "@riotjs/parcel-plugin-riot": "^4.0.1",
+    "@types/parcel-env": "0.0.0",
     "ava": "^3.6.0",
     "backstopjs": "^4.5.0",
     "esm": "^3.2.25",
@@ -34,12 +35,13 @@
     "start": "parcel index.html",
     "build": "parcel build --no-cache -d dist index.html",
     "lint": "xo --fix --prettier --env=browser || exit 0",
-    "test": "npm run lint && ava --verbose && npm run backstop test",
+    "test": "npm run lint && ava && npm run backstop test",
     "build-local-use": "parcel build --no-cache -d dist index.html --public-url ./",
     "readme": "node build/readme.js",
     "generate-parser": "node build/parsers.js"
   },
   "ava": {
+    "verbose": true,
     "require": [
       "esm",
       "ts-node/register"

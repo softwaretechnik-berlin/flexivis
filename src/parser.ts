@@ -1,8 +1,17 @@
-import * as layoutParser from "./parsers/layout";
-import * as viewParser from "./parsers/view";
+import {
+	parse as parseLayout,
+	ViewFrameCollection,
+	ViewDef,
+} from "./parsers/layout";
+import { parse as parseView, Resource } from "./parsers/view";
 import DataSource from "./data-source";
 
-const handleError = (error, name, title, input) => {
+const handleError = (
+	error: Error,
+	name: string,
+	title: string,
+	input: string
+): Error => {
 	if (error.name === "SyntaxError") {
 		error.name = name;
 		error.title = title;
@@ -20,15 +29,22 @@ const handleError = (error, name, title, input) => {
 	return error;
 };
 
-const retrieveText = url =>
-	fetch(url)
-		.catch(error => {
-			throw new Error(`Failed to fetch "${url}": ${error}`);
-		})
-		.then(r => r.text());
+const retrieveText = async (url: string): Promise<string> => {
+	try {
+		return await (await fetch(url)).text();
+	} catch (error) {
+		throw new Error(`Failed to fetch "${url}": ${error}`);
+	}
+};
 
 class LayoutParser {
-	constructor(parameters, retrieve) {
+	private readonly params: URLSearchParams;
+	private readonly retrieve: (url: string) => Promise<string>;
+	private readonly dataSourceCache: Map<string, DataSource<string>>;
+	constructor(
+		parameters: URLSearchParams,
+		retrieve: (url: string) => Promise<string>
+	) {
 		if (!parameters.has("layout")) {
 			parameters.set("layout", "url");
 			if (!parameters.has("url")) {
@@ -44,8 +60,8 @@ class LayoutParser {
 	parse() {
 		const layout = this.params.get("layout");
 		try {
-			const layoutSpec = layoutParser.parse(layout);
-			return this._parseView(layoutSpec);
+			const layoutSpec: ViewDef = parseLayout(layout);
+			return this.recursivelyParseViews(layoutSpec);
 		} catch (error) {
 			throw handleError(
 				error,
@@ -56,7 +72,7 @@ class LayoutParser {
 		}
 	}
 
-	get(name) {
+	private get(name: string) {
 		if (!this.params.has(name)) {
 			const error = new Error(`Missing parameter for view ’${name}’.`);
 			error.name = "UndefinedView";
@@ -69,11 +85,11 @@ class LayoutParser {
 
 		const viewParameter = this.params.get(name);
 		try {
-			const parsed = viewParser.parse(viewParameter);
+			const parsed = parseView(viewParameter);
 
-			parsed.resources.forEach(resource => {
+			parsed.resources.forEach((resource: Resource) => {
 				const name = resource.value;
-				let url;
+				let url: string;
 
 				if (resource.value.startsWith("$")) {
 					if (!this.params.has(name)) {
@@ -105,18 +121,22 @@ class LayoutParser {
 		}
 	}
 
-	_parseView(view) {
+	private recursivelyParseViews(view: ViewDef): ViewDef {
 		if (typeof view === "string") {
 			return this.get(view);
 		}
 
-		view.views.forEach(v => {
-			v.view = this._parseView(v.view);
+		view.views.forEach((v: ViewFrameCollection) => {
+			v.view = this.recursivelyParseViews(v.view);
 		});
+
 		return view;
 	}
 }
 
-export default function parse(parameters, retrieve = retrieveText) {
+export default function parse(
+	parameters: URLSearchParams,
+	retrieve: (url: string) => Promise<string> = retrieveText
+) {
 	return new LayoutParser(parameters, retrieve).parse();
 }
