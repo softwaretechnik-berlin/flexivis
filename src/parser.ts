@@ -2,7 +2,9 @@ import {
 	parse as parseLayout,
 	ViewFrameCollection,
 	ViewDef,
+	// @ts-ignore comment
 } from "./parsers/layout";
+// @ts-ignore comment
 import { parse as parseView, Resource } from "./parsers/view";
 import DataSource from "./data-source";
 
@@ -14,15 +16,22 @@ const handleError = (
 ): Error => {
 	if (error.name === "SyntaxError") {
 		error.name = name;
+		// @ts-ignore comment
 		error.title = title;
+		// @ts-ignore comment
 		error.prefixSection = input.slice(
 			0,
+			// @ts-ignore comment
 			Math.max(0, error.location.start.offset)
 		);
+		// @ts-ignore comment
 		error.invalidSection = input.slice(
+			// @ts-ignore comment
 			error.location.start.offset,
+			// @ts-ignore comment
 			error.location.end.offset
 		);
+		// @ts-ignore comment
 		error.suffixSection = input.slice(Math.max(0, error.location.end.offset));
 	}
 
@@ -76,9 +85,11 @@ class LayoutParser {
 		if (!this.params.has(name)) {
 			const error = new Error(`Missing parameter for view ’${name}’.`);
 			error.name = "UndefinedView";
+			// @ts-ignore comment
 			error.availableParams = Array.from(this.params.keys()).filter(
 				k => k !== "layout"
 			);
+			// @ts-ignore comment
 			error.title = `Undefined View ’${name}’`;
 			return { error };
 		}

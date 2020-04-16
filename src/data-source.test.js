@@ -1,129 +1,124 @@
 import test from "ava";
+import DataSource from "./data-source";
 
-test("to-do", t => {
-	// This test is failing to compile the TypeScript code.
-	t.pass();
+
+test("returns a promise with the current value", async t => {
+	const source = new DataSource("hi", "file://hi", 123);
+
+	t.is(await source.latest, 123);
 });
 
-// Import DataSource from "./data-source";
+test("allows values to be observed", async t => {
+	const source = new DataSource("hi", "file://hi");
 
-// test("returns a promise with the current value", async t => {
-// 	const source = new DataSource("hi", "file://hi", 123);
+	const results = new Promise(resolve => {
+		const values = [];
+		source.observe((error, value) => {
+			values.push({ error, value });
+			if (values.length === 2) {
+				resolve(values);
+			}
+		});
+	});
 
-// 	t.is(await source.latest, 123);
-// });
+	source.latest = 1;
+	source.latest = 2;
 
-// test("allows values to be observed", async t => {
-// 	const source = new DataSource("hi", "file://hi");
+	t.deepEqual(await results, [
+		{ error: undefined, value: 1 },
+		{ error: undefined, value: 2 },
+	]);
+});
 
-// 	const results = new Promise(resolve => {
-// 		const values = [];
-// 		source.observe((error, value) => {
-// 			values.push({ error, value });
-// 			if (values.length === 2) {
-// 				resolve(values);
-// 			}
-// 		});
-// 	});
+test("emits the last known value on subscription", async t => {
+	const source = new DataSource("hi", "file://hi", 73);
 
-// 	source.latest = 1;
-// 	source.latest = 2;
+	const { error, value } = await new Promise(resolve => {
+		source.observe((error, value) => resolve({ error, value }));
+	});
 
-// 	t.deepEqual(await results, [
-// 		{ error: undefined, value: 1 },
-// 		{ error: undefined, value: 2 },
-// 	]);
-// });
+	t.falsy(error);
+	t.is(value, 73);
+});
 
-// test("emits the last known value on subscription", async t => {
-// 	const source = new DataSource("hi", "file://hi", 73);
+test("emits errors", async t => {
+	const source = new DataSource(
+		"hi",
+		"file://hi",
+		Promise.reject(new Error("oops"))
+	);
 
-// 	const { error, value } = await new Promise(resolve => {
-// 		source.observe((error, value) => resolve({ error, value }));
-// 	});
+	const { error } = await new Promise(resolve => {
+		source.observe((error, value) => resolve({ error, value }));
+	});
 
-// 	t.falsy(error);
-// 	t.is(value, 73);
-// });
+	t.is(error.message, "oops");
+});
 
-// test("emits errors", async t => {
-// 	const source = new DataSource(
-// 		"hi",
-// 		"file://hi",
-// 		Promise.reject(new Error("oops"))
-// 	);
+test("allows unsubscribing", async t => {
+	const source = new DataSource("hi", "file://hi");
 
-// 	const { error } = await new Promise(resolve => {
-// 		source.observe((error, value) => resolve({ error, value }));
-// 	});
+	const values = [];
+	const x = (error, value) => {
+		values.push({ error, value });
+		subscription.cancel();
+	};
 
-// 	t.is(error.message, "oops");
-// });
+	const subscription = source.observe(x);
 
-// test("allows unsubscribing", async t => {
-// 	const source = new DataSource("hi", "file://hi");
+	const results = new Promise(resolve => {
+		let total = 0;
+		source.observe(() => {
+			if (++total === 2) {
+				resolve();
+			}
+		});
+	});
 
-// 	const values = [];
-// 	const x = (error, value) => {
-// 		values.push({ error, value });
-// 		subscription.cancel();
-// 	};
+	source.latest = 7;
+	source.latest = 9;
 
-// 	const subscription = source.observe(x);
+	await results;
+	t.deepEqual(values, [{ error: undefined, value: 7 }]);
+});
 
-// 	const results = new Promise(resolve => {
-// 		let total = 0;
-// 		source.observe(() => {
-// 			if (++total === 2) {
-// 				resolve();
-// 			}
-// 		});
-// 	});
+test("emits only the latest value", async t => {
+	const source = new DataSource("hi", "file://hi");
 
-// 	source.latest = 7;
-// 	source.latest = 9;
+	const result = new Promise(resolve => {
+		const values = [];
+		source.observe((_, value) => {
+			values.push(value);
+			resolve(values);
+		});
+	});
 
-// 	await results;
-// 	t.deepEqual(values, [{ error: undefined, value: 7 }]);
-// });
+	source.latest = new Promise(resolve => {
+		source.latest = new Promise(resolve => {
+			resolve(2);
+		});
+		source.latest.then(() => resolve(1));
+	});
 
-// test("emits only the latest value", async t => {
-// 	const source = new DataSource("hi", "file://hi");
+	t.deepEqual(await result, [2]);
+});
 
-// 	const result = new Promise(resolve => {
-// 		const values = [];
-// 		source.observe((_, value) => {
-// 			values.push(value);
-// 			resolve(values);
-// 		});
-// 	});
+test("does not re-emit the same value", async t => {
+	const source = new DataSource("hi", "file://hi");
 
-// 	source.latest = new Promise(resolve => {
-// 		source.latest = new Promise(resolve => {
-// 			resolve(2);
-// 		});
-// 		source.latest.then(() => resolve(1));
-// 	});
+	const result = new Promise(resolve => {
+		const values = [];
+		source.observe((_, value) => {
+			values.push(value);
+			if (values.length === 2) {
+				resolve(values);
+			}
+		});
+	});
 
-// 	t.deepEqual(await result, [2]);
-// });
+	source.latest = "a";
+	source.latest = "a";
+	source.latest = "b";
 
-// test("does not re-emit the same value", async t => {
-// 	const source = new DataSource("hi", "file://hi");
-
-// 	const result = new Promise(resolve => {
-// 		const values = [];
-// 		source.observe((_, value) => {
-// 			values.push(value);
-// 			if (values.length === 2) {
-// 				resolve(values);
-// 			}
-// 		});
-// 	});
-
-// 	source.latest = "a";
-// 	source.latest = "a";
-// 	source.latest = "b";
-
-// 	t.deepEqual(await result, ["a", "b"]);
-// });
+	t.deepEqual(await result, ["a", "b"]);
+});
