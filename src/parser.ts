@@ -2,9 +2,7 @@ import {
 	parse as parseLayout,
 	ViewFrameCollection,
 	ViewDef,
-	// @ts-ignore comment
 } from "./parsers/layout";
-// @ts-ignore comment
 import { parse as parseView, Resource } from "./parsers/view";
 import DataSource from "./data-source";
 
@@ -112,6 +110,7 @@ class LayoutParser {
 					url = resource.value;
 				}
 
+				// @ts-ignore comment
 				resource.value = this.dataSourceCache.has(name)
 					? this.dataSourceCache.get(name)
 					: this.dataSourceCache
@@ -134,10 +133,13 @@ class LayoutParser {
 
 	private recursivelyParseViews(view: ViewDef): ViewDef {
 		if (typeof view === "string") {
+			// @ts-ignore comment
 			return this.get(view);
 		}
 
+		// @ts-ignore comment
 		view.views.forEach((v: ViewFrameCollection) => {
+			// @ts-ignore comment
 			v.view = this.recursivelyParseViews(v.view);
 		});
 

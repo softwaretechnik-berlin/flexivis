@@ -1,7 +1,6 @@
 import test from "ava";
 import DataSource from "./data-source";
 
-
 test("returns a promise with the current value", async t => {
 	const source = new DataSource("hi", "file://hi", 123);
 
