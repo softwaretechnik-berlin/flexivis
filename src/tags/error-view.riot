@@ -22,10 +22,10 @@
     </div>
 
     <div if={ error.name === "UndefinedView" }>
-      <div if={error.availableParams}>
+      <div if={error.availableParameters}>
         <p>Known views from URL parameters:</p>
         <ul>
-          <li each={p in error.availableParams.sort()}>'{p}'</li>
+          <li each={p in error.availableParameters.sort()}>'{p}'</li>
         </ul>
       </div>
     </div>

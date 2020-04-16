@@ -28,31 +28,47 @@ export interface XViewError {
 
 export type XView = XViewFrame | XViewFrameCollection | XViewError;
 
-const handleError = (
+class InputParseError extends Error {
+	constructor(
+		public title: string,
+		public prefixSection: string,
+		public invalidSection: string,
+		public suffixSection: string
+	) {
+		super();
+		Object.setPrototypeOf(this, new.target.prototype);
+	}
+}
+
+class UndefinedViewError extends Error {
+	constructor(public title: string, public availableParameters: string[]) {
+		super();
+	}
+}
+
+const convertSyntaxError = (
 	error: Error,
 	name: string,
 	title: string,
 	input: string
 ): Error => {
 	if (error.name === "SyntaxError") {
-		error.name = name;
-		// @ts-ignore comment
-		error.title = title;
-		// @ts-ignore comment
-		error.prefixSection = input.slice(
-			0,
-			// @ts-ignore comment
-			Math.max(0, error.location.start.offset)
+		// @ts-ignore
+		const start = error.location.start.offset;
+		// @ts-ignore
+		const end = error.location.end.offset;
+
+		const converted = new InputParseError(
+			title,
+			input.slice(0, Math.max(0, start)),
+			input.slice(start, end),
+			input.slice(Math.max(0, end))
 		);
-		// @ts-ignore comment
-		error.invalidSection = input.slice(
-			// @ts-ignore comment
-			error.location.start.offset,
-			// @ts-ignore comment
-			error.location.end.offset
-		);
-		// @ts-ignore comment
-		error.suffixSection = input.slice(Math.max(0, error.location.end.offset));
+
+		converted.name = name;
+		converted.message = error.message;
+
+		return converted;
 	}
 
 	return error;
@@ -99,7 +115,7 @@ class LayoutParser {
 			const layoutSpec: ViewDef = parseLayout(layout);
 			return this.recursivelyParseViews(layoutSpec);
 		} catch (error) {
-			throw handleError(
+			throw convertSyntaxError(
 				error,
 				"InvalidLayout",
 				"Invalid ’layout’ Parameter",
@@ -110,14 +126,12 @@ class LayoutParser {
 
 	private get(name: string): XView {
 		if (!this.params.has(name)) {
-			const error = new Error(`Missing parameter for view ’${name}’.`);
-			error.name = "UndefinedView";
-			// @ts-ignore comment
-			error.availableParams = Array.from(this.params.keys()).filter(
-				k => k !== "layout"
+			const error = new UndefinedViewError(
+				`Undefined View ’${name}’`,
+				Array.from(this.params.keys()).filter(k => k !== "layout")
 			);
-			// @ts-ignore comment
-			error.title = `Undefined View ’${name}’`;
+			error.name = "UndefinedView";
+			error.message = `Missing parameter for view ’${name}’.`;
 			return { error };
 		}
 
@@ -160,7 +174,7 @@ class LayoutParser {
 			};
 		} catch (error) {
 			return {
-				error: handleError(
+				error: convertSyntaxError(
 					error,
 					"InvalidView",
 					`Invalid View Parameter ’${name}’`,
@@ -172,7 +186,6 @@ class LayoutParser {
 
 	private recursivelyParseViews(view: ViewDef): XView {
 		if (typeof view === "string") {
-			// TODO anything better to check ViewName?
 			return this.get(view);
 		}
 
