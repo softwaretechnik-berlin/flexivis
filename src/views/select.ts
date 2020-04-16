@@ -1,7 +1,7 @@
-import { SourceHandler } from "./common";
+import { Context, SourceHandler } from "./common";
 
 export default class SelectHandler extends SourceHandler {
-	handleWithSource(source, ctx) {
+	async handleWithSource(source: string, ctx: Context): Promise<void> {
 		const definition = JSON.parse(source);
 		ctx.riot.mount(
 			ctx.element,

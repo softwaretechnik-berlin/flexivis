@@ -1,7 +1,7 @@
-import { Handler } from "./common";
+import { Handler, Context } from "./common";
 
-export default class FrameHandler extends Handler {
-	handle(ctx) {
+export default class FrameHandler implements Handler {
+	async handle(ctx: Context): Promise<void> {
 		const iframe = document.createElement("iframe");
 		iframe.src = `${ctx.view.type}:${ctx.view.resources[0].value.name}`;
 		ctx.element.append(iframe);

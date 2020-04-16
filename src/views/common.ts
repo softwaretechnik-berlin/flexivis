@@ -1,16 +1,22 @@
+import { XViewFrame } from "../parser";
+
+export interface Context {
+	riot: any;
+	element: HTMLElement;
+	view: XViewFrame;
+	handleError: (error: Error) => void;
+}
+
 /**
  * Handles view specifications by rendering them into an element.
  */
-export class Handler {
+export interface Handler {
 	/**
 	 * Renders a view into the given element.
 	 *
-	 * @param {{name: string, definition: string, definition: string, element, riot}} ctx
-	 * @returns {Promise.<*>} a promise that is fulfilled when the view is rendered, or rejected if the view cannot be rendered
+	 * @returns A promise that is fulfilled when the view is rendered, or rejected if the view cannot be rendered.
 	 */
-	handle(ctx) {
-		throw new Error(`Cannot handle type ’${ctx.name}’`);
-	}
+	handle(ctx: Context): Promise<void>;
 }
 
 /**
@@ -22,18 +28,8 @@ export class Handler {
  *
  * Implementations need only specify how to render the view given the source string.
  */
-export class SourceHandler extends Handler {
-	constructor(retriever) {
-		super();
-		this.retriever = retriever;
-
-		// As ridiculous as it may sound, ES6 class with babel does not autobind `this`.
-		// For now, I'll just do the binding myself.
-		// https://stackoverflow.com/a/42163458
-		this.handle = this.handle.bind(this);
-	}
-
-	async handle(ctx) {
+export abstract class SourceHandler implements Handler {
+	async handle(ctx: Context): Promise<void> {
 		ctx.view.resources[0].value.observe(async (error, source) => {
 			if (error) {
 				ctx.handleError(error);
@@ -42,8 +38,8 @@ export class SourceHandler extends Handler {
 			ctx.element.innerHTML = "";
 			try {
 				return await this.handleWithSource(source, ctx);
-			} catch (error_) {
-				ctx.handleError(error_);
+			} catch (handleError) {
+				ctx.handleError(handleError);
 			}
 		});
 	}
@@ -51,11 +47,8 @@ export class SourceHandler extends Handler {
 	/**
 	 * Renders the source into the given element.
 	 *
-	 * @param {string} source the source text to render
-	 * @param {{name: string, definition: string, definition: string, element, riot}} ctx
+	 * @param source the source text to render
 	 * @returns {Promise.<*>} a promise that is fulfilled when the view is rendered, or rejected if the view cannot be rendered
 	 */
-	handleWithSource(source, ctx) {
-		return super.handle(ctx);
-	}
+	abstract handleWithSource(source: string, ctx: Context): Promise<void>;
 }

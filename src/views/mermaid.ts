@@ -1,9 +1,10 @@
-import { SourceHandler } from "./common";
+import { Context, SourceHandler } from "./common";
 import mermaid from "mermaid";
 
 export default class MermaidHandler extends SourceHandler {
-	handleWithSource(source, ctx) {
+	async handleWithSource(source: string, ctx: Context): Promise<void> {
 		ctx.element.innerHTML = source;
+		// @ts-ignore
 		mermaid.init(undefined, ctx.element);
 	}
 }

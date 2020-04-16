@@ -1,7 +1,7 @@
-import { Handler } from "./common";
+import { Handler, Context } from "./common";
 
-export default class MapHandler extends Handler {
-	handle(ctx) {
+export default class MapHandler implements Handler {
+	async handle(ctx: Context): Promise<void> {
 		ctx.riot.mount(
 			ctx.element,
 			{

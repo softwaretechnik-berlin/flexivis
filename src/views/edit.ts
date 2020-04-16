@@ -1,7 +1,7 @@
-import { Handler } from "./common";
+import { Handler, Context } from "./common";
 
-export default class EditHandler extends Handler {
-	async handle(ctx) {
+export default class EditHandler implements Handler {
+	async handle(ctx: Context): Promise<void> {
 		const dataSource = ctx.view.resources[0].value;
 		const content = await dataSource.latest;
 
@@ -12,7 +12,7 @@ export default class EditHandler extends Handler {
 
 		const button = document.createElement("button");
 		button.textContent = "Update";
-		button.style.right = 0;
+		button.style.right = "0";
 		button.style.position = "absolute";
 		button.addEventListener("click", () => {
 			dataSource.latest = textarea.value;

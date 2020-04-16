@@ -1,9 +1,10 @@
-import { SourceHandler } from "./common";
+import { Context, SourceHandler } from "./common";
 
+// @ts-ignore
 import vegaEmbed from "vega-embed";
 
 export default class VegaHandler extends SourceHandler {
-	handleWithSource(source, ctx) {
+	async handleWithSource(source: string, ctx: Context): Promise<void> {
 		const div = document.createElement("div");
 		div.style.width = "100%";
 		div.style.height = "100%";

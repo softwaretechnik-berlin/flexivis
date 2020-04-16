@@ -7,18 +7,18 @@ const mod = loadHandlerModule => async ctx => {
 };
 
 const handlers = {
-	http: mod(() => import("./frame.js")),
-	https: mod(() => import("./frame.js")),
-	file: mod(() => import("./frame.js")),
-	md: mod(() => import("./markdown.js")),
-	json: mod(() => import("./json.js")),
-	text: mod(() => import("./text.js")),
-	vega: mod(() => import("./vega.js")),
-	mermaid: mod(() => import("./mermaid.js")),
-	map: mod(() => import("./map.js")),
-	readme: mod(() => import("./readme.js")),
-	select: mod(() => import("./select.js")),
-	edit: mod(() => import("./edit.js")),
+	http: mod(() => import("./frame")),
+	https: mod(() => import("./frame")),
+	file: mod(() => import("./frame")),
+	md: mod(() => import("./markdown")),
+	json: mod(() => import("./json")),
+	text: mod(() => import("./text")),
+	vega: mod(() => import("./vega")),
+	mermaid: mod(() => import("./mermaid")),
+	map: mod(() => import("./map")),
+	readme: mod(() => import("./readme")),
+	select: mod(() => import("./select")),
+	edit: mod(() => import("./edit")),
 };
 
 export const knownHandlers = Object.keys(handlers);

@@ -1,7 +1,7 @@
-import { SourceHandler } from "./common";
+import { SourceHandler, Context } from "./common";
 
 export default class JsonHandler extends SourceHandler {
-	handleWithSource(source, ctx) {
+	async handleWithSource(source: string, ctx: Context): Promise<void> {
 		const div = document.createElement("div");
 		div.classList.add("json");
 		ctx.element.append(div);
