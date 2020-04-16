@@ -1,10 +1,32 @@
-import {
-	parse as parseLayout,
-	ViewFrameCollection,
-	ViewDef,
-} from "./parsers/layout";
-import { parse as parseView, Resource } from "./parsers/view";
+import { parse as parseLayout, ViewDef } from "./parsers/layout";
+import { parse as parseView, Resource, Config } from "./parsers/view";
 import DataSource from "./data-source";
+
+export interface XConfig {
+	[key: string]: string | string[] | Config;
+}
+
+export interface XResource {
+	config: XConfig;
+	value: DataSource<string>;
+}
+
+export interface XViewFrame {
+	type: string;
+	config: XConfig;
+	resources: XResource[];
+}
+
+export interface XViewFrameCollection {
+	sep: "/" | "-";
+	views: Array<{ view: XView; size: number }>;
+}
+
+export interface XViewError {
+	error: Error;
+}
+
+export type XView = XViewFrame | XViewFrameCollection | XViewError;
 
 const handleError = (
 	error: Error,
@@ -40,7 +62,14 @@ const retrieveText = async (url: string): Promise<string> => {
 	try {
 		return await (await fetch(url)).text();
 	} catch (error) {
-		throw new Error(`Failed to fetch "${url}": ${error}`);
+		let message: string;
+		if (error instanceof Error) {
+			message = error.message;
+		} else {
+			message = "";
+		}
+
+		throw new TypeError(`Failed to fetch "${url}": ${message}`);
 	}
 };
 
@@ -64,7 +93,7 @@ class LayoutParser {
 		this.dataSourceCache = new Map();
 	}
 
-	parse() {
+	parse(): XView {
 		const layout = this.params.get("layout");
 		try {
 			const layoutSpec: ViewDef = parseLayout(layout);
@@ -79,7 +108,7 @@ class LayoutParser {
 		}
 	}
 
-	private get(name: string) {
+	private get(name: string): XView {
 		if (!this.params.has(name)) {
 			const error = new Error(`Missing parameter for view ’${name}’.`);
 			error.name = "UndefinedView";
@@ -96,29 +125,39 @@ class LayoutParser {
 		try {
 			const parsed = parseView(viewParameter);
 
-			parsed.resources.forEach((resource: Resource) => {
-				const name = resource.value;
-				let url: string;
+			const resources: XResource[] = parsed.resources.map(
+				(resource: Resource) => {
+					const name = resource.value;
+					let url: string;
 
-				if (resource.value.startsWith("$")) {
-					if (!this.params.has(name)) {
-						throw new Error(`Shared source ’${name}’ is not available.`);
+					if (resource.value.startsWith("$")) {
+						if (!this.params.has(name)) {
+							throw new Error(`Shared source ’${name}’ is not available.`);
+						}
+
+						url = this.params.get(resource.value);
+					} else {
+						url = resource.value;
 					}
 
-					url = this.params.get(resource.value);
-				} else {
-					url = resource.value;
+					const value = this.dataSourceCache.has(name)
+						? this.dataSourceCache.get(name)
+						: this.dataSourceCache
+								.set(name, new DataSource(name, url, this.retrieve(url)))
+								.get(name);
+
+					return {
+						config: resource.config,
+						value,
+					};
 				}
+			);
 
-				// @ts-ignore comment
-				resource.value = this.dataSourceCache.has(name)
-					? this.dataSourceCache.get(name)
-					: this.dataSourceCache
-							.set(name, new DataSource(name, url, this.retrieve(url)))
-							.get(name);
-			});
-
-			return parsed;
+			return {
+				type: parsed.type,
+				config: parsed.config,
+				resources,
+			};
 		} catch (error) {
 			return {
 				error: handleError(
@@ -131,25 +170,29 @@ class LayoutParser {
 		}
 	}
 
-	private recursivelyParseViews(view: ViewDef): ViewDef {
+	private recursivelyParseViews(view: ViewDef): XView {
 		if (typeof view === "string") {
-			// @ts-ignore comment
+			// TODO anything better to check ViewName?
 			return this.get(view);
 		}
 
-		// @ts-ignore comment
-		view.views.forEach((v: ViewFrameCollection) => {
-			// @ts-ignore comment
-			v.view = this.recursivelyParseViews(v.view);
-		});
+		const collection: XViewFrameCollection = {
+			sep: view.sep,
+			views: view.views.map(v => {
+				return {
+					size: v.size,
+					view: this.recursivelyParseViews(v.view),
+				};
+			}),
+		};
 
-		return view;
+		return collection;
 	}
 }
 
 export default function parse(
 	parameters: URLSearchParams,
 	retrieve: (url: string) => Promise<string> = retrieveText
-) {
+): XView {
 	return new LayoutParser(parameters, retrieve).parse();
 }

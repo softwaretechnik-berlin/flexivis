@@ -15,7 +15,7 @@ export default class DataSource<T> {
 	constructor(
 		public name: string,
 		public url: string,
-		initialValue: T | Promise<T>
+		initialValue?: T | Promise<T>
 	) {
 		this.handlers = [];
 		this.counter = 0;
