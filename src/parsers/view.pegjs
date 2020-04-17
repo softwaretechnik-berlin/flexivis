@@ -1,11 +1,11 @@
 Root =
   config:ConfigurationList? view:(InlineView / RegularView) {
-    view.config = config || [];
+    view.config = config || {};
     return view;
   }
 
 InlineView = type:ViewType ':inline:' content:(.* { return text(); }) {
-  return { type, resources: [{ config: [], value: "data:," + encodeURIComponent(content) }] }
+  return { type, resources: [{ config: {}, value: "data:," + encodeURIComponent(content) }] }
 }
 RegularView = type:ViewType resources:(
   	':'
@@ -64,7 +64,7 @@ ResourceList =
 Resource =
   config:ConfigurationList?
   value:ResourceValue
-  { return { value, config: config || [] }; }
+  { return { value, config: config || {} }; }
 ResourceValue =
   [^;]+
   { return text(); }

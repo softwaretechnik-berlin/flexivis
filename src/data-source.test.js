@@ -48,7 +48,7 @@ test("emits errors", async t => {
 	);
 
 	const { error } = await new Promise(resolve => {
-		source.observe((error, value) => resolve({ error, value }));
+		source.observe(error => resolve({ error }));
 	});
 
 	t.is(error.message, "oops");

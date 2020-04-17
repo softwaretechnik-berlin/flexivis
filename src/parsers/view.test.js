@@ -4,13 +4,13 @@ const view = require("./view");
 test("parses just a view type", t => {
 	t.deepEqual(view.parse("readme"), {
 		type: "readme",
-		config: [],
+		config: {},
 		resources: [],
 	});
 
 	t.deepEqual(view.parse("readme:"), {
 		type: "readme",
-		config: [],
+		config: {},
 		resources: [],
 	});
 });
@@ -18,11 +18,11 @@ test("parses just a view type", t => {
 test("parses URLs", t => {
 	t.deepEqual(view.parse("https://example.com"), {
 		type: "https",
-		config: [],
+		config: {},
 		resources: [
 			{
 				value: "//example.com",
-				config: [],
+				config: {},
 			},
 		],
 	});
@@ -31,15 +31,15 @@ test("parses URLs", t => {
 test("parses multiple resources", t => {
 	t.deepEqual(view.parse("multi:a;b"), {
 		type: "multi",
-		config: [],
+		config: {},
 		resources: [
 			{
 				value: "a",
-				config: [],
+				config: {},
 			},
 			{
 				value: "b",
-				config: [],
+				config: {},
 			},
 		],
 	});

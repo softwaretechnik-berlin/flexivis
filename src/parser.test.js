@@ -8,7 +8,7 @@ test("combines the layout and view parsers", t => {
 
 	// We serialize and deserialize to "flat" all classes in it.
 	const layoutDefinition = JSON.parse(
-		JSON.stringify(parse(parameters, url => url))
+		JSON.stringify(parse(parameters, async url => url))
 	);
 	t.deepEqual(layoutDefinition, {
 		sep: "/",
@@ -21,7 +21,7 @@ test("combines the layout and view parsers", t => {
 				view: {
 					sep: "-",
 					views: [
-						{ view: { type: "lap", resources: [], config: [] }, size: 50 },
+						{ view: { type: "lap", resources: [], config: {} }, size: 50 },
 						{
 							view: {
 								type: "map",
@@ -34,7 +34,7 @@ test("combines the layout and view parsers", t => {
 											n: 0,
 											url: "json1",
 										},
-										config: [],
+										config: {},
 									},
 									{
 										value: {
@@ -47,7 +47,7 @@ test("combines the layout and view parsers", t => {
 										config: { hide: null },
 									},
 								],
-								config: [],
+								config: {},
 							},
 							size: 50,
 						},

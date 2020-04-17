@@ -2,9 +2,11 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "allowJs": true,
+    "checkJs": false,
     "target": "es2015",
     "module": "CommonJS",
     "allowSyntheticDefaultImports": true,
+    "noEmit": true,
     "typeRoots": [
       "./src/**/*"
     ],

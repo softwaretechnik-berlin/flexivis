@@ -142,7 +142,7 @@ function peg$parse(input, options) {
       peg$startRuleFunction  = peg$parseRoot,
 
       peg$c0 = function(config, view) {
-          view.config = config || [];
+          view.config = config || {};
           return view;
         },
       peg$c1 = ":inline:",
@@ -150,7 +150,7 @@ function peg$parse(input, options) {
       peg$c3 = peg$anyExpectation(),
       peg$c4 = function(type) { return text(); },
       peg$c5 = function(type, content) {
-        return { type, resources: [{ config: [], value: "data:," + encodeURIComponent(content) }] }
+        return { type, resources: [{ config: {}, value: "data:," + encodeURIComponent(content) }] }
       },
       peg$c6 = ":",
       peg$c7 = peg$literalExpectation(":", false),
@@ -183,7 +183,7 @@ function peg$parse(input, options) {
       peg$c32 = peg$classExpectation([["a", "z"], ["A", "Z"], "-"], false, false),
       peg$c33 = function(head, resources) { return resources; },
       peg$c34 = function(head, tail) { return [head, ...tail].flat(); },
-      peg$c35 = function(config, value) { return { value, config: config || [] }; },
+      peg$c35 = function(config, value) { return { value, config: config || {} }; },
       peg$c36 = /^[^;]/,
       peg$c37 = peg$classExpectation([";"], true, false),
 
