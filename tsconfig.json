@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "allowJs": true,
-    "checkJs": false,
+    "checkJs": true,
     "target": "es2015",
     "module": "CommonJS",
     "allowSyntheticDefaultImports": true,
