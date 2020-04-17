@@ -19,9 +19,7 @@ glob("src/parsers/*.pegjs")
 		return Promise.all(
 			files.map(async file => {
 				const outputFile = file.replace(/\.[^.]+$/, ".js");
-				await run(
-					`npx pegjs -o ${outputFile} --export-var module.exports --format umd ${file}`
-				);
+				await run(`npx pegjs -o ${outputFile} --format commonjs ${file}`);
 				await run(`npx grammkit -t md ../../${file}`, {
 					cwd: `${projectDir}/docs/grammar`,
 				});
