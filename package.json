@@ -15,6 +15,7 @@
   "devDependencies": {
     "@ava/typescript": "^1.1.1",
     "@riotjs/parcel-plugin-riot": "^4.0.1",
+    "@types/didyoumean": "^1.2.0",
     "@types/parcel-env": "0.0.0",
     "ava": "^3.6.0",
     "backstopjs": "^4.5.0",

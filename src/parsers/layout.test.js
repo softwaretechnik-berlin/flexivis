@@ -1,5 +1,5 @@
 import test from "ava";
-import * as layout from "./layout";
+const layout = require("./layout");
 
 test("parses a single view", t => {
 	t.is(layout.parse("a"), "a");
