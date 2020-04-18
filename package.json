@@ -33,11 +33,11 @@
   },
   "scripts": {
     "backstop": "node build/backstop-config.js && backstop --config tests/visual/backstop.json --docker",
-    "start": "parcel index.html",
-    "build": "parcel build --no-cache -d dist index.html",
+    "start": "rm -rf .cache/ && parcel index.html",
+    "build": "rm -rf .cache/ && parcel build --no-cache -d dist index.html",
+    "build-local-use": "rm -rf .cache/ && parcel build --no-cache -d dist index.html --public-url ./",
     "lint": "xo --fix --prettier --env=browser || exit 0",
     "test": "npm run lint && ava && npm run backstop test",
-    "build-local-use": "parcel build --no-cache -d dist index.html --public-url ./",
     "readme": "node build/readme.js",
     "generate-parser": "node build/parsers.js"
   },

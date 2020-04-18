@@ -1,6 +1,7 @@
 import { parse as parseLayout, ViewDef } from "./parsers/layout";
 import { parse as parseView, Resource, Config } from "./parsers/view";
 import DataSource from "./data-source";
+import { FlexivisError } from "./flexivis";
 
 export interface XConfig {
 	[key: string]: string | string[] | Config;
@@ -28,21 +29,28 @@ export interface XViewError {
 
 export type XView = XViewFrame | XViewFrameCollection | XViewError;
 
-class InputParseError extends Error {
+class InputParseError extends FlexivisError {
 	constructor(
-		public title: string,
-		public prefixSection: string,
-		public invalidSection: string,
-		public suffixSection: string
+		name: string,
+		title: string,
+		message: string,
+		public details: {
+			prefixSection: string;
+			invalidSection: string;
+			suffixSection: string;
+		}
 	) {
-		super();
-		Object.setPrototypeOf(this, new.target.prototype);
+		super(name, title, message);
 	}
 }
 
-class UndefinedViewError extends Error {
-	constructor(public title: string, public availableParameters: string[]) {
-		super();
+class UndefinedViewError extends FlexivisError {
+	constructor(
+		title: string,
+		message: string,
+		public details: { availableParameters: string[] }
+	) {
+		super("UndefinedView", title, message);
 	}
 }
 
@@ -58,17 +66,11 @@ const convertSyntaxError = (
 		// @ts-ignore
 		const end = error.location.end.offset;
 
-		const converted = new InputParseError(
-			title,
-			input.slice(0, Math.max(0, start)),
-			input.slice(start, end),
-			input.slice(Math.max(0, end))
-		);
-
-		converted.name = name;
-		converted.message = error.message;
-
-		return converted;
+		return new InputParseError(name, title, error.message, {
+			prefixSection: input.slice(0, Math.max(0, start)),
+			invalidSection: input.slice(start, end),
+			suffixSection: input.slice(Math.max(0, end)),
+		});
 	}
 
 	return error;
@@ -128,10 +130,13 @@ class LayoutParser {
 		if (!this.params.has(name)) {
 			const error = new UndefinedViewError(
 				`Undefined View ’${name}’`,
-				Array.from(this.params.keys()).filter(k => k !== "layout")
+				`Missing parameter for view ’${name}’.`,
+				{
+					availableParameters: Array.from(this.params.keys()).filter(
+						k => k !== "layout"
+					),
+				}
 			);
-			error.name = "UndefinedView";
-			error.message = `Missing parameter for view ’${name}’.`;
 			return { error };
 		}
 

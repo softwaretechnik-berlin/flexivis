@@ -3,6 +3,7 @@ import didYouMean from "didyoumean";
 
 import { Context, Handler } from "./common";
 import { XViewFrame } from "../parser";
+import { FlexivisError } from "../flexivis";
 
 type HandlerModule = { default: new () => Handler };
 const mod = (loadHandlerModule: () => Promise<HandlerModule>) => async (
@@ -29,9 +30,9 @@ const handlers: { [key: string]: (ctx: Context) => Promise<void> } = {
 
 export const knownHandlers = Object.keys(handlers);
 
-class UnknownViewTypeError extends Error {
-	constructor(public title: string, public knownHandlers: string[]) {
-		super();
+class UnknownViewTypeError extends FlexivisError {
+	constructor(message: string, public details: { knownHandlers: string[] }) {
+		super("UnknownViewType", "Unknown View Type", message);
 	}
 }
 
@@ -50,10 +51,10 @@ export async function mount(
 						: suggestedHandler.join(", ")
 			  }"?`
 			: "";
-		const error = new UnknownViewTypeError("Unknown View Type", knownHandlers);
-		error.name = "UnknownViewType";
-		error.message = `Unknown view type "${view.type}".${suggestion}`;
-		throw error;
+		throw new UnknownViewTypeError(
+			`Unknown view type "${view.type}".${suggestion}`,
+			{ knownHandlers }
+		);
 	}
 
 	return handler({

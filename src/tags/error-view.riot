@@ -4,28 +4,28 @@
     <p>{ error.message || error }</p>
 
     <div if={ error.name === "InvalidLayout" }>
-      <p><pre><code><span style="color: #999">{error.prefixSection}</span><span style="border: 1px solid red; background-color: pink">{error.errorSection}</span><span style="color: #999">{error.suffixSection}</span></code></pre></p>
+      <p><pre><code><span style="color: #999">{error.details.prefixSection}</span><span style="border: 1px solid red; background-color: pink">{error.details.errorSection}</span><span style="color: #999">{error.details.suffixSection}</span></code></pre></p>
       <p>You may want to refer to the Layout section of the <a href="/#layout">documentation</a>.</p>
     </div>
 
     <div if={ error.name === "InvalidView" }>
-      <p><pre><code><span style="color: #999">{error.prefixSection}</span><span style="border: 1px solid red; background-color: pink">{error.errorSection}</span><span style="color: #999">{error.suffixSection}</span></code></pre></p>
+      <p><pre><code><span style="color: #999">{error.details.prefixSection}</span><span style="border: 1px solid red; background-color: pink">{error.details.errorSection}</span><span style="color: #999">{error.details.suffixSection}</span></code></pre></p>
     </div>
 
     <div if={ error.name === "UnknownViewType" }>
-      <div if={error.knownHandlers}>
+      <div if={error.details.knownHandlers}>
         <p>Known view types (see the <a href="/">documentation</a> for details):</p>
         <ul>
-          <li each={h in error.knownHandlers.sort()}>{h}</li>
+          <li each={h in error.details.knownHandlers.sort()}>{h}</li>
         </ul>
       </div>
     </div>
 
     <div if={ error.name === "UndefinedView" }>
-      <div if={error.availableParameters}>
+      <div if={error.details.availableParameters}>
         <p>Known views from URL parameters:</p>
         <ul>
-          <li each={p in error.availableParameters.sort()}>'{p}'</li>
+          <li each={p in error.details.availableParameters.sort()}>'{p}'</li>
         </ul>
       </div>
     </div>

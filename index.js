@@ -4,6 +4,7 @@ import "regenerator-runtime/runtime";
 
 import * as riot from "riot";
 
+// TODO https://riot.js.org/faq/#should-i-use-dash-on-the-tag-name
 import ErrorView from "./src/tags/error-view";
 riot.register("error-view", ErrorView);
 import Tree from "./src/tags/tree";
