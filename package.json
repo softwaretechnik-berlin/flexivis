@@ -1,24 +1,26 @@
 {
   "name": "flexivis",
   "dependencies": {
+    "@medv/codejar": "^1.0.9",
     "@riotjs/observable": "^4.0.4",
+    "@types/highlight.js": "^9.12.3",
     "didyoumean": "^1.2.1",
     "flexivis-md": "file:build/flexivis-md",
     "github-markdown-css": "^4.0.0",
-    "mermaid": "^8.4.8",
+    "mermaid": "^8.5.0",
     "ol": "6.1.1",
-    "riot": "^4.11.1",
+    "riot": "^4.12.0",
     "vega": "^5.10.1",
-    "vega-embed": "^6.5.2",
-    "vega-lite": "^4.10.1"
+    "vega-embed": "^6.6.0",
+    "vega-lite": "^4.10.4"
   },
   "devDependencies": {
     "@ava/typescript": "^1.1.1",
     "@riotjs/parcel-plugin-riot": "^4.0.1",
     "@types/didyoumean": "^1.2.0",
     "@types/parcel-env": "0.0.0",
-    "ava": "^3.6.0",
-    "backstopjs": "^4.5.0",
+    "ava": "^3.7.0",
+    "backstopjs": "^4.5.1",
     "esm": "^3.2.25",
     "glob": "^7.1.6",
     "grammkit": "^0.7.1",
