@@ -47,8 +47,19 @@ export default class EditHandler implements Handler {
 		});
 		jar.updateCode(initialContent);
 
-		button.addEventListener("click", () => {
+		const update = (): void => {
 			dataSource.latest = jar.toString();
-		});
+		};
+
+		button.addEventListener("click", update);
+		wrapper.addEventListener(
+			"keydown",
+			event => {
+				if (event.ctrlKey && event.key === "s") {
+					update();
+				}
+			},
+			true
+		);
 	}
 }
