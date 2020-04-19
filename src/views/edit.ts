@@ -12,7 +12,11 @@ export default class EditHandler implements Handler {
 		wrapper.style.position = "relative";
 
     const textarea = document.createElement("div");
-    textarea.classList.add("editor");
+		textarea.classList.add("editor");
+		const lang = ctx.view.config.lang;
+		if (typeof lang === "string") {
+			textarea.classList.add(lang);
+		}
     textarea.style.width = "100%";
     textarea.style.height = "100%";
 
