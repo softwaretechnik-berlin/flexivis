@@ -17,6 +17,7 @@ Flexivis is a flexible visualisation tool that allows you to easily visualise di
             <li><a href="#mermaid-diagrams">Mermaid Diagrams</a></li>
             <li><a href="#vega-graphs">Vega Graphs</a></li>
             <li><a href="#item-select">Item Select</a></li>
+            <li><a href="#data-editor">Data Editor</a></li>
         </ul>
         <!-- END view specifications table of contents -->
     </li>
@@ -97,6 +98,32 @@ The parameter name is the name of the view (which can then be used in the `layou
 
 The basic format of a view specification is `<prefix>:<resource>`. The prefix specifies the view type. Optionally, configurations can be passed to both the view or the resources listed before the value, for example: `(abc=123;xyz=789)<prefix>:(hello=true;hide)<resource>`. A detailed specification of the view format is available [here](docs/grammar/view.md).
 
+### Inlined Data
+
+Many of the available views allows resources to be defined in-line. For that, the prefix `inline:` should be added. For example. the `text` view can be used as follows:
+
+```
+text:inline:Hello World!
+```
+
+
+### Shared Data Sources
+
+View resources can be declared as shared data sources. Shared data sources can be modified and cause other views to be updated.
+
+To use them, a resource name is prefixed with `$`, i.e. `$dataSourceName`. The URL parameters should then contain a parameter with the same name that defines the actual resource:
+
+```
+$dataSourceName=https://example.com
+```
+
+The inline prefix can also be used with data sources.
+
+The `edit` view demonstrates how to use them.
+
+
+### View Types
+
 The following view types are supported:
 
 <!-- BEGIN view specifications -->
@@ -109,6 +136,7 @@ The following view types are supported:
     <li><a href="#mermaid-diagrams">Mermaid Diagrams</a></li>
     <li><a href="#vega-graphs">Vega Graphs</a></li>
     <li><a href="#item-select">Item Select</a></li>
+    <li><a href="#data-editor">Data Editor</a></li>
 </ul>
 
 
@@ -304,6 +332,24 @@ https://flexivis.infrastruktur.link/?url=select:https://raw.githubusercontent.co
 ```
 
 <a href="https://flexivis.infrastruktur.link/?url=select:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/select-view.json"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_select-2_0_document_0_main.png"/></a>
+
+
+### Data Editor
+
+View specification prefix: `edit`.
+
+Allows editing a data source. Changes to it are broadcasted when clicking the "Update" button.
+
+The editor will try to automatically detect the type of the content. However,
+the type can be enforced by using the `lang` config. `lang` can be any of the languages supported by Highlight.js.
+The list of supported values is available [here](https://github.com/highlightjs/highlight.js/blob/master/SUPPORTED_LANGUAGES.md).
+
+
+```
+https://flexivis.infrastruktur.link/?layout=e/m&e=edit:$data&m=map:$data&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
+```
+
+<a href="https://flexivis.infrastruktur.link/?layout=e/m&amp;e=edit:$data&amp;m=map:$data&amp;$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_edit-1_0_document_0_main.png"/></a>
 <!-- END view specifications -->
 
 

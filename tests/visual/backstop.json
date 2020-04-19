@@ -206,7 +206,7 @@
           "label": "main"
         }
       ],
-      "delay": 2000
+      "delay": 4000
     },
     {
       "label": "mermaid-1",
@@ -272,6 +272,19 @@
         }
       ],
       "delay": 20000
+    },
+    {
+      "label": "edit-1",
+      "url": "http://host.docker.internal:1234/?layout=e/m&e=edit:$data&m=map:$data&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=e/m&e=edit:$data&m=map:$data&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 4000
     }
   ]
 }

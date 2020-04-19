@@ -82,6 +82,7 @@ handlers:
     examples:
       # TODO after fixing markdown display, use `md` instead of `text` to show JSON source
       - query: "layout=a/b&a=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&b=text:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"
+        delay: 4000
       # TODO - 'map:inline:{"type": "Feature", "geometry": {"type": "Point", "coordinates": [6.140556, 46.226667]}, "properties": {"wikipedia": "https://en.wikipedia.org/wiki/Palace_of_Nations"}}'
 
   mermaid:
@@ -160,4 +161,18 @@ handlers:
       - query: "layout=banner/capitals60&banner=text:inline:Select%20a%20capital!&capitals=(default=br)select:inline:%7B%22items%22%3A%5B%7B%22id%22%3A%22de%22%2C%22label%22%3A%22Germany%22%2C%22capital%22%3A%22Berlin%22%7D%2C%7B%22id%22%3A%22ca%22%2C%22label%22%3A%22Canada%22%2C%22capital%22%3A%22Ottawa%22%7D%2C%7B%22id%22%3A%22br%22%2C%22label%22%3A%22Brazil%22%2C%22capital%22%3A%22Brasilia%22%7D%5D%2C%22parameters%22%3A%7B%22layout%22%3A%22a%22%2C%22a%22%3A%22text%3Ainline%3AWelcome%20to%20%24%7Bcapital%7D%2C%20capital%20of%20%24%7Blabel%7D!%22%7D%2C%22modals%22%3A%7B%22Wikipedia%22%3A%22https%3A%2F%2Fen.wikipedia.org%2Fwiki%2F%24%7Bcapital%7D%22%7D%7D"
       - query: "url=select:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/select-view.json"
         delay: 20000
+
+  edit:
+    prefixes: ["edit"]
+    title: "Data Editor"
+    description: |
+      Allows editing a data source. Changes to it are broadcasted when clicking the "Update" button.
+
+      The editor will try to automatically detect the type of the content. However,
+      the type can be enforced by using the `lang` config. `lang` can be any of the languages supported by Highlight.js.
+      The list of supported values is available [here](https://github.com/highlightjs/highlight.js/blob/master/SUPPORTED_LANGUAGES.md).
+    examples:
+      - query: "layout=e/m&e=edit:$data&m=map:$data&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"
+        delay: 4000
+
   # TODO: Deal with README, which isn't documented here. Arguably it shouldn't be a named view handler.
