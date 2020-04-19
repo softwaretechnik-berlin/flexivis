@@ -144,6 +144,20 @@
       "onReadyScript": "open-first-modal-in-select-view-and-wait-iframe.js"
     },
     {
+      "label": "update-content-on-edit-view",
+      "url": "http://host.docker.internal:1234/?layout=a/b&a=edit:$data&b=text:$data&$data=inline:Hello",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=edit:$data&b=text:$data&$data=inline:Hello",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 2000,
+      "onReadyScript": "update-editor-content.js"
+    },
+    {
       "label": "frame-1",
       "url": "http://host.docker.internal:1234/?layout=a/b&a=https://wikipedia.org&b=https://example.com",
       "referenceUrl": "https://flexivis.infrastruktur.link/?layout=a/b&a=https://wikipedia.org&b=https://example.com",
