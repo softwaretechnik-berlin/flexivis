@@ -3,6 +3,8 @@ import { parse as parseView, Resource, Config } from "./parsers/view";
 import DataSource from "./data-source";
 import { FlexivisError } from "./flexivis";
 
+const inlinedDataPrefix = "inline:";
+
 export interface XConfig {
 	[key: string]: string | string[] | Config;
 }
@@ -155,6 +157,11 @@ class LayoutParser {
 						}
 
 						url = this.params.get(resource.value);
+						if (url.startsWith(inlinedDataPrefix)) {
+							url =
+								"data:," +
+								encodeURIComponent(url.slice(inlinedDataPrefix.length));
+						}
 					} else {
 						url = resource.value;
 					}
