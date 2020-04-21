@@ -18,6 +18,7 @@ Flexivis is a flexible visualisation tool that allows you to easily visualise di
             <li><a href="#vega-graphs">Vega Graphs</a></li>
             <li><a href="#item-select">Item Select</a></li>
             <li><a href="#data-editor">Data Editor</a></li>
+            <li><a href="#table-editor">Table Editor</a></li>
         </ul>
         <!-- END view specifications table of contents -->
     </li>
@@ -137,6 +138,7 @@ The following view types are supported:
     <li><a href="#vega-graphs">Vega Graphs</a></li>
     <li><a href="#item-select">Item Select</a></li>
     <li><a href="#data-editor">Data Editor</a></li>
+    <li><a href="#table-editor">Table Editor</a></li>
 </ul>
 
 
@@ -338,10 +340,10 @@ https://flexivis.infrastruktur.link/?url=select:https://raw.githubusercontent.co
 
 View specification prefix: `edit`.
 
-Allows editing a data source. Changes to it are broadcasted when clicking the "Update" button.
+Allows editing data. Changes made are broadcasted when clicking the "Update" button.
 
 The editor will try to automatically detect the type of the content. However,
-the type can be enforced by using the `lang` config. `lang` can be any of the languages supported by Highlight.js.
+a specific type can be enforced by using the `lang` config. `lang` can be set to any of the languages supported by Highlight.js.
 The list of supported values is available [here](https://github.com/highlightjs/highlight.js/blob/master/SUPPORTED_LANGUAGES.md).
 
 
@@ -350,6 +352,20 @@ https://flexivis.infrastruktur.link/?layout=e/m&e=edit:$data&m=map:$data&$data=h
 ```
 
 <a href="https://flexivis.infrastruktur.link/?layout=e/m&amp;e=edit:$data&amp;m=map:$data&amp;$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_edit-1_0_document_0_main.png"/></a>
+
+
+### Table Editor
+
+View specification prefix: `table`.
+
+Allows editing multiple CSV data sources in a spreadsheet. Changes made are broadcasted automatically when changes are introduced.
+
+
+```
+https://flexivis.infrastruktur.link/?layout=tables/textA/textB&textA=text:$a&textB=text:$b&tables=table:$a;$b&$a=inline:x,y,z&$b=inline:a,b,c
+```
+
+<a href="https://flexivis.infrastruktur.link/?layout=tables/textA/textB&amp;textA=text:$a&amp;textB=text:$b&amp;tables=table:$a;$b&amp;$a=inline:x,y,z&amp;$b=inline:a,b,c"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_table-1_0_document_0_main.png"/></a>
 <!-- END view specifications -->
 
 

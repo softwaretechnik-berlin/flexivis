@@ -1,6 +1,7 @@
 general:
   berlin-walk:
     query: "layout=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"
+    delay: 5000
   empty-layout:
     query: "layout="
   illegal-layout:
@@ -169,13 +170,21 @@ handlers:
     prefixes: ["edit"]
     title: "Data Editor"
     description: |
-      Allows editing a data source. Changes to it are broadcasted when clicking the "Update" button.
+      Allows editing data. Changes made are broadcasted when clicking the "Update" button.
 
       The editor will try to automatically detect the type of the content. However,
-      the type can be enforced by using the `lang` config. `lang` can be any of the languages supported by Highlight.js.
+      a specific type can be enforced by using the `lang` config. `lang` can be set to any of the languages supported by Highlight.js.
       The list of supported values is available [here](https://github.com/highlightjs/highlight.js/blob/master/SUPPORTED_LANGUAGES.md).
     examples:
       - query: "layout=e/m&e=edit:$data&m=map:$data&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"
         delay: 4000
+
+  table:
+    prefixes: ["table"]
+    title: "Table Editor"
+    description: |
+      Allows editing multiple CSV data sources in a spreadsheet. Changes made are broadcasted automatically when changes are introduced.
+    examples:
+      - query: "layout=tables/textA/textB&textA=text:$a&textB=text:$b&tables=table:$a;$b&$a=inline:x,y,z&$b=inline:a,b,c"
 
   # TODO: Deal with README, which isn't documented here. Arguably it shouldn't be a named view handler.
