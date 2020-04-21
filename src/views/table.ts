@@ -73,7 +73,7 @@ export default class EditHandler implements Handler {
 
 		const spreadsheet = new Spreadsheet(spreadsheetDiv, options)
 			.loadData(Array.from(tables.values()).map(({ sheet }) => sheet))
-			.on("cell-edited", () => {
+			.change(() => {
 				spreadsheet.getData().forEach((sheet: any) => {
 					if (tables.has(sheet.name)) {
 						const csv = Papa.unparse(sheetToArrays(sheet.rows));
