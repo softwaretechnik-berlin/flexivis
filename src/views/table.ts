@@ -22,17 +22,21 @@ export default class EditHandler implements Handler {
 			);
 
 		const sheetToArrays = (rows: Record<string, unknown>): string[][] => {
-			const size = (object): number =>
-				Math.max(...Object.keys(object).map(i => parseInt(i, 10) || -1)) + 1;
+			const length = (object: Record<string, unknown>): number => {
+				const numbers = Object.keys(object)
+					.map(i => parseInt(i, 10))
+					.filter(n => n >= 0);
+				return numbers.length === 0 ? 0 : Math.max(...numbers) + 1;
+			};
 
-			const cellsPerRow = Array.from(new Array(size(rows))).map(
+			const cellsPerRow = Array.from(new Array(length(rows))).map(
 				(_, i) => Object.assign({ cells: [] }, rows[i]).cells
 			);
 
 			const baseRow =
 				cellsPerRow.length === 0
 					? []
-					: Array.from(new Array(Math.max(...cellsPerRow.map(size))));
+					: Array.from(new Array(Math.max(...cellsPerRow.map(length))));
 
 			return cellsPerRow.map(cells =>
 				baseRow.map((_, j) => (cells[j] || {}).text)
@@ -70,7 +74,7 @@ export default class EditHandler implements Handler {
 		const spreadsheet = new Spreadsheet(spreadsheetDiv, options)
 			.loadData(Array.from(tables.values()).map(({ sheet }) => sheet))
 			.on("cell-edited", () => {
-				spreadsheet.getData().forEach(sheet => {
+				spreadsheet.getData().forEach((sheet: any) => {
 					if (tables.has(sheet.name)) {
 						const csv = Papa.unparse(sheetToArrays(sheet.rows));
 						tables.get(sheet.name).data.latest = csv;
