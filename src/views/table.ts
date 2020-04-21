@@ -7,6 +7,9 @@ import DataSource from "../data-source";
 export default class EditHandler implements Handler {
 	async handle(ctx: Context): Promise<void> {
 		const spreadsheetDiv = document.createElement("div");
+		spreadsheetDiv.style.width = "100%";
+		spreadsheetDiv.style.height = "100%";
+		ctx.element.append(spreadsheetDiv);
 
 		const arraysToSheet = (data: any[][]): Record<string, unknown> =>
 			Object.fromEntries(
@@ -38,7 +41,10 @@ export default class EditHandler implements Handler {
 
 		const options = {
 			showToolbar: false,
-			showGrid: false,
+			view: {
+				height: () => spreadsheetDiv.clientHeight,
+				width: () => spreadsheetDiv.clientWidth,
+			},
 		};
 
 		type Table = {
@@ -71,7 +77,5 @@ export default class EditHandler implements Handler {
 					}
 				});
 			});
-
-		ctx.element.append(spreadsheetDiv);
 	}
 }
