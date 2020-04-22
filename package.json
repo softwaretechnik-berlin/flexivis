@@ -3,6 +3,7 @@
   "dependencies": {
     "@medv/codejar": "^1.0.9",
     "@riotjs/observable": "^4.0.4",
+    "babel-preset-solid": "^0.17.0",
     "didyoumean": "^1.2.1",
     "flexivis-md": "file:build/flexivis-md",
     "github-markdown-css": "^4.0.0",
@@ -11,6 +12,7 @@
     "ol": "6.1.1",
     "papaparse": "^5.2.0",
     "riot": "^4.12.0",
+    "solid-js": "^0.17.5",
     "vega": "^5.10.1",
     "vega-embed": "^6.6.0",
     "vega-lite": "^4.10.5",
@@ -18,6 +20,7 @@
   },
   "devDependencies": {
     "@ava/typescript": "^1.1.1",
+    "@babel/core": "^7.9.0",
     "@riotjs/parcel-plugin-riot": "^4.0.1",
     "@types/didyoumean": "^1.2.0",
     "@types/highlight.js": "^9.12.3",

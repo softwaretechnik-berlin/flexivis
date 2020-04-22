@@ -26,6 +26,7 @@ const handlers: { [key: string]: (ctx: Context) => Promise<void> } = {
 	select: mod(async () => import("./select")),
 	edit: mod(async () => import("./edit")),
 	table: mod(async () => import("./table")),
+	ttt: mod(async () => import("./ttt")),
 };
 
 export const knownHandlers = Object.keys(handlers);

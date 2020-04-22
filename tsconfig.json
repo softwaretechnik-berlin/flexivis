@@ -4,8 +4,11 @@
     "allowJs": true,
     "checkJs": true,
     "target": "es2019",
+    "jsx": "preserve",
     "module": "CommonJS",
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "typeRoots": [
       "./src/**/*"
