@@ -35,13 +35,14 @@
 
     export default {
       onBeforeMount() {
-        this.state.selectedIndex = 0;
         this.tabs = Object.entries(this.props.tabs).map(([name, view]) => {
           return {
             name,
             parameters: `?url=${view}`,
           };
-        })
+        });
+        const defaultIndex = this.tabs.findIndex(({ name }) => name === this.props.config.default);
+        this.state.selectedIndex = defaultIndex === -1 ? 0 : defaultIndex;
       },
       selectTab(index) {
         return () => {

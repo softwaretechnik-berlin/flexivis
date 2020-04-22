@@ -93,6 +93,8 @@ const retrieveText = async (url: string): Promise<string> => {
 	}
 };
 
+const globalDataSourceCache = new Map<string, DataSource<string>>();
+
 class LayoutParser {
 	private readonly params: URLSearchParams;
 	private readonly retrieve: (url: string) => Promise<string>;
@@ -110,11 +112,12 @@ class LayoutParser {
 
 		this.params = parameters;
 		this.retrieve = retrieve;
-		this.dataSourceCache = new Map();
+		this.dataSourceCache = globalDataSourceCache;
 	}
 
 	parse(): XView {
 		const layout = this.params.get("layout");
+		this.extractDataSources();
 		try {
 			const layoutSpec: ViewDef = parseLayout(layout);
 			return this.recursivelyParseViews(layoutSpec);
@@ -125,6 +128,23 @@ class LayoutParser {
 				"Invalid ’layout’ Parameter",
 				layout
 			);
+		}
+	}
+
+	private extractDataSources(): void {
+		for (const [name, value] of this.params.entries()) {
+			if (name.startsWith("$")) {
+				let url = value;
+				if (url.startsWith(inlinedDataPrefix)) {
+					url =
+						"data:," + encodeURIComponent(url.slice(inlinedDataPrefix.length));
+				}
+
+				this.dataSourceCache.set(
+					name,
+					new DataSource(name, url, this.retrieve(url))
+				);
+			}
 		}
 	}
 
@@ -149,32 +169,22 @@ class LayoutParser {
 			const resources: XResource[] = parsed.resources.map(
 				(resource: Resource) => {
 					const name = resource.value;
-					let url: string;
 
-					if (resource.value.startsWith("$")) {
-						if (!this.params.has(name)) {
+					if (!this.dataSourceCache.has(name)) {
+						if (resource.value.startsWith("$")) {
 							throw new Error(`Shared source ’${name}’ is not available.`);
+						} else {
+							const url = resource.value;
+							this.dataSourceCache.set(
+								name,
+								new DataSource(name, url, this.retrieve(url))
+							);
 						}
-
-						url = this.params.get(resource.value);
-						if (url.startsWith(inlinedDataPrefix)) {
-							url =
-								"data:," +
-								encodeURIComponent(url.slice(inlinedDataPrefix.length));
-						}
-					} else {
-						url = resource.value;
 					}
-
-					const value = this.dataSourceCache.has(name)
-						? this.dataSourceCache.get(name)
-						: this.dataSourceCache
-								.set(name, new DataSource(name, url, this.retrieve(url)))
-								.get(name);
 
 					return {
 						config: resource.config,
-						value,
+						value: this.dataSourceCache.get(name),
 					};
 				}
 			);

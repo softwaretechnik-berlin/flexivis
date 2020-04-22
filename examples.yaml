@@ -182,7 +182,9 @@ handlers:
       }
       ```
     examples:
-      - query: "url=tab:inline:{%22tabs%22:{%22Text 1%22:%22text:inline:Hi!%22,%22Text 2%22:%22text:inline:Hello!%22}}"
+      - query: "url=tab:inline:{%22tabs%22:{%22Map%22:%22map:$data%22,%22JSON%22:%22edit:$data%22}}&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"
+        delay: 5000
+      - query: "url=(default=JSON)tab:inline:{%22tabs%22:{%22Map%22:%22map:$data%22,%22JSON%22:%22edit:$data%22}}&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"
 
   edit:
     prefixes: ["edit"]

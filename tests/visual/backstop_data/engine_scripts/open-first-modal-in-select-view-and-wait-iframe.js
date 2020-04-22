@@ -6,6 +6,7 @@ module.exports = async page => {
 	const elementHandle = await page.$("iframe");
 	const frame = await elementHandle.contentFrame();
 
+	await frame.$("body")
 	await frame.$eval(
 		"body",
 		() =>

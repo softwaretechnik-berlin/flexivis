@@ -289,8 +289,21 @@
     },
     {
       "label": "tab-1",
-      "url": "http://host.docker.internal:1234/?url=tab:inline:{%22tabs%22:{%22Text 1%22:%22text:inline:Hi!%22,%22Text 2%22:%22text:inline:Hello!%22}}",
-      "referenceUrl": "https://flexivis.infrastruktur.link/?url=tab:inline:{%22tabs%22:{%22Text 1%22:%22text:inline:Hi!%22,%22Text 2%22:%22text:inline:Hello!%22}}",
+      "url": "http://host.docker.internal:1234/?url=tab:inline:{%22tabs%22:{%22Map%22:%22map:$data%22,%22JSON%22:%22edit:$data%22}}&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?url=tab:inline:{%22tabs%22:{%22Map%22:%22map:$data%22,%22JSON%22:%22edit:$data%22}}&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
+      "viewports": [
+        {
+          "height": 798,
+          "width": 1440,
+          "label": "main"
+        }
+      ],
+      "delay": 5000
+    },
+    {
+      "label": "tab-2",
+      "url": "http://host.docker.internal:1234/?url=(default=JSON)tab:inline:{%22tabs%22:{%22Map%22:%22map:$data%22,%22JSON%22:%22edit:$data%22}}&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
+      "referenceUrl": "https://flexivis.infrastruktur.link/?url=(default=JSON)tab:inline:{%22tabs%22:{%22Map%22:%22map:$data%22,%22JSON%22:%22edit:$data%22}}&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
       "viewports": [
         {
           "height": 798,
