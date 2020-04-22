@@ -17,6 +17,7 @@ Flexivis is a flexible visualisation tool that allows you to easily visualise di
             <li><a href="#mermaid-diagrams">Mermaid Diagrams</a></li>
             <li><a href="#vega-graphs">Vega Graphs</a></li>
             <li><a href="#item-select">Item Select</a></li>
+            <li><a href="#tabs">Tabs</a></li>
             <li><a href="#data-editor">Data Editor</a></li>
             <li><a href="#table-editor">Table Editor</a></li>
         </ul>
@@ -137,6 +138,7 @@ The following view types are supported:
     <li><a href="#mermaid-diagrams">Mermaid Diagrams</a></li>
     <li><a href="#vega-graphs">Vega Graphs</a></li>
     <li><a href="#item-select">Item Select</a></li>
+    <li><a href="#tabs">Tabs</a></li>
     <li><a href="#data-editor">Data Editor</a></li>
     <li><a href="#table-editor">Table Editor</a></li>
 </ul>
@@ -334,6 +336,30 @@ https://flexivis.infrastruktur.link/?url=select:https://raw.githubusercontent.co
 ```
 
 <a href="https://flexivis.infrastruktur.link/?url=select:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/select-view.json"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_select-2_0_document_0_main.png"/></a>
+
+
+### Tabs
+
+View specification prefixes: `tab`, `tab:inline`.
+
+Takes multiple view definitions and displays each one on a different tab.
+
+Tabs are defined using the following JSON model, where each entry in the `tabs` object defines a new tab:
+
+```json
+{
+  "tabs": {
+    "TabName": "view:resource"
+  }
+}
+```
+
+
+```
+https://flexivis.infrastruktur.link/?url=tab:inline:{%22tabs%22:{%22Text 1%22:%22text:inline:Hi!%22,%22Text 2%22:%22text:inline:Hello!%22}}
+```
+
+<a href="https://flexivis.infrastruktur.link/?url=tab:inline:{%22tabs%22:{%22Text 1%22:%22text:inline:Hi!%22,%22Text 2%22:%22text:inline:Hello!%22}}"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_tab-1_0_document_0_main.png"/></a>
 
 
 ### Data Editor
