@@ -354,12 +354,20 @@ Tabs are defined using the following JSON model, where each entry in the `tabs` 
 }
 ```
 
+The `default` config can contain the name of the tab that is selected by default.
+
 
 ```
-https://flexivis.infrastruktur.link/?url=tab:inline:{%22tabs%22:{%22Text 1%22:%22text:inline:Hi!%22,%22Text 2%22:%22text:inline:Hello!%22}}
+https://flexivis.infrastruktur.link/?url=tab:inline:{%22tabs%22:{%22Map%22:%22map:$data%22,%22JSON%22:%22edit:$data%22}}&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
 ```
 
-<a href="https://flexivis.infrastruktur.link/?url=tab:inline:{%22tabs%22:{%22Text 1%22:%22text:inline:Hi!%22,%22Text 2%22:%22text:inline:Hello!%22}}"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_tab-1_0_document_0_main.png"/></a>
+<a href="https://flexivis.infrastruktur.link/?url=tab:inline:{%22tabs%22:{%22Map%22:%22map:$data%22,%22JSON%22:%22edit:$data%22}}&amp;$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_tab-1_0_document_0_main.png"/></a>
+
+```
+https://flexivis.infrastruktur.link/?url=(default=JSON)tab:inline:{%22tabs%22:{%22Map%22:%22map:$data%22,%22JSON%22:%22edit:$data%22}}&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
+```
+
+<a href="https://flexivis.infrastruktur.link/?url=(default=JSON)tab:inline:{%22tabs%22:{%22Map%22:%22map:$data%22,%22JSON%22:%22edit:$data%22}}&amp;$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"><img alt="rendering of the URL shown above" src="tests/visual/backstop_data/bitmaps_reference/flexivis_tab-2_0_document_0_main.png"/></a>
 
 
 ### Data Editor
