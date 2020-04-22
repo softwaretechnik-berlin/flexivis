@@ -21,6 +21,8 @@ import ContentFrame from "./src/tags/content-frame";
 riot.register("content-frame", ContentFrame);
 import ItemSelect from "./src/tags/item-select";
 riot.register("item-select", ItemSelect);
+import MultiTab from "./src/tags/multi-tab";
+riot.register("multi-tab", MultiTab);
 import Modal from "./src/tags/modal";
 riot.register("modal", Modal);
 import AppComponent from "./src/tags/app";

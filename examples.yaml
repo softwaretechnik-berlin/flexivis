@@ -166,6 +166,24 @@ handlers:
       - query: "url=select:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/select-view.json"
         delay: 20000
 
+  tab:
+    prefixes: ["tab", "tab:inline"]
+    title: Tabs
+    description: |
+      Takes multiple view definitions and displays each one on a different tab.
+
+      Tabs are defined using the following JSON model, where each entry in the `tabs` object defines a new tab:
+
+      ```json
+      {
+        "tabs": {
+          "TabName": "view:resource"
+        }
+      }
+      ```
+    examples:
+      - query: "url=tab:inline:{%22tabs%22:{%22Text 1%22:%22text:inline:Hi!%22,%22Text 2%22:%22text:inline:Hello!%22}}"
+
   edit:
     prefixes: ["edit"]
     title: "Data Editor"

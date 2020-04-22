@@ -1,0 +1,55 @@
+<multi-tab>
+  <div class="multi-tab">
+    <div class="tabs">
+      <span each={ (tab, index) in tabs } onclick={ selectTab(index) } class="{index === state.selectedIndex ? "tab-selected" : "tab-hidden"}">
+        {tab.name}
+      </span>
+    </div>
+
+    <div class="contents">
+      <div each={ (tab, index) in tabs } class="tab-content-{index} {index === state.selectedIndex ? "content-selected" : "content-hidden"}">
+        <app query-string={tab.parameters} />
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .tabs {
+      padding: 2px 10px 2px 10px;
+      border-bottom: 1px solid #b5b5b5;
+    }
+    .tabs span {
+      cursor: pointer;
+      padding: 2px 10px 2px 10px;
+    }
+    .tabs .tab-selected {
+      background-color: #b5b5b5;
+    }
+    .contents .content-hidden {
+      display: none;
+    }
+  </style>
+
+  <script>
+    import * as riot from "riot";
+
+    export default {
+      onBeforeMount() {
+        this.state.selectedIndex = 0;
+        this.tabs = Object.entries(this.props.tabs).map(([name, view]) => {
+          return {
+            name,
+            parameters: `?url=${view}`,
+          };
+        })
+      },
+      selectTab(index) {
+        return () => {
+          this.update({
+            selectedIndex: index,
+          });
+        };
+      },
+    }
+  </script>
+</multi-tab>
