@@ -1,7 +1,6 @@
 import { XViewFrame } from "../parser";
 
 export interface Context {
-	riot: any;
 	element: HTMLElement;
 	view: XViewFrame;
 	handleError: (error: Error) => void;

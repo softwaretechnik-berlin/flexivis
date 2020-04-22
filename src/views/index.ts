@@ -1,4 +1,3 @@
-import * as riot from "riot";
 import didYouMean from "didyoumean";
 
 import { Context, Handler } from "./common";
@@ -59,7 +58,6 @@ export async function mount(
 	}
 
 	return handler({
-		riot,
 		element,
 		view,
 		handleError,

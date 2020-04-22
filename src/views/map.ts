@@ -1,8 +1,9 @@
+import * as riot from "riot";
 import { Handler, Context } from "./common";
 
 export default class MapHandler implements Handler {
 	async handle(ctx: Context): Promise<void> {
-		ctx.riot.mount(
+		riot.mount(
 			ctx.element,
 			{
 				config: ctx.view.config,

@@ -1,3 +1,4 @@
+import * as riot from "riot";
 import { SourceHandler, Context } from "./common";
 
 export default class JsonHandler extends SourceHandler {
@@ -5,10 +6,6 @@ export default class JsonHandler extends SourceHandler {
 		const div = document.createElement("div");
 		div.classList.add("json");
 		ctx.element.append(div);
-		ctx.riot.mount(
-			div,
-			{ obj: JSON.parse(source), showDepth: 4 },
-			"tree-search"
-		);
+		riot.mount(div, { obj: JSON.parse(source), showDepth: 4 }, "tree-search");
 	}
 }
