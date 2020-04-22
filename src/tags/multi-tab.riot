@@ -26,13 +26,12 @@
       background-color: #b5b5b5;
     }
     .contents .content-hidden {
-      display: none;
+      visibility: hidden;
+      height: 0;
     }
   </style>
 
   <script>
-    import * as riot from "riot";
-
     export default {
       onBeforeMount() {
         this.tabs = Object.entries(this.props.tabs).map(([name, view]) => {
