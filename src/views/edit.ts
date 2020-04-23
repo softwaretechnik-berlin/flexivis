@@ -8,7 +8,6 @@ import debounce from "./debounce";
 export default class EditHandler implements Handler {
 	async handle(ctx: Context): Promise<void> {
 		const dataSource = ctx.view.resources[0].value;
-		const initialContent = await dataSource.latest;
 
 		const wrapper = document.createElement("div");
 		wrapper.classList.add("edit");
@@ -39,7 +38,6 @@ export default class EditHandler implements Handler {
 		const jar = codeJar(textarea, withLineNumbers(highlight), {
 			tab: "  ",
 		});
-		jar.updateCode(initialContent);
 
 		const update = (): void => {
 			dataSource.latest = jar.toString();
@@ -55,5 +53,13 @@ export default class EditHandler implements Handler {
 			true
 		);
 		jar.onUpdate(debounce(update));
+
+		dataSource.observe((error, value) => {
+			if (error) {
+				ctx.handleError(error);
+			} else {
+				jar.updateCode(value);
+			}
+		});
 	}
 }
