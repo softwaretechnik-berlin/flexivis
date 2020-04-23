@@ -4,5 +4,8 @@ module.exports = async page => {
 		editor.textContent += " World!";
 	});
 
-	await page.click(".update-btn");
+	// Wait for the changes to be propagated
+	await new Promise(resolve => {
+		setTimeout(resolve, 1000);
+	});
 };

@@ -4,6 +4,8 @@ import Spreadsheet from "x-data-spreadsheet";
 import Papa from "papaparse";
 import DataSource from "../data-source";
 
+import debounce from "./debounce";
+
 export default class EditHandler implements Handler {
 	async handle(ctx: Context): Promise<void> {
 		const spreadsheetDiv = document.createElement("div");
@@ -73,13 +75,15 @@ export default class EditHandler implements Handler {
 
 		const spreadsheet = new Spreadsheet(spreadsheetDiv, options)
 			.loadData(Array.from(tables.values()).map(({ sheet }) => sheet))
-			.change(() => {
-				spreadsheet.getData().forEach((sheet: any) => {
-					if (tables.has(sheet.name)) {
-						const csv = Papa.unparse(sheetToArrays(sheet.rows));
-						tables.get(sheet.name).data.latest = csv;
-					}
-				});
-			});
+			.change(
+				debounce(() => {
+					spreadsheet.getData().forEach((sheet: any) => {
+						if (tables.has(sheet.name)) {
+							const csv = Papa.unparse(sheetToArrays(sheet.rows));
+							tables.get(sheet.name).data.latest = csv;
+						}
+					});
+				})
+			);
 	}
 }
