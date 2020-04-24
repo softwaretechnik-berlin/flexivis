@@ -1,19 +1,24 @@
 <content-frame>
-  <error-view error={ state.error } />
 
   <script>
+    import * as riot from "riot";
     import { mount } from "../views";
 
     export default {
       onBeforeMount() {
-        this.state.error = this.props.view.error;
+        const handleError = error => {
+          const errorView = document.createElement("error-view");
+          this.root.innerHTML = "";
+          this.root.append(errorView);
+          riot.mount(errorView, { error }, "error-view");
+        };
 
-        const handleError = error => this.update({ error });
-
-
-        if (!this.state.error)
+        if (this.props.view.error) {
+          handleError(this.props.view.error);
+        } else {
           new Promise((resolve, reject) => resolve(mount(this.root, this.props.view, handleError)))
             .catch(handleError);
+        }
       },
     }
   </script>
