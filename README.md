@@ -123,6 +123,48 @@ The inline prefix can also be used with data sources.
 
 The `edit` view demonstrates how to use them.
 
+### Nested JSON Views
+
+Views that use JSON to define their contents, like `select` and `tab`, can define nested views using JSON objects with the following structure:
+
+```json
+{
+  "type": "(configA=1;configB=2)viewName",
+  "definition": {
+    "...": "..."
+  }
+}
+```
+
+For example, using select:
+
+```
+{
+  "items": [
+    {"id": "hi"},
+    {"id": "hey"}
+  ],
+  "parameters": {
+    "layout": "map/tabs",
+    "$data": "https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json",
+    "map": "map:$data",
+    "tabs": {
+      "type": "tab",
+      "definition": {
+        "tabs": {
+          "Id": "text:inline:${id}",
+          "JSON 1": "json:$data"
+        }
+      }
+    }
+  }
+}
+```
+
+```
+https://flexivis.infrastruktur.link/?url=select:inline:{%22items%22:[{%22id%22:%22hi%22},{%22id%22:%22hey%22}],%22parameters%22:{%22layout%22:%22map/tabs%22,%22$data%22:%22https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json%22,%22map%22:%22map:$data%22,%22tabs%22:{%22type%22:%22tab%22,%22definition%22:{%22tabs%22:{%22Id%22:%22text:inline:${id}%22,%22JSON%201%22:%22json:$data%22}}}}}
+```
+
 
 ### View Types
 
