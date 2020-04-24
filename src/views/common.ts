@@ -1,4 +1,4 @@
-import { XViewFrame } from "../parser";
+import { XViewFrame, inlinedDataPrefix } from "../parser";
 
 export interface Context {
 	element: HTMLElement;
@@ -50,4 +50,29 @@ export abstract class SourceHandler implements Handler {
 	 * @returns {Promise.<*>} a promise that is fulfilled when the view is rendered, or rejected if the view cannot be rendered
 	 */
 	abstract handleWithSource(source: string, ctx: Context): Promise<void>;
+}
+
+interface ExpandedView {
+	type: string;
+	definition: Record<string, unknown>;
+}
+
+const isExpandedView = (object: {
+	[key: string]: any;
+}): object is ExpandedView => {
+	return Boolean((object as ExpandedView).type);
+};
+
+export function inlineExpandedViews(
+	object: Record<string, unknown>
+): Record<string, unknown> {
+	for (const key of Object.keys(object)) {
+		const view = object[key];
+		if (isExpandedView(view)) {
+			const inlined = JSON.stringify(view.definition);
+			object[key] = `${view.type}:${inlinedDataPrefix}${inlined}`;
+		}
+	}
+
+	return object;
 }

@@ -5,7 +5,7 @@
     </select>
     <input class="select-input { state.selectClass }" type="text" value={ state.inputId } onkeyup={ onIdInput } onpaste={ onIdInput }/>
     <button class="select-btn" onclick={ onGoClick }>Select</button>
-    <button class="select-btn select-modal-btn-{idx}" each={ (modal, idx) in Object.entries(props.definition.modals) } onclick={ showModal(modal[0], modal[1]) }>{ modal[0] }</button>
+    <button class="select-btn select-modal-btn-{idx}" each={ (modal, idx) in Object.entries(props.definition.modals || {}) } onclick={ showModal(modal[0], modal[1]) }>{ modal[0] }</button>
   </div>
 
   <div class="app" />
@@ -16,11 +16,10 @@
 
   <script>
     import * as riot from "riot";
+    import { serialize } from "./parameters";
 
     export default {
       onBeforeMount() {
-        this.baseQuery = "?" + Object.entries(this.props.definition.parameters).map(([key, value]) => `${key}=${value}`).join("&");
-
         this.keyboardShortcutsHandler = e => {
           const nextItem = inc => {
             const currentIndex = this.props.definition.items.findIndex(item => item.id === this.state.selectedId);
@@ -89,13 +88,15 @@
 
         riot.unmount(this.appElement, true);
         riot.mount(this.appElement, {
-          queryString: this.prepareQueryString(this.baseQuery),
+          queryString: this.prepareQueryString(this.props.definition.parameters),
         }, "app");
       },
       showModal(name, viewDefinition) {
         return e => {
           this.update({
-            modalQueryString: this.prepareQueryString(`?url=${viewDefinition}`),
+            modalQueryString: this.prepareQueryString({
+              url: viewDefinition,
+            }),
             modalTitle: name,
           });
         };
@@ -103,9 +104,11 @@
       onModalClosed() {
         this.update({ modalQueryString: undefined });
       },
-      prepareQueryString(queryString) {
-        return Object.entries(this.state.selectedItem)
-          .reduce((q, [key, value]) => q.replace(`\${${key}}`, value), queryString);
+      prepareQueryString(parameters) {
+        return serialize(parameters, str => {
+          return Object.entries(this.state.selectedItem)
+            .reduce((q, [key, value]) => q.replace(new RegExp(`\\\$\\{${key}\\}`, "g"), value), str);
+        });
       },
     }
   </script>

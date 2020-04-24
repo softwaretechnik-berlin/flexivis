@@ -3,7 +3,7 @@ import { parse as parseView, Resource, Config } from "./parsers/view";
 import DataSource from "./data-source";
 import { FlexivisError } from "./flexivis";
 
-const inlinedDataPrefix = "inline:";
+export const inlinedDataPrefix = "inline:";
 
 export interface XConfig {
 	[key: string]: string | string[] | Config;

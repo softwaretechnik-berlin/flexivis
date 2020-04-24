@@ -31,12 +31,16 @@
   </style>
 
   <script>
+    import { serialize } from "./parameters";
+
     export default {
       onBeforeMount() {
         this.tabs = Object.entries(this.props.tabs).map(([name, view]) => {
           return {
             name,
-            parameters: `?url=${view}`,
+            parameters: serialize({
+              "url": view,
+            }),
           };
         });
         const defaultIndex = this.tabs.findIndex(({ name }) => name === this.props.config.default);
