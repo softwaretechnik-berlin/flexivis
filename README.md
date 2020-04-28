@@ -1,4 +1,6 @@
-# Flexivis
+![Flexivis Logo](flexivis-logo-small.png)
+
+---
 
 Flexivis is a flexible visualisation tool that allows you to easily visualise diverse types of data in Web browser.
 
