@@ -1,4 +1,4 @@
-![Flexivis Logo](flexivis-logo-small.png)
+<img src="flexivis-logo.svg" alt="Flexivis Logo" height="200px">
 
 ---
 
