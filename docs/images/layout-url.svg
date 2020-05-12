@@ -1,5 +1,1 @@
-<svg width="90" height="60" xmlns="http://www.w3.org/2000/svg">
-    <style>* { font-family: sans-serif }</style>
-    <rect width="90" height="60" style="fill: lightblue" />
-    <text x="45" y="30" alignment-baseline="middle" text-anchor="middle">url</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60"><style>*{font-family:sans-serif}</style><rect width="90" height="60" style="fill:#add8e6"/><text x="45" y="30" alignment-baseline="middle" text-anchor="middle">url</text></svg>
