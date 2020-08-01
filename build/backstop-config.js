@@ -15,7 +15,7 @@ backstopConfig.scenarios = Object.values(examples.all)
 		viewports: [
 			Object.assign({ height: 798, width: 1440, label: "main" }, ex.viewport),
 		],
-		delay: ex.delay || 2000,
+		delay: ex.delay || 3000,
 		onReadyScript: ex.onReadyScript,
 	}));
 
