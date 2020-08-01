@@ -5,7 +5,7 @@ type RecurrentHandler<T> = {
 	keep: boolean;
 	remove: boolean;
 };
-export type Subscription = { cancel(): void };
+export type Subscription = { cancel: () => void };
 
 export default class DataSource<T> {
 	private handlers: Array<RecurrentHandler<T>>;

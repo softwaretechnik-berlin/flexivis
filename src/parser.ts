@@ -63,9 +63,9 @@ const convertSyntaxError = (
 	input: string
 ): Error => {
 	if (error.name === "SyntaxError") {
-		// @ts-ignore
+		// @ts-expect-error
 		const start = error.location.start.offset;
-		// @ts-ignore
+		// @ts-expect-error
 		const end = error.location.end.offset;
 
 		return new InputParseError(name, title, error.message, {

@@ -15,7 +15,7 @@ export interface Handler {
 	 *
 	 * @returns A promise that is fulfilled when the view is rendered, or rejected if the view cannot be rendered.
 	 */
-	handle(ctx: Context): Promise<void>;
+	handle: (ctx: Context) => Promise<void>;
 }
 
 /**

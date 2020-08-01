@@ -73,7 +73,7 @@ export default class EditHandler implements Handler {
 	private sheetToCsv(sheet: Sheet): string {
 		const length = (object: Record<string, unknown>): number => {
 			const numbers = Object.keys(object)
-				.map(i => parseInt(i, 10))
+				.map(i => Number.parseInt(i, 10))
 				.filter(n => n >= 0);
 			return numbers.length === 0 ? 0 : Math.max(...numbers) + 1;
 		};

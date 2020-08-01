@@ -1,6 +1,6 @@
 import { Context, SourceHandler } from "./common";
 
-// @ts-ignore
+// @ts-expect-error
 import vegaEmbed from "vega-embed";
 
 export default class VegaHandler extends SourceHandler {

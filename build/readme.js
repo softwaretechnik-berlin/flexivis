@@ -34,9 +34,7 @@ function renderToc(handlers) {
 }
 
 function renderDescriptions(handlers) {
-	return Object.values(handlers)
-		.map(renderDescription)
-		.join("\n\n");
+	return Object.values(handlers).map(renderDescription).join("\n\n");
 }
 
 function renderDescription({ title, prefixes, description, examples }) {
@@ -74,8 +72,9 @@ function updateSection(original, sectionName, section) {
 	);
 	if (beginMarkerLine < 1 || lastContentLine <= beginMarkerLine)
 		throw new Error(
-			`Can’t find section "${sectionName} (begin marker on line ${beginMarkerLine}, end marker on line ${lastContentLine +
-				1})`
+			`Can’t find section "${sectionName} (begin marker on line ${beginMarkerLine}, end marker on line ${
+				lastContentLine + 1
+			})`
 		);
 	const indentation = lines[beginMarkerLine - 1].match(/^ */)[0];
 	const sectionLines = section.split("\n");

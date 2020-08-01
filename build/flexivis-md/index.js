@@ -12,7 +12,7 @@ module.exports = config => {
 					if (lang && hljs.getLanguage(lang)) {
 						try {
 							return hljs.highlight(lang, string).value;
-						} catch (_) {}
+						} catch {}
 					} else if (lang === "mermaid") {
 						return `<div class="mermaid">${string}</div>`;
 					}

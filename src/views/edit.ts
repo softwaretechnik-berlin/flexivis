@@ -32,7 +32,7 @@ export default class EditHandler implements Handler {
 			editor.textContent = editor.textContent.toString();
 			try {
 				hljs.highlightBlock(editor);
-			} catch (_) {}
+			} catch {}
 		};
 
 		const jar = codeJar(textarea, withLineNumbers(highlight), {

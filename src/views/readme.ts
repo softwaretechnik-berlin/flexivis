@@ -7,7 +7,7 @@ export default class ReadmeHandler implements Handler {
 		// `require` already renders the markdown file. Therefore we cannot use the existing `markdownHandler` directly.
 		// There is a workaround documented in https://github.com/parcel-bundler/parcel/issues/970
 		// but it doesn't render the README the same way that GitHub does (!), so for now we stick with this approach.
-		// @ts-ignore
+		// @ts-expect-error
 		div.innerHTML = require("../../README.md");
 		ctx.element.append(div);
 	}
