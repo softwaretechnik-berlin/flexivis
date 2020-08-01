@@ -199,7 +199,7 @@ handlers:
       The list of supported values is available [here](https://github.com/highlightjs/highlight.js/blob/master/SUPPORTED_LANGUAGES.md).
     examples:
       - query: "layout=e/m&e=edit:$data&m=map:$data&$data=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json"
-        delay: 5000
+        delay: 8000
 
   table:
     prefixes: ["table"]
