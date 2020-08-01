@@ -140,7 +140,7 @@
           "label": "main"
         }
       ],
-      "delay": 5000,
+      "delay": 8000,
       "onReadyScript": "open-first-modal-in-select-view-and-wait-iframe.js"
     },
     {
@@ -285,7 +285,7 @@
           "label": "main"
         }
       ],
-      "delay": 20000
+      "delay": 25000
     },
     {
       "label": "tab-1",
