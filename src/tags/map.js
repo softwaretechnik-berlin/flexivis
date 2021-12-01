@@ -1,6 +1,6 @@
-import Map from "ol/Map";
-import View from "ol/View";
-import XYZ from "ol/source/XYZ";
+import Map from "ol/Map.js";
+import View from "ol/View.js";
+import XYZ from "ol/source/XYZ.js";
 import { fromLonLat } from "ol/proj";
 
 import { GeoJSON } from "ol/format";
@@ -102,7 +102,7 @@ export class HereGeoJsonMap {
 				layerDesc.type === "here"
 					? new TileLayer({
 							visible: false,
-							preload: Infinity,
+							preload: Number.POSITIVE_INFINITY,
 							source: new XYZ({
 								url:
 									`https://{1-4}.${layerDesc.base}.maps.api.here.com/` +
@@ -131,7 +131,7 @@ export class HereGeoJsonMap {
 	}
 
 	selectHereLayer(id) {
-		this.baseLayers.forEach(l => l.layer.setVisible(false));
+		for (const l of this.baseLayers) l.layer.setVisible(false);
 		this.baseLayers.find(l => l.id === id).layer.setVisible(true);
 	}
 
@@ -146,9 +146,9 @@ export class HereGeoJsonMap {
 
 	addGeoJsonLayer(id, geoJson) {
 		if (this.geoJsonLayers[id]) {
-			const err = new Error(`Duplicate map layer with id "${id}".`);
-			err.title = "Duplicate Layer Error";
-			throw err;
+			const error = new Error(`Duplicate map layer with id "${id}".`);
+			error.title = "Duplicate Layer Error";
+			throw error;
 		}
 
 		const layer = new VectorLayer({
@@ -165,9 +165,10 @@ export class HereGeoJsonMap {
 
 		layer.once("change", () => {
 			const extent = createExtent();
-			Object.values(this.geoJsonLayers).forEach(l => {
+			for (const l of Object.values(this.geoJsonLayers)) {
 				extendExtent(extent, l.getSource().getExtent());
-			});
+			}
+
 			this.map.getView().fit(extent, {
 				padding: [30, 30, 30, 30],
 			});
@@ -189,7 +190,7 @@ export class HereGeoJsonMap {
 			? this.map.getFeaturesAtPixel(this.lastClickedPixel)
 			: [];
 
-		features.forEach(f => f.setStyle(undefined));
+		for (const f of features) f.setStyle(undefined);
 		if (this.highlightedFeature) {
 			this.highlightedFeature.setStyle(undefined);
 		}

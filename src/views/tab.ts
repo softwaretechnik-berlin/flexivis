@@ -1,9 +1,9 @@
 import * as riot from "riot";
-import { Context, SourceHandler, inlineExpandedViews } from "./common";
 import { FlexivisError } from "../flexivis";
+import { Context, SourceHandler, inlineExpandedViews } from "./common";
 
 type Tabs = {
-	tabs: { [key: string]: string | Record<string, unknown> };
+	tabs: Record<string, string | Record<string, unknown>>;
 };
 
 const isValid = (object: any): object is Tabs => {

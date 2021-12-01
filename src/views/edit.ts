@@ -1,7 +1,7 @@
-import { Handler, Context } from "./common";
 import { CodeJar as codeJar } from "codejar";
 import { withLineNumbers } from "codejar/linenumbers";
 import hljs from "highlight.js";
+import { Handler, Context } from "./common";
 
 import debounce from "./debounce";
 

@@ -1,16 +1,17 @@
 import test from "ava";
-const layout = require("./layout");
+
+import { parse } from "./layout";
 
 test("parses a single view", t => {
-	t.is(layout.parse("a"), "a");
+	t.is(parse("a"), "a");
 });
 
 test("unwraps a single view", t => {
-	t.is(layout.parse("(a)"), "a");
+	t.is(parse("(a)"), "a");
 });
 
 test("parses two split views", t => {
-	t.deepEqual(layout.parse("a/b"), {
+	t.deepEqual(parse("a/b"), {
 		sep: "/",
 		views: [
 			{ size: 50, view: "a" },
@@ -18,7 +19,7 @@ test("parses two split views", t => {
 		],
 	});
 
-	t.deepEqual(layout.parse("a-b"), {
+	t.deepEqual(parse("a-b"), {
 		sep: "-",
 		views: [
 			{ size: 50, view: "a" },
@@ -28,7 +29,7 @@ test("parses two split views", t => {
 });
 
 test("parses multiple views split in the same direction", t => {
-	t.deepEqual(layout.parse("a/b/c"), {
+	t.deepEqual(parse("a/b/c"), {
 		sep: "/",
 		views: [
 			{ size: 100 / 3, view: "a" },
@@ -37,7 +38,7 @@ test("parses multiple views split in the same direction", t => {
 		],
 	});
 
-	t.deepEqual(layout.parse("a-b-c"), {
+	t.deepEqual(parse("a-b-c"), {
 		sep: "-",
 		views: [
 			{ size: 100 / 3, view: "a" },
@@ -48,7 +49,7 @@ test("parses multiple views split in the same direction", t => {
 });
 
 test("parses complex nested views", t => {
-	t.deepEqual(layout.parse("a/(x-(y/(z)))/b"), {
+	t.deepEqual(parse("a/(x-(y/(z)))/b"), {
 		sep: "/",
 		views: [
 			{
@@ -92,7 +93,7 @@ test("parses complex nested views", t => {
 });
 
 test("parses nested views with configurable sizes", t => {
-	t.deepEqual(layout.parse("a30/(x15-(y/(z)10))/b40"), {
+	t.deepEqual(parse("a30/(x15-(y/(z)10))/b40"), {
 		sep: "/",
 		views: [
 			{ view: "a", size: 30 },

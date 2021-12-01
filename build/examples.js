@@ -8,15 +8,12 @@ const examples = yaml.safeLoad(fs.readFileSync("examples.yaml", "utf8"));
 
 examples.all = [];
 
-Object.entries(examples.general).forEach(([id, example]) =>
-	enrichExample(id, example)
-);
+for (const [id, example] of Object.entries(examples.general))
+	enrichExample(id, example);
 
-Object.entries(examples.handlers).forEach(([handler, spec]) =>
-	spec.examples.forEach((example, i) =>
-		enrichExample(`${handler}-${i + 1}`, example)
-	)
-);
+for (const [handler, spec] of Object.entries(examples.handlers))
+	for (const [i, example] of spec.examples.entries())
+		enrichExample(`${handler}-${i + 1}`, example);
 
 function enrichExample(id, example) {
 	example.id = id;

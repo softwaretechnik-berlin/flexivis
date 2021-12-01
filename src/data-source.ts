@@ -31,7 +31,9 @@ export default class DataSource<T> {
 		if (!this.currentResult) {
 			return new Promise((resolve, reject) => {
 				this.handlers.push({
-					handler: (error, value) => (error ? reject(error) : resolve(value)),
+					handler: (error, value) => {
+						error ? reject(error) : resolve(value);
+					},
 					keep: false,
 					remove: false,
 				});
@@ -63,8 +65,12 @@ export default class DataSource<T> {
 		};
 
 		Promise.resolve(newValue).then(
-			value => update({ value }),
-			error => update({ error: error || new Error(error) })
+			value => {
+				update({ value });
+			},
+			error => {
+				update({ error: error || new Error(error) });
+			}
 		);
 	}
 

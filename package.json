@@ -17,14 +17,14 @@
     "x-data-spreadsheet": "^1.1.9"
   },
   "devDependencies": {
-    "@ava/typescript": "^3.0.1",
+    "@ava/typescript": "^2.0.0",
     "@parcel/transformer-less": "^2.0.1",
     "@riotjs/compiler": "^6.0.4",
     "@riotjs/parcel-transformer-riot": "^7.0.3",
     "@types/didyoumean": "^1.2.0",
     "@types/papaparse": "^5.3.1",
     "@types/parcel-env": "0.0.1",
-    "ava": "^3.15.0",
+    "ava": "^4.0.0-rc.1",
     "backstopjs": "^6.0.1",
     "esm": "^3.2.25",
     "glob": "^7.2.0",
@@ -57,11 +57,6 @@
     ],
     "files": [
       "!tests/visual"
-    ],
-    "typescript": {
-      "rewritePaths": {
-        "src/": "build/"
-      }
-    }
+    ]
   }
 }

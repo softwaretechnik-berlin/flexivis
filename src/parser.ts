@@ -5,9 +5,7 @@ import { FlexivisError } from "./flexivis";
 
 export const inlinedDataPrefix = "inline:";
 
-export interface XConfig {
-	[key: string]: string | string[] | Config;
-}
+export type XConfig = Record<string, string | string[] | Config>;
 
 export interface XResource {
 	config: XConfig;
@@ -83,11 +81,7 @@ const retrieveText = async (url: string): Promise<string> => {
 		return await (await fetch(url)).text();
 	} catch (error) {
 		let message: string;
-		if (error instanceof Error) {
-			message = error.message;
-		} else {
-			message = "";
-		}
+		message = error instanceof Error ? error.message : "";
 
 		throw new TypeError(`Failed to fetch "${url}": ${message}`);
 	}
