@@ -1,0 +1,14 @@
+{
+  "name": "parcel-transformer-render-md",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Parcel Transformer Render Markdown",
+  "main": "index.js",
+  "dependencies": {
+    "@parcel/plugin": "^2.0.1",
+    "flexivis-md": "file:../flexivis-md"
+  },
+  "engines": {
+    "parcel": "2.x"
+  }
+}

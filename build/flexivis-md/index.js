@@ -8,12 +8,12 @@ module.exports = config => {
 			{
 				html: false,
 				typographer: true,
-				highlight: (string, lang) => {
-					if (lang && hljs.getLanguage(lang)) {
+				highlight: (string, language) => {
+					if (language && hljs.getLanguage(language)) {
 						try {
-							return hljs.highlight(lang, string).value;
+							return hljs.highlight(string, {language}).value;
 						} catch {}
-					} else if (lang === "mermaid") {
+					} else if (language === "mermaid") {
 						return `<div class="mermaid">${string}</div>`;
 					}
 
