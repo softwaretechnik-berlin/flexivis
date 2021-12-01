@@ -6,7 +6,8 @@ module.exports = new Transformer({
     const source = await asset.getCode();
 
     asset.type = "html";
-    asset.setCode(compile(source));
+    const html = compile(source);
+    asset.setCode(html);
 
     return [asset];
   },
