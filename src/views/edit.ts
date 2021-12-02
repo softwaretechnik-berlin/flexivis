@@ -27,17 +27,18 @@ export default class EditHandler implements Handler {
 		ctx.element.append(wrapper);
 
 		const highlight = (editor: HTMLElement): void => {
-			// Highlight.js does not trims old tags,
-			// let's do it by this hack.
-			editor.textContent = editor.textContent.toString();
-			try {
-				hljs.highlightBlock(editor);
-			} catch {}
-		};
+      editor.innerHTML = hljs.highlightAuto(
+        editor.textContent.toString()
+      ).value;
+    };
 
-		const jar = codeJar(textarea, withLineNumbers(highlight), {
-			tab: "  ",
-		});
+    const jar = codeJar(
+      textarea,
+      withLineNumbers(highlight, { wrapClass: "editor" }),
+      {
+        tab: "  ",
+      }
+    );
 
 		const update = (): void => {
 			dataSource.latest = jar.toString();
