@@ -1,6 +1,6 @@
 module.exports = async page => {
 	await page.waitForSelector(".editor");
-	await page.$eval(".editor", editor => {
+	await page.$eval(".editor-content", editor => {
 		editor.textContent += " World!";
 	});
 

@@ -6,59 +6,59 @@ import { Handler, Context } from "./common";
 import debounce from "./debounce";
 
 export default class EditHandler implements Handler {
-  async handle(ctx: Context): Promise<void> {
-    const dataSource = ctx.view.resources[0].value;
+	async handle(ctx: Context): Promise<void> {
+		const dataSource = ctx.view.resources[0].value;
 
-    const wrapper = document.createElement("div");
-    wrapper.classList.add("edit");
-    wrapper.style.position = "relative";
+		const wrapper = document.createElement("div");
+		wrapper.classList.add("edit");
+		wrapper.style.position = "relative";
 
-    const textarea = document.createElement("div");
-    textarea.classList.add("editor");
-    const lang = ctx.view.config.lang;
-    if (typeof lang === "string") {
-      textarea.classList.add(lang);
-    }
+		const textarea = document.createElement("div");
+		textarea.classList.add("editor");
+		const lang = ctx.view.config.lang;
+		if (typeof lang === "string") {
+			textarea.classList.add(lang);
+		}
 
-    textarea.style.width = "100%";
-    textarea.style.height = "100%";
+		textarea.style.width = "100%";
+		textarea.style.height = "100%";
 
-    wrapper.append(textarea);
-    ctx.element.append(wrapper);
+		wrapper.append(textarea);
+		ctx.element.append(wrapper);
 
-    const highlight = (editor: HTMLElement): void => {
-      editor.innerHTML = hljs.highlightAuto(editor.textContent).value;
-    };
+		const highlight = (editor: HTMLElement): void => {
+			editor.innerHTML = hljs.highlightAuto(editor.textContent).value;
+		};
 
-    const jar = codeJar(
-      textarea,
-      withLineNumbers(highlight, { wrapClass: "editor" }),
-      {
-        tab: "  ",
-      }
-    );
+		const jar = codeJar(
+			textarea,
+			withLineNumbers(highlight, { wrapClass: "editor-content" }),
+			{
+				tab: "  ",
+			}
+		);
 
-    const update = (): void => {
-      dataSource.latest = jar.toString();
-    };
+		const update = (): void => {
+			dataSource.latest = jar.toString();
+		};
 
-    wrapper.addEventListener(
-      "keydown",
-      event => {
-        if (event.ctrlKey && event.key === "s") {
-          update();
-        }
-      },
-      true
-    );
-    jar.onUpdate(debounce(update));
+		wrapper.addEventListener(
+			"keydown",
+			event => {
+				if (event.ctrlKey && event.key === "s") {
+					update();
+				}
+			},
+			true
+		);
+		jar.onUpdate(debounce(update));
 
-    dataSource.observe((error, value) => {
-      if (error) {
-        ctx.handleError(error);
-      } else if (value !== jar.toString()) {
-        jar.updateCode(value);
-      }
-    });
-  }
+		dataSource.observe((error, value) => {
+			if (error) {
+				ctx.handleError(error);
+			} else if (value !== jar.toString()) {
+				jar.updateCode(value);
+			}
+		});
+	}
 }

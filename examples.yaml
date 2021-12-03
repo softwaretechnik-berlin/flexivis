@@ -22,6 +22,7 @@ general:
     onReadyScript: "open-first-modal-in-select-view-and-wait-iframe.js"
   update-content-on-edit-view:
     query: "layout=a/b&a=edit:$data&b=text:$data&$data=inline:Hello"
+    delay: 8000
     onReadyScript: "update-editor-content.js"
 
 handlers:

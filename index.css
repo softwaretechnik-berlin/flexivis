@@ -300,3 +300,12 @@ content-frame > .readme .hide-following-in-app ~ * {
   padding: 10px;
   tab-size: 4;
 }
+
+.editor-content {
+  height: 100%;
+  padding-left: 10px;
+}
+
+.multi-tab, .contents, .content-selected {
+  height: 100%;
+}
