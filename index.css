@@ -112,7 +112,7 @@ split-view > .separator {
   margin-bottom: 10px;
 }
 .tree-controls > a {
-  margin: 0 10 0 10;
+  margin: 0 10px 0 10px;
 }
 .tree-node > .toggle {
   color: #ccf;
