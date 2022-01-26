@@ -1,0 +1,7 @@
+{
+  "extends": "@parcel/config-default",
+  "transformers": {
+    "*.riot": ["@riotjs/parcel-transformer-riot"],
+    "*.md": ["parcel-transformer-render-md"]
+  }
+}

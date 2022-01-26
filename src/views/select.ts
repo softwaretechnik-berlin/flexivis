@@ -1,17 +1,17 @@
 import * as riot from "riot";
-import { Context, SourceHandler, inlineExpandedViews } from "./common";
 import { FlexivisError } from "../flexivis";
+import { Context, SourceHandler, inlineExpandedViews } from "./common";
 
 type Select = {
 	items: Array<{ id: string }>;
-	parameters: { [key: string]: string | Record<string, unknown> };
-	modals?: { [key: string]: "string" };
+	parameters: Record<string, string | Record<string, unknown>>;
+	modals?: Record<string, "string">;
 };
 
 const isValid = (object: any): object is Select => {
 	const asSelect = object as Select;
 	return Boolean(
-		asSelect.items && asSelect.items.length !== 0 && asSelect.parameters
+		asSelect.items && asSelect.items.length > 0 && asSelect.parameters
 	);
 };
 

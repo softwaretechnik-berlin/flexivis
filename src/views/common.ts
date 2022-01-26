@@ -36,7 +36,8 @@ export abstract class SourceHandler implements Handler {
 
 			ctx.element.innerHTML = "";
 			try {
-				return await this.handleWithSource(source, ctx);
+				await this.handleWithSource(source, ctx);
+				return;
 			} catch (handleError) {
 				ctx.handleError(handleError);
 			}
@@ -57,9 +58,9 @@ interface ExpandedView {
 	definition: Record<string, unknown>;
 }
 
-const isExpandedView = (object: {
-	[key: string]: any;
-}): object is ExpandedView => {
+const isExpandedView = (
+	object: Record<string, any>
+): object is ExpandedView => {
 	return Boolean((object as ExpandedView).type);
 };
 

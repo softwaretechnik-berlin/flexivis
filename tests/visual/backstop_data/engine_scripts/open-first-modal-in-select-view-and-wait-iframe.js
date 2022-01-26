@@ -14,7 +14,7 @@ module.exports = async page => {
 				window.addEventListener("load", () => resolve());
 				setTimeout(
 					() => reject(new Error("Waiting for iframe load has timed out")),
-					10000
+					10_000
 				);
 			})
 	);

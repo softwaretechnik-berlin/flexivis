@@ -1,6 +1,6 @@
 export function serialize(
 	parameters: Record<string, unknown>,
-	prepareValue: (str: string) => string = string => string
+	prepareValue: (string_: string) => string = string => string
 ): string {
 	const searchParameters = new URLSearchParams();
 

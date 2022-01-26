@@ -154,7 +154,7 @@
           "label": "main"
         }
       ],
-      "delay": 3000,
+      "delay": 8000,
       "onReadyScript": "update-editor-content.js"
     },
     {

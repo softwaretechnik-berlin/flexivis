@@ -1,6 +1,4 @@
-export interface Config {
-	[key: string]: string | string[] | Config;
-}
+export type Config = Record<string, string | string[] | Config>;
 
 export interface Resource {
 	config: Config;

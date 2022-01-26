@@ -1,7 +1,5 @@
-import { Context, SourceHandler } from "./common";
-
-// @ts-expect-error
 import vegaEmbed from "vega-embed";
+import { Context, SourceHandler } from "./common";
 
 export default class VegaHandler extends SourceHandler {
 	async handleWithSource(source: string, ctx: Context): Promise<void> {

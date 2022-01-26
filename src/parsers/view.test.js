@@ -1,14 +1,15 @@
 import test from "ava";
-const view = require("./view");
+
+import { parse } from "./view";
 
 test("parses just a view type", t => {
-	t.deepEqual(view.parse("readme"), {
+	t.deepEqual(parse("readme"), {
 		type: "readme",
 		config: {},
 		resources: [],
 	});
 
-	t.deepEqual(view.parse("readme:"), {
+	t.deepEqual(parse("readme:"), {
 		type: "readme",
 		config: {},
 		resources: [],
@@ -16,7 +17,7 @@ test("parses just a view type", t => {
 });
 
 test("parses URLs", t => {
-	t.deepEqual(view.parse("https://example.com"), {
+	t.deepEqual(parse("https://example.com"), {
 		type: "https",
 		config: {},
 		resources: [
@@ -29,7 +30,7 @@ test("parses URLs", t => {
 });
 
 test("parses multiple resources", t => {
-	t.deepEqual(view.parse("multi:a;b"), {
+	t.deepEqual(parse("multi:a;b"), {
 		type: "multi",
 		config: {},
 		resources: [
@@ -47,7 +48,7 @@ test("parses multiple resources", t => {
 
 test("parses configurations", t => {
 	t.deepEqual(
-		view.parse(
+		parse(
 			"(center=0.0,0.0;configWithoutValue)map:(geojson;hide)http://example.com/geojson1;(kml;whatever=1,2,3)$someData"
 		),
 		{
@@ -68,7 +69,7 @@ test("parses configurations", t => {
 });
 
 test("parses nested configurations", t => {
-	t.deepEqual(view.parse("(a=(b=(c=3);d=true);e=false)hello"), {
+	t.deepEqual(parse("(a=(b=(c=3);d=true);e=false)hello"), {
 		type: "hello",
 		config: {
 			a: {

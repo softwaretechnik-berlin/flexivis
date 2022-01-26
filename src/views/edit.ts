@@ -1,7 +1,7 @@
-import { Handler, Context } from "./common";
-import { CodeJar as codeJar } from "@medv/codejar";
-import { withLineNumbers } from "@medv/codejar/linenumbers";
+import { CodeJar as codeJar } from "codejar";
+import { withLineNumbers } from "codejar/linenumbers";
 import hljs from "highlight.js";
+import { Handler, Context } from "./common";
 
 import debounce from "./debounce";
 
@@ -27,17 +27,16 @@ export default class EditHandler implements Handler {
 		ctx.element.append(wrapper);
 
 		const highlight = (editor: HTMLElement): void => {
-			// Highlight.js does not trims old tags,
-			// let's do it by this hack.
-			editor.textContent = editor.textContent.toString();
-			try {
-				hljs.highlightBlock(editor);
-			} catch {}
+			editor.innerHTML = hljs.highlightAuto(editor.textContent).value;
 		};
 
-		const jar = codeJar(textarea, withLineNumbers(highlight), {
-			tab: "  ",
-		});
+		const jar = codeJar(
+			textarea,
+			withLineNumbers(highlight, { wrapClass: "editor-content" }),
+			{
+				tab: "  ",
+			}
+		);
 
 		const update = (): void => {
 			dataSource.latest = jar.toString();
@@ -57,7 +56,7 @@ export default class EditHandler implements Handler {
 		dataSource.observe((error, value) => {
 			if (error) {
 				ctx.handleError(error);
-			} else {
+			} else if (value !== jar.toString()) {
 				jar.updateCode(value);
 			}
 		});

@@ -1,18 +1,18 @@
 import didYouMean from "didyoumean";
 
-import { Context, Handler } from "./common";
 import { XViewFrame } from "../parser";
 import { FlexivisError } from "../flexivis";
+import { Context, Handler } from "./common";
 
 type HandlerModule = { default: new () => Handler };
-const mod = (loadHandlerModule: () => Promise<HandlerModule>) => async (
-	ctx: Context
-): Promise<void> => {
-	const Handler = (await loadHandlerModule()).default;
-	return new Handler().handle(ctx);
-};
+const mod =
+	(loadHandlerModule: () => Promise<HandlerModule>) =>
+	async (ctx: Context): Promise<void> => {
+		const Handler = (await loadHandlerModule()).default;
+		return new Handler().handle(ctx);
+	};
 
-const handlers: { [key: string]: (ctx: Context) => Promise<void> } = {
+const handlers: Record<string, (ctx: Context) => Promise<void>> = {
 	http: mod(async () => import("./frame")),
 	https: mod(async () => import("./frame")),
 	file: mod(async () => import("./frame")),
