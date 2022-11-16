@@ -119,6 +119,7 @@ Many of the available views allows resources to be defined in-line. For that, th
 text:inline:Hello World!
 ```
 
+[Example](https://flexivis.infrastruktur.link/?url=text:inline:Hello,%20world!)
 
 ### Shared Data Sources
 
@@ -132,7 +133,19 @@ $dataSourceName=https://example.com
 
 The inline prefix can also be used with data sources.
 
-The `edit` view demonstrates how to use them.
+#### Example: Inline data source 
+
+`$textView=inline:Hello,%20world!&url=text:$textView`
+
+[Try it out](https://flexivis.infrastruktur.link/?$textView=inline:Hello,%20world!&url=text:$textView)
+
+#### Example: external data source
+
+`layout=left/right&left=md:$textView&right=md:$textView&$textView=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md`
+
+[Try it out](https://flexivis.infrastruktur.link/?layout=left/right&left=md:$textView&right=md:$textView&$textView=https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md)
+
+The [Data editor](#data-editor) view also demonstrates data sources.
 
 ### Nested JSON Views
 
