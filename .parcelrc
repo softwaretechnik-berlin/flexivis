@@ -1,7 +1,29 @@
 {
   "extends": "@parcel/config-default",
   "transformers": {
-    "*.riot": ["@riotjs/parcel-transformer-riot"],
-    "*.md": ["parcel-transformer-render-md"]
+    "*.riot": [
+      "@riotjs/parcel-transformer-riot"
+    ],
+    "*.md": [
+      "parcel-transformer-render-md"
+    ]
+  },
+  "optimizers": {
+    "data-url:*": [
+      "@parcel/optimizer-data-url"
+    ],
+    "*.css": [
+      "@parcel/optimizer-cssnano"
+    ],
+    "*.{html,xhtml}": [
+      "@parcel/optimizer-htmlnano"
+    ],
+    "*.{js,mjs,cjs}": [],
+    "*.svg": [
+      "@parcel/optimizer-svgo"
+    ],
+    "*.{jpg,jpeg,png}": [
+      "@parcel/optimizer-image"
+    ]
   }
 }
