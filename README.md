@@ -2,50 +2,59 @@
 
 ---
 
-Flexivis is a flexible visualisation tool that allows you to easily visualise diverse types of data in Web browser.
+## Getting started
 
-<ul>
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#layout">Layout</a></li>
-    <li>
-        <a href="#view-specifications">View specifications</a>
-        <!-- BEGIN view specifications table of contents -->
-        <ul>
-            <li><a href="#regular-content">Regular Content</a></li>
-            <li><a href="#markdown">Markdown</a></li>
-            <li><a href="#json">JSON</a></li>
-            <li><a href="#text">Text</a></li>
-            <li><a href="#map">Map</a></li>
-            <li><a href="#mermaid-diagrams">Mermaid Diagrams</a></li>
-            <li><a href="#vega-graphs">Vega Graphs</a></li>
-            <li><a href="#item-select">Item Select</a></li>
-            <li><a href="#tabs">Tabs</a></li>
-            <li><a href="#data-editor">Data Editor</a></li>
-            <li><a href="#table-editor">Table Editor</a></li>
-        </ul>
-        <!-- END view specifications table of contents -->
-    </li>
-    <li class="hide-in-app"><a href="#development">Development</a></li>
-</ul>
+Flexivis is a flexible visualisation tool that allows you to easily visualise diverse types of data in a Web browser
+without having to implement your own web-app. It is a static single page app that is also served 
+under https://flexivis.infrastruktur.link, so you don't even need to install it yourself.
 
-
-## Overview
-
-Flexivis combines two main abilities:
-- Render or visualise many types of data.
-- Lay out multiple views into sub-regions of the browser window.
+The data can either be provided marshalled into the URL or via a separate URL. Using 
 
 Using Flexivis is simple:
 1. You build a Flexivis URL that describes the various views you'd like to display and optionally the layout that should be used to combine them.
 2. Nagivating to that URL displays the rendered layout.
 
 
-Here's an [example Flexivis URL]:
+### Visualise Data Given in the URL
+For example, to render a bit of geojson you can just use the following URL containing the data using the `inline` pseudo
+protocol: 
+
+<https://flexivis.infrastruktur.link?url=map:inline:%7B%22type%22:%22Feature%22,%22geometry%22:%7B%22type%22:%22LineString%22,%22coordinates%22:%5B%5B13.3907,52.5074%5D,%5B13.3902,52.5076%5D,%5B13.3891,52.5076%5D,%5B13.3871,52.5077%5D,%5B13.3855,52.5073%5D,%5B13.3841,52.5095%5D%5D%7D,%22properties%22:%7B%22stroke%22:%22green%22%7D%7D>
+
+
+### Visualise Data That is Served via HTTP
+Of course, this only works for small bits of content. If you have more data you can also point Flexivis to an HTTP URL:
+
+<https://flexivis.infrastruktur.link?url=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json>
+
+**Note**: The first segment of the `url` parameter specifies the visualisation type here we use map for geojson. Flexivis
+supports a number of visusalisation types, see  <a href="#view-types">View Types</a>
+
+Here is an example with markdown:
+
+<https://flexivis.infrastruktur.link/?url=md:inline:%23%20Awesome%20Content%0AMakes%20for%20a%20nice%20read.> 
+
+### Visualise Local Files
+
+To visualise local files, you can always run a simple http server such as the node based [http-server](https://www.npmjs.com/package/http-server) that exposes parts of your file system.
+If you still want to use the hosted version of Flexivis don't forget to set CORS-Headers. Here is how you would serve
+the Flexivis samples directory:
+
 ```
-https://flexivis.infrastruktur.link?layout=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
+$ npx http-server -c-1 --cors docs/samples
 ```
 
-[example Flexivis URL]: https://flexivis.infrastruktur.link?layout=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json
+Now the following URL will render the berlin-walk.json example from the local file system:
+```
+https://flexivis.infrastruktur.link/?url=map:http://localhost:8080/docs/samples/berlin-walk.json
+```
+
+### Adding Layout   
+
+As mentioned earlier, Flexivis can also arrange multiple views. Here is a simple example, which shows a rendered geojson file, 
+its source and a rendered markdown file side by side:
+
+<https://flexivis.infrastruktur.link?layout=(explanation30-map)/source&explanation=md:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.md&map=map:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json&source=json:https://raw.githubusercontent.com/programmiersportgruppe/flexivis/master/docs/samples/berlin-walk.json>
 
 It renders something like this:
 
@@ -450,6 +459,13 @@ https://flexivis.infrastruktur.link/?layout=tables/textA/textB&textA=text:$a&tex
 <div class="hide-following-in-app"></div>
 
 ## Development
+
+Note that parts of the README file are generated using the example provided in
+[examples.yaml](examples.yaml). To regenerate them run:
+
+```bash
+npm run readme
+```
 
 ### Setup
 

@@ -12,7 +12,7 @@ const handlers = examples.handlers;
 	fs.writeFileSync(
 		"README.md",
 		updateSection(
-			updateSection(readme, "view specifications table of contents", toc),
+			readme,
 			"view specifications",
 			toc + "\n\n" + renderDescriptions(handlers)
 		)
