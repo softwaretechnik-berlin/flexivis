@@ -49,7 +49,7 @@ function renderDescription({ title, prefixes, description, examples }) {
 
 function renderExample(example) {
 	const intro = example.intro ? example.intro + "\n\n" : "";
-	const url = "```\n" + example.canonicalUrl + "\n```\n";
+	const url = "```\n" + example.query + "\n```\n";
 	const screenshot = example.screenshotPath
 		? `\n<a href="${example.canonicalUrl
 				.replace(/&/g, "&amp;")
@@ -59,7 +59,7 @@ function renderExample(example) {
 				)}"><img alt="rendering of the URL shown above" src="${
 				example.screenshotPath
 		  }"/></a>\n`
-		: "";
+		: "[Try it out](" + example.canonicalUrl + ")";
 
 	return intro + url + screenshot;
 }
