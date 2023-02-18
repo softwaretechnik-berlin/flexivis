@@ -27,6 +27,7 @@ const handlers: Record<string, (ctx: Context) => Promise<void>> = {
 	edit: mod(async () => import("./edit")),
 	tab: mod(async () => import("./tab")),
 	table: mod(async () => import("./table")),
+	pivot: mod(async () => import("./pivot")),
 };
 
 export const knownHandlers = Object.keys(handlers);
