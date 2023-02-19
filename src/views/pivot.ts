@@ -36,6 +36,11 @@ export default class PivottableHandler extends SourceHandler {
 				case 'ndjson':
 					data = source.split("\n").filter(l => l.trim().length > 0).map(l => JSON.parse(l))
 			        break
+				case 'json':
+					data = JSON.parse(source)
+					break
+				default:
+					throw `Unknown format '${ctx.view.config['format']}'`
 			}
 		} else {
 			data = JSON.parse(source)
