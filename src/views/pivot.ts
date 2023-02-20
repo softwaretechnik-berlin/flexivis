@@ -8,12 +8,9 @@ require('pivottable/dist/pivot.css')
 import Papa from "papaparse";
 import 'jquery-ui/dist/jquery-ui'
 
-
 import "pivottable"
 
-
 import { SourceHandler, Context } from "./common";
-import csvParser from "csv-parser";
 
 
 export default class PivottableHandler extends SourceHandler {
@@ -21,8 +18,6 @@ export default class PivottableHandler extends SourceHandler {
 		const div = document.createElement("div");
 		div.id = "pivottable_div"
 		ctx.element.append(div);
-		console.log("Yo!")
-		console.log(ctx.view.config)
 
 		let data
 		if ('format' in ctx.view.config ) {
@@ -45,14 +40,21 @@ export default class PivottableHandler extends SourceHandler {
 		} else {
 			data = JSON.parse(source)
 		}
+		
+		let rows = []
+		if ('rows' in ctx.view.config ) {
+			rows = ctx.view.config['rows'].split(",").map(s => s.trim())
+		}
+		let cols = []
+		if ('cols' in ctx.view.config ) {
+			cols = ctx.view.config['cols'].split(",").map(s => s.trim())
+		}
 
-		console.log(data)
-		console.log($("#pivottable_div"))
 		$("#pivottable_div").pivotUI(
 			data,
 			{
-				rows: ["color"],
-				cols: ["shape"]
+				rows: rows,
+				cols: cols
 			}
 		);
 	}
