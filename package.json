@@ -2,7 +2,7 @@
   "name": "flexivis",
   "dependencies": {
     "@riotjs/observable": "^4.1.1",
-    "codejar": "^3.6.0",
+    "codejar": "^3.7.0",
     "didyoumean": "^1.2.2",
     "flexivis-md": "file:build/flexivis-md",
     "github-markdown-css": "^5.1.0",
