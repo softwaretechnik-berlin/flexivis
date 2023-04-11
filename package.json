@@ -6,7 +6,7 @@
     "didyoumean": "^1.2.2",
     "flexivis-md": "file:build/flexivis-md",
     "github-markdown-css": "^5.2.0",
-    "highlight.js": "^11.6.0",
+    "highlight.js": "^11.7.0",
     "mermaid": "^10.1.0",
     "ol": "^7.1.0",
     "papaparse": "^5.4.1",
