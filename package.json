@@ -31,7 +31,7 @@
     "esm": "^3.2.25",
     "glob": "^10.0.0",
     "grammkit": "^0.7.1",
-    "marked": "^4.2.2",
+    "marked": "^4.3.0",
     "parcel": "^2.8.3",
     "parcel-transformer-render-md": "file:build/parcel-transformer-render-md",
     "pegjs": "^0.10.0",
