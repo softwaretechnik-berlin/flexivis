@@ -17,7 +17,7 @@
     "x-data-spreadsheet": "^1.1.9"
   },
   "devDependencies": {
-    "@ava/typescript": "^3.0.1",
+    "@ava/typescript": "^4.0.0",
     "@parcel/optimizer-cssnano": "^2.8.3",
     "@parcel/transformer-less": "^2.8.3",
     "@parcel/transformer-yaml": "^2.8.3",
@@ -26,7 +26,7 @@
     "@types/didyoumean": "^1.2.0",
     "@types/papaparse": "^5.3.5",
     "@types/parcel-env": "0.0.1",
-    "ava": "^5.1.0",
+    "ava": "^5.2.0",
     "backstopjs": "^6.1.4",
     "esm": "^3.2.25",
     "glob": "^8.0.3",
