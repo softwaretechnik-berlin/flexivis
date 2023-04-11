@@ -1,5 +1,4 @@
 import test from "ava";
-
 import { parse } from "./layout";
 
 test("parses a single view", t => {

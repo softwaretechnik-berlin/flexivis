@@ -1,7 +1,6 @@
 // To fix the support of some ES6 features, e.g. nested async functions.
 // eslint-disable-next-line import/no-unassigned-import
 import "regenerator-runtime/runtime.js";
-
 import * as riot from "riot";
 
 // TODO: https://riot.js.org/faq/#should-i-use-dash-on-the-tag-name

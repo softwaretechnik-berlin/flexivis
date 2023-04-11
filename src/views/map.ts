@@ -1,5 +1,5 @@
 import * as riot from "riot";
-import { Handler, Context } from "./common";
+import { type Handler, type Context } from "./common";
 
 export default class MapHandler implements Handler {
 	async handle(ctx: Context): Promise<void> {

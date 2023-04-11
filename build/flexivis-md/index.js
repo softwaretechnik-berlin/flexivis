@@ -8,7 +8,7 @@ module.exports = config => {
 			{
 				html: false,
 				typographer: true,
-				highlight: (string, language) => {
+				highlight(string, language) {
 					if (language && hljs.getLanguage(language)) {
 						try {
 							return hljs.highlight(string, { language }).value;

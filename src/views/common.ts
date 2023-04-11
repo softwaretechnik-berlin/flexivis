@@ -1,22 +1,22 @@
-import { XViewFrame, inlinedDataPrefix } from "../parser";
+import { type XViewFrame, inlinedDataPrefix } from "../parser";
 
-export interface Context {
+export type Context = {
 	element: HTMLElement;
 	view: XViewFrame;
 	handleError: (error: Error) => void;
-}
+};
 
 /**
  * Handles view specifications by rendering them into an element.
  */
-export interface Handler {
+export type Handler = {
 	/**
 	 * Renders a view into the given element.
 	 *
 	 * @returns A promise that is fulfilled when the view is rendered, or rejected if the view cannot be rendered.
 	 */
 	handle: (ctx: Context) => Promise<void>;
-}
+};
 
 /**
  * Handles views types that are fully defined by a source string.
@@ -53,10 +53,10 @@ export abstract class SourceHandler implements Handler {
 	abstract handleWithSource(source: string, ctx: Context): Promise<void>;
 }
 
-interface ExpandedView {
+type ExpandedView = {
 	type: string;
 	definition: Record<string, unknown>;
-}
+};
 
 const isExpandedView = (
 	object: Record<string, any>

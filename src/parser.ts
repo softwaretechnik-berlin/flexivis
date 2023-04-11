@@ -1,5 +1,5 @@
-import { parse as parseLayout, ViewDef } from "./parsers/layout";
-import { parse as parseView, Resource, Config } from "./parsers/view";
+import { parse as parseLayout, type ViewDef } from "./parsers/layout";
+import { parse as parseView, type Resource, type Config } from "./parsers/view";
 import DataSource from "./data-source";
 import { FlexivisError } from "./flexivis";
 
@@ -7,25 +7,25 @@ export const inlinedDataPrefix = "inline:";
 
 export type XConfig = Record<string, string | string[] | Config>;
 
-export interface XResource {
+export type XResource = {
 	config: XConfig;
 	value: DataSource<string>;
-}
+};
 
-export interface XViewFrame {
+export type XViewFrame = {
 	type: string;
 	config: XConfig;
 	resources: XResource[];
-}
+};
 
-export interface XViewFrameCollection {
+export type XViewFrameCollection = {
 	sep: "/" | "-";
 	views: Array<{ view: XView; size: number }>;
-}
+};
 
-export interface XViewError {
+export type XViewError = {
 	error: Error;
-}
+};
 
 export type XView = XViewFrame | XViewFrameCollection | XViewError;
 

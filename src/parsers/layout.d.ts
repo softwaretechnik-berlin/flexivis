@@ -5,10 +5,10 @@ export type ViewFrame = {
 	size: number;
 };
 
-export interface ViewFrameCollection {
+export type ViewFrameCollection = {
 	sep: "/" | "-";
 	views: ViewFrame[];
-}
+};
 
 export type ViewDef = ViewName | ViewFrameCollection;
 

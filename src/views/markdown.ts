@@ -1,6 +1,6 @@
 import mdFactory from "flexivis-md";
 import mermaid from "mermaid";
-import { SourceHandler, Context } from "./common";
+import { SourceHandler, type Context } from "./common";
 
 const md = mdFactory();
 

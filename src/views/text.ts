@@ -1,4 +1,4 @@
-import { Context, SourceHandler } from "./common";
+import { type Context, SourceHandler } from "./common";
 
 export default class TextHandler extends SourceHandler {
 	async handleWithSource(source: string, ctx: Context): Promise<void> {

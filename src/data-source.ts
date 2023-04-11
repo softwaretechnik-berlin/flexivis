@@ -31,7 +31,7 @@ export default class DataSource<T> {
 		if (!this.currentResult) {
 			return new Promise((resolve, reject) => {
 				this.handlers.push({
-					handler: (error, value) => {
+					handler(error, value) {
 						error ? reject(error) : resolve(value);
 					},
 					keep: false,

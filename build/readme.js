@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
+const fs = require("node:fs");
 const examples = require("./examples.js");
 
 const handlers = examples.handlers;

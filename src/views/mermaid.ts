@@ -1,5 +1,5 @@
 import mermaid from "mermaid";
-import { Context, SourceHandler } from "./common";
+import { type Context, SourceHandler } from "./common";
 
 export default class MermaidHandler extends SourceHandler {
 	async handleWithSource(source: string, ctx: Context): Promise<void> {

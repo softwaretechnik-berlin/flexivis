@@ -1,4 +1,4 @@
-import { Handler, Context } from "./common";
+import { type Handler, type Context } from "./common";
 
 export default class FrameHandler implements Handler {
 	async handle(ctx: Context): Promise<void> {

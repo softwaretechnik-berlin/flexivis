@@ -1,7 +1,7 @@
 const canonicalBaseUrl = "https://flexivis.infrastruktur.link/";
 const testBaseUrl = "http://host.docker.internal:1234/";
 
-const fs = require("fs");
+const fs = require("node:fs");
 const yaml = require("js-yaml");
 
 const examples = yaml.safeLoad(fs.readFileSync("examples.yaml", "utf8"));

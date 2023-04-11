@@ -1,6 +1,6 @@
 import * as riot from "riot";
 import { FlexivisError } from "../flexivis";
-import { Context, SourceHandler, inlineExpandedViews } from "./common";
+import { type Context, SourceHandler, inlineExpandedViews } from "./common";
 
 type Tabs = {
 	tabs: Record<string, string | Record<string, unknown>>;

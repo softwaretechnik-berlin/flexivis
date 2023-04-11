@@ -1,5 +1,4 @@
 import test from "ava";
-
 import { parse } from "./view";
 
 test("parses just a view type", t => {

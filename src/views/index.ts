@@ -1,8 +1,7 @@
 import didYouMean from "didyoumean";
-
-import { XViewFrame } from "../parser";
+import { type XViewFrame } from "../parser";
 import { FlexivisError } from "../flexivis";
-import { Context, Handler } from "./common";
+import { type Context, type Handler } from "./common";
 
 type HandlerModule = { default: new () => Handler };
 const mod =

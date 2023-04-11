@@ -1,8 +1,7 @@
 import { CodeJar as codeJar } from "codejar";
 import { withLineNumbers } from "codejar/linenumbers";
 import hljs from "highlight.js";
-import { Handler, Context } from "./common";
-
+import { type Handler, type Context } from "./common";
 import debounce from "./debounce";
 
 export default class EditHandler implements Handler {

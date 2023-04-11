@@ -1,7 +1,6 @@
 import Spreadsheet from "x-data-spreadsheet";
 import Papa from "papaparse";
-import { Handler, Context } from "./common";
-
+import { type Handler, type Context } from "./common";
 import debounce from "./debounce";
 
 type Sheet = { name: string; rows: Record<string, unknown> };
@@ -84,7 +83,9 @@ export default class EditHandler implements Handler {
 		const baseRow =
 			cellsPerRow.length === 0
 				? []
-				: Array.from(new Array(Math.max(...cellsPerRow.map(length))));
+				: Array.from(
+						Array.from({ length: Math.max(...cellsPerRow.map(length)) })
+				  );
 
 		return Papa.unparse(
 			cellsPerRow.map(cells => baseRow.map((_, j) => (cells[j] || {}).text))

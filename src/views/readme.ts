@@ -1,4 +1,4 @@
-import { Context, Handler } from "./common";
+import { type Context, type Handler } from "./common";
 
 export default class ReadmeHandler implements Handler {
 	async handle(ctx: Context): Promise<void> {

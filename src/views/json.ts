@@ -1,5 +1,5 @@
 import * as riot from "riot";
-import { SourceHandler, Context } from "./common";
+import { SourceHandler, type Context } from "./common";
 
 export default class JsonHandler extends SourceHandler {
 	async handleWithSource(source: string, ctx: Context): Promise<void> {

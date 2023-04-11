@@ -2,13 +2,11 @@ import Map from "ol/Map.js";
 import View from "ol/View.js";
 import XYZ from "ol/source/XYZ.js";
 import { fromLonLat } from "ol/proj";
-
 import { GeoJSON } from "ol/format";
 import { extend as extendExtent, createEmpty as createExtent } from "ol/extent";
 import { Tile as TileLayer, Vector as VectorLayer } from "ol/layer";
 import { Vector as VectorSource, OSM as OSMSource } from "ol/source";
 import { Circle as CircleStyle, Fill, Stroke, Style } from "ol/style";
-
 import observable from "@riotjs/observable";
 
 const defaultColor = "darkgrey";
@@ -156,7 +154,7 @@ export class HereGeoJsonMap {
 				format: new GeoJSON(),
 				url: "data:," + encodeURIComponent(geoJson),
 			}),
-			style: feature => {
+			style(feature) {
 				return geoJsonStyles(feature.getProperties());
 			},
 		});
