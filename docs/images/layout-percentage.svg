@@ -1,9 +1,1 @@
-<svg width="90" height="60" xmlns="http://www.w3.org/2000/svg">
-    <style>* { font-family: sans-serif }</style>
-    <rect width="22.5" height="60" style="fill: lightblue" />
-    <text x="11.25" y="30" alignment-baseline="middle" text-anchor="middle">foo</text>
-    <rect x="22.5" width="67.5" height="24" style="fill: lightgreen" />
-    <text x="56.25" y="12" alignment-baseline="middle" text-anchor="middle">bar</text>
-    <rect x="22.5" y="24" width="67.5" height="36" style="fill: pink" />
-    <text x="56.25" y="42" alignment-baseline="middle" text-anchor="middle">baz</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="90" height="60"><style>*{font-family:sans-serif}</style><rect width="22.5" height="60" style="fill:#add8e6"/><text x="11.25" y="30" alignment-baseline="middle" text-anchor="middle">foo</text><rect width="67.5" height="24" x="22.5" style="fill:#90ee90"/><text x="56.25" y="12" alignment-baseline="middle" text-anchor="middle">bar</text><rect width="67.5" height="36" x="22.5" y="24" style="fill:pink"/><text x="56.25" y="42" alignment-baseline="middle" text-anchor="middle">baz</text></svg>
