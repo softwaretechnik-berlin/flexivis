@@ -16,6 +16,9 @@
     "vega-lite": "^5.7.0",
     "x-data-spreadsheet": "^1.1.9"
   },
+  "optionalDependencies": {
+    "lightningcss-linux-x64-gnu": "^1.19.0"
+  },
   "devDependencies": {
     "@ava/typescript": "^4.0.0",
     "@parcel/optimizer-cssnano": "^2.8.3",
