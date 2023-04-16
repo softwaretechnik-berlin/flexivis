@@ -15,7 +15,7 @@ import ContentFrame from "./src/tags/content-frame.riot";
 import ItemSelect from "./src/tags/item-select.riot";
 import MultiTab from "./src/tags/multi-tab.riot";
 import Modal from "./src/tags/modal.riot";
-import AppComponent from "./src/tags/App.riot";
+import AppComponent from "./src/tags/app.riot";
 
 riot.register("error-view", ErrorView);
 riot.register("tree", Tree);
