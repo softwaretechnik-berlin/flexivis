@@ -325,19 +325,6 @@
         }
       ],
       "delay": 8000
-    },
-    {
-      "label": "table-1",
-      "url": "http://host.docker.internal:1234/?layout=tables/textA/textB&textA=text:$a&textB=text:$b&tables=table:$a;$b&$a=inline:x,y,z&$b=inline:a,b,c",
-      "referenceUrl": "https://flexivis.infrastruktur.link/?layout=tables/textA/textB&textA=text:$a&textB=text:$b&tables=table:$a;$b&$a=inline:x,y,z&$b=inline:a,b,c",
-      "viewports": [
-        {
-          "height": 798,
-          "width": 1440,
-          "label": "main"
-        }
-      ],
-      "delay": 3000
     }
   ]
 }
