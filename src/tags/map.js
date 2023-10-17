@@ -15,7 +15,7 @@ const geoJsonStyles = properties =>
 	new Style({
 		stroke: new Stroke({
 			color: properties.stroke || defaultColor,
-			width: 3,
+			width: properties['stroke-width']  || 3,
 		}),
 		fill: new Fill({
 			color: properties.stroke || defaultColor,
