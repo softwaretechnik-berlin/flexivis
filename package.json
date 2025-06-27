@@ -7,7 +7,7 @@
     "flexivis-md": "file:build/flexivis-md",
     "github-markdown-css": "^5.2.0",
     "highlight.js": "^11.7.0",
-    "mermaid": "^10.1.0",
+    "mermaid": "^10.9.3",
     "ol": "~7.1.0",
     "papaparse": "^5.4.1",
     "riot": "^7.1.0",
