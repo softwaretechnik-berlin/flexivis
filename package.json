@@ -38,7 +38,7 @@
     "parcel-transformer-render-md": "file:build/parcel-transformer-render-md",
     "pegjs": "^0.10.0",
     "punycode": "^1.4.1",
-    "puppeteer": "^19.9.0",
+    "puppeteer": "^24.11.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4",
     "xo": "^0.54.1"
