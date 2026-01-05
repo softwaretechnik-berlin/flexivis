@@ -11,9 +11,9 @@
     "ol": "~7.1.0",
     "papaparse": "^5.4.1",
     "riot": "^7.1.0",
-    "vega": "^5.24.0",
-    "vega-embed": "^6.21.3",
-    "vega-lite": "^5.7.0"
+    "vega": "^6.2.0",
+    "vega-embed": "^7.1.0",
+    "vega-lite": "^6.4.1"
   },
   "optionalDependencies": {
     "lightningcss-linux-x64-gnu": "^1.19.0"
